@@ -1,0 +1,20 @@
+$body-color: #7f808c;
+$heading-color:#242939;
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  color: $body-color!important;
+  text-align: left;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: $heading-color;
+}

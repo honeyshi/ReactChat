@@ -1,0 +1,113 @@
+$border-color: rgba(245,246,250,.85);
+$border-width: 1px;
+$body-bg: rgb(255, 255, 255);
+$card-border-color: rgba(245,246,250,.85);
+$card-border-width: 1px;
+
+html, body, .layout {
+  height: 100%;
+}
+
+textarea {
+  overflow: hidden;
+  resize: none;
+}
+
+.layout {
+  display: flex;
+  flex-direction: row;
+}
+
+.navigation {
+  border-top: 1px solid $border-color;
+  padding-left: 20px;
+  padding-right: 20px;
+  order: 2;
+  min-height: 61px;
+}
+
+.main,
+.chat-sidebar {
+    height: 100vh;
+    height: 100%;
+}
+
+.main,
+.navigation,
+.chat-sidebar {
+    background: $body-bg;
+}
+
+.sidebar {
+  background: rgb(245, 246, 250);;
+  flex-grow: 2;
+  order: 1;
+}
+
+.main {
+  overflow: hidden;
+  order: 3;
+  flex: 1;
+
+  .chat-body {
+      display: flex;
+      flex-grow: 1;
+      flex-flow: column;
+      min-width: 0;
+      width: 100%;
+  }
+
+  .chat-content {
+      flex: 2;
+  }
+}
+
+.chat {
+  display: flex;
+  height: 100%;
+}
+
+.sidebar, .navigation, .active-users {
+  height: 100vh;
+}
+
+.navigation {
+  width: 90px;
+  border-top: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+  order: 0;
+}
+
+.sidebar {
+  width: 400px;
+  flex-grow: 0;
+}
+
+.main, .chat-sidebar {
+  height: 100vh;
+}
+
+.card {
+  border: $card-border-width solid $card-border-color!important;
+}
+
+.container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.border         { border: $border-width solid $border-color !important; }
+.border-top     { border-top: $border-width solid $border-color !important; }
+.border-right   { border-right: $border-width solid $border-color !important; }
+.border-bottom  { border-bottom: $border-width solid $border-color !important; }
+.border-left    { border-left: $border-width solid $border-color !important; }

@@ -1,0 +1,47 @@
+$btn-text-color: #212529;
+$btn-background-color:#fff; 
+$btn-secondary-text-color: rgba(33,37,41,.35);
+$btn-secondary-background-color: #edeef6;
+$btn-secondary-text-color-hover: rgba(33,37,41,.5);
+$btn-secondary-focus-color: rgba(206,208,215,.5);
+
+.btn-group-lg > .btn, .btn-lg {
+  padding: .9375rem 1.25rem;
+  font-size: .9375rem;
+  line-height: 1.6;
+  border-radius: .375rem;
+}
+
+.btn-basic {
+  color: $btn-text-color;
+  background-color: $btn-background-color;
+  border-color: $btn-background-color;
+}
+
+.btn-secondary.btn-minimal {
+    color: $btn-secondary-text-color;
+    fill: $btn-secondary-text-color;
+}
+
+.btn-secondary {
+  background-color: $btn-secondary-background-color;
+  border-color: $btn-secondary-background-color;
+}
+
+.btn-ico {
+  padding: .5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: .3rem;
+}
+
+.btn-secondary.btn-minimal.focus, .btn-secondary.btn-minimal:focus, .btn-secondary.btn-minimal:hover, .btn-secondary.btn-minimal:not(:disabled):not(.disabled).active, .btn-secondary.btn-minimal:not(:disabled):not(.disabled):active {
+  border-color: $btn-secondary-background-color;
+  background: $btn-secondary-background-color;
+  color: $btn-secondary-text-color-hover;
+  fill: $btn-secondary-text-color-hover;
+}
+
+btn-secondary.focus, .btn-secondary:focus {
+  box-shadow: 0 0 0 0 $btn-secondary-focus-color;
+}

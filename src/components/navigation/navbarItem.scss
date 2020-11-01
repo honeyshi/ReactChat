@@ -1,0 +1,30 @@
+$navbar-light-active-color: #0176ff;
+
+.navbar-nav .active {
+  color: #0176ff!important;
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+  color: #0176ff;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #aab0b7;
+}
+
+.show > .nav-link,
+    .active > .nav-link,
+    .nav-link.show,
+    .nav-link.active {
+      color: $navbar-light-active-color;
+}
+
+.nav-tabs {
+  background: #edeef6;
+  border-radius: .375rem;
+  padding: .34375rem;
+}
+
+.nav-tabs .nav-link:not(.active) {
+  color: inherit;
+}

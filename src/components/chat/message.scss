@@ -1,0 +1,45 @@
+$border-radius-lg: .625rem;
+$root-font-size: 16px;
+
+@function rem($size) {
+  @return $size / $root-font-size * 1rem;
+};
+
+.message {
+  display: flex;
+  align-items: flex-end;
+
+  & + & {
+      margin-top: rem(32px);
+  }
+
+  .message-row + .message-row {
+      margin-top: rem(16px);
+  }
+}
+
+.message-body {
+  flex: 1;
+}
+
+.message-content {
+  border-radius: $border-radius-lg $border-radius-lg $border-radius-lg 2px;
+  display: inline-block;
+  padding: rem(18px);
+  max-width: 45%;
+}
+
+.message-right {
+
+  .avatar {
+      order: 2;
+  }
+
+  .message-body {
+      order: 1;
+  }
+
+  .message-row .message-content {
+      border-radius: $border-radius-lg $border-radius-lg 2px $border-radius-lg;
+  }
+}
