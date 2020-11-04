@@ -1,4 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import * as reducer from "./reducers";
+import { mainReducer } from "./reducers";
 
-export const store = configureStore({ reducer: reducer.authUserReducer });
+export const store = configureStore({
+  reducer: mainReducer,
+});
+
+export type RootState = ReturnType<typeof mainReducer>;

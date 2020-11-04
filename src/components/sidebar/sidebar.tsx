@@ -10,7 +10,7 @@ import {
   ISidebarChatItem,
   ISidebarFriendItem,
   ISidebarUserInfoItem,
-  ISidebarUserProfileProps
+  ISidebarUserProfileProps,
 } from "../../common/interfaces";
 import { NavbarItem } from "../navigation/navbarItem";
 
@@ -22,7 +22,7 @@ const sidebarChatItems: ISidebarChatItem[] = [
     isOnline: false,
     lastMessageAuthor: "Anna Bridges",
     lastMessageText: "Hey, Maher! How are you? The weather is great isn't it?",
-    lastMessageTime: "10:15 AM"
+    lastMessageTime: "10:15 AM",
   },
   {
     chatHeader: "Anna Bridges",
@@ -30,8 +30,8 @@ const sidebarChatItems: ISidebarChatItem[] = [
     countUnreadMessages: 0,
     isOnline: true,
     lastMessageText: "is typing...",
-    lastMessageTime: "10:42 AM"
-  }
+    lastMessageTime: "10:42 AM",
+  },
 ];
 
 const sidebarFriendItems: ISidebarFriendItem[] = [
@@ -39,46 +39,46 @@ const sidebarFriendItems: ISidebarFriendItem[] = [
     friendImage: "/fake-link",
     friendName: "Anna Bridges",
     friendStatus: "Online",
-    isOnline: true
+    isOnline: true,
   },
   {
     friendImage: "/fake-link",
     friendName: "Brian Dawson",
     friendStatus: "last seen 2 hours ago",
-    isOnline: false
+    isOnline: false,
   },
   {
     friendImage: "/fake-link",
     friendName: "Leslie Sutton",
     friendStatus: "last seen 3 days ago",
-    isOnline: false
+    isOnline: false,
   },
   {
     friendImage: "/fake-link",
     friendName: "Simon Haskell",
     friendStatus: "last seen 3 days ago",
-    isOnline: false
+    isOnline: false,
   },
   {
     friendImage: "/fake-link",
     friendName: "Tina Turner",
     friendStatus: "last seen 3 days ago",
-    isOnline: false
-  }
+    isOnline: false,
+  },
 ];
 
 const userProfileItem: ISidebarUserProfileProps = {
   userDescription:
     "Bootstrap is an open source toolkit for developing web with HTML.",
   userImage: "/fake-link",
-  userName: "Matthew Wiggins"
+  userName: "Matthew Wiggins",
 };
 
 const userProfileInfoItems: ISidebarUserInfoItem[] = [
   { itemHeader: "Country", itemValue: "Warsaw, Poland", icon: Icon.Globe },
   { itemHeader: "Phone", itemValue: "+39 02 87 21 43 19", icon: Icon.Phone },
   { itemHeader: "Email", itemValue: "anna@gmail.com", icon: Icon.Mail },
-  { itemHeader: "Time", itemValue: "10:03 am", icon: Icon.Clock }
+  { itemHeader: "Time", itemValue: "10:03 am", icon: Icon.Clock },
 ];
 
 export const Sidebar: React.FC = () => {
@@ -100,6 +100,7 @@ export const Sidebar: React.FC = () => {
               <Input
                 type="input"
                 placeholder="Search for messages or users..."
+                onChange={() => void 0}
               />
               <div className="input-group-append">
                 <Button
@@ -170,30 +171,39 @@ export const Sidebar: React.FC = () => {
             />
           </ul>
           <SidebarTab id="create-group-details" isActive={true} isOuter={false}>
-            <FormGroup forName="new-chat-title" label="Name" isVisible={true}>
+            <FormGroup
+              forName="new-chat-title"
+              label="Name"
+              isVisible={true}
+              isWithLabel={true}
+            >
               <Input
                 name="new-chat-title"
                 id="new-chat-title"
                 placeholder="Group Name"
                 type="input"
+                onChange={() => void 0}
               />
             </FormGroup>
             <FormGroup
               forName="new-chat-topic"
               label="Topic (optional)"
               isVisible={true}
+              isWithLabel={true}
             >
               <Input
                 name="new-chat-topic"
                 id="new-chat-topic"
                 placeholder="Group Topic"
                 type="input"
+                onChange={() => void 0}
               />
             </FormGroup>
             <FormGroup
               forName="new-chat-description"
               label="Description"
               isVisible={true}
+              isWithLabel={true}
             >
               <Input
                 name="new-chat-description"
@@ -201,6 +211,7 @@ export const Sidebar: React.FC = () => {
                 placeholder="Group Description"
                 type="textarea"
                 row="6"
+                onChange={() => void 0}
               />
             </FormGroup>
             <div className="pb-6">

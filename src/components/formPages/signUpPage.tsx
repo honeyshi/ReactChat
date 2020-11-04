@@ -28,7 +28,7 @@ export const SignUpPage: React.FC = () => {
       {/* <!-- Registration form --> */}
       <Form>
         {/* <!-- Login -->*/}
-        <FormGroup forName="login" label="Login" isVisible={false}>
+        <FormGroup forName="login" label="Login" isVisible={false} isWithLabel={true}>
           <Input
             id="login"
             placeholder="Enter your login"
@@ -37,7 +37,7 @@ export const SignUpPage: React.FC = () => {
           />
         </FormGroup>
         {/* <!-- Email -->*/}
-        <FormGroup forName="email" label="Email Address" isVisible={false}>
+        <FormGroup forName="email" label="Email Address" isVisible={false} isWithLabel={true}>
           <Input
             id="email"
             placeholder="Enter your email"
@@ -46,7 +46,7 @@ export const SignUpPage: React.FC = () => {
           />
         </FormGroup>
         {/* <!-- Password -->*/}
-        <FormGroup forName="password" label="Password" isVisible={false}>
+        <FormGroup forName="password" label="Password" isVisible={false} isWithLabel={true}>
           <Input
             id="password"
             placeholder="Enter your password"

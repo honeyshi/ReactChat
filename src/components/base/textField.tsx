@@ -15,18 +15,21 @@ export const TextField: React.FC<ITextFieldProps> = ({
   isCenter,
   text,
   type: Tag,
-  children
+  children,
 }) => {
-  return (
-    <Tag
-      className={classNames(
-        { "font-bold": isBold },
-        { "text-center": isCenter },
-        classes
-      )}
-    >
-      {text}
-      {children}
-    </Tag>
-  );
+  if (text !== "") {
+    return (
+      <Tag
+        className={classNames(
+          { "font-bold": isBold },
+          { "text-center": isCenter },
+          classes
+        )}
+      >
+        {text}
+        {children}
+      </Tag>
+    );
+  }
+  return null;
 };
