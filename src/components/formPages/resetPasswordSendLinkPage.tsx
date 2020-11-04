@@ -29,7 +29,7 @@ export const ResetPasswordSendLinkPage: React.FC = () => {
       />
       <Form>
         {/* <!-- Email -->*/}
-        <FormGroup forName="email" label="Email Address" isVisible={false}>
+        <FormGroup forName="email" label="Email Address" isVisible={false} isWithLabel={true}>
           <Input
             id="email"
             placeholder="Enter your email"

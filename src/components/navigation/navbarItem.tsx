@@ -34,7 +34,7 @@ export const NavbarItem: React.FC<INavbarItemProps> = ({
         title={title}
         role="tab"
         aria-selected={isActive}
-        onClick={onClick}
+        onClick={() => onClick}
       >
         {text}
         {children}

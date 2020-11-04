@@ -2,23 +2,34 @@ import * as React from "react";
 import { ChatLayout } from "./components/chat/chatLayout";
 import { Sidebar } from "./components/sidebar/sidebar";
 import { Navbar } from "./components/navigation/navbar";
-import { SignUpPage } from "./components/formPages/signUpPage";
-import { SignInPage } from "./components/formPages/signInPage";
-import { ResetPasswordSendLinkPage } from "./components/formPages/resetPasswordSendLinkPage";
-import { ResetPasswordPage } from "./components/formPages/resetPasswordPage";
+import {
+  ResetPasswordPage,
+  ResetPasswordSendLinkPage,
+  SignInPage,
+  SignUpPage,
+} from "./components/formPages";
 import { Switch, Route } from "react-router-dom";
 
 import "./styles.scss";
 import "./components/layout.scss";
 import "./components/spacing.scss";
 
-export const App: React.FC = () => {
+import { RootState } from "./store/stores";
+import { connect, ConnectedProps } from "react-redux";
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    errorMessage: state.root.errorMessage,
+  };
+};
+
+const connector = connect(mapStateToProps);
+
+type Props = ConnectedProps<typeof connector>;
+
+export const App: React.FC<Props> = () => {
   return (
     <div className="layout">
-      {/*<SignUpPage />*/}
-      {/*<SignInPage />*/}
-      {/*<ResetPasswordSendLinkPage />*/}
-      {/*<ResetPasswordPage />*/}
       {/*<Navbar />
       <Sidebar />
       <ChatLayout />*/}
@@ -37,4 +48,4 @@ export const App: React.FC = () => {
   );
 };
 
-export default App;
+export default connector(App);

@@ -9,6 +9,9 @@ export const confirmPassword = createAction<string>(
 );
 export const setIsAuth = createAction<boolean>(ActionTypes.COMMON_SET_ISAUTH);
 export const setUserId = createAction<string>(ActionTypes.COMMON_SET_USERID);
+export const setErrorMessage = createAction<string>(
+  ActionTypes.COMMON_SET_ERRORMESSAGE
+);
 
 export const signUp = createAction(ActionTypes.SIGN_UP);
 export const signIn = createAction(ActionTypes.SIGN_IN);

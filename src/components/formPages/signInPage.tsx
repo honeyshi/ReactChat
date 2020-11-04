@@ -1,17 +1,26 @@
 import React from "react";
-import { TextField } from "../base/textField";
-import { FormContainer } from "../base/formContainer";
-import { Form } from "../base/form";
-import { FormGroup } from "../base/formGroup";
-import { Input } from "../base/input";
-import { Button } from "../base/button";
+import {
+  Button,
+  FormContainer,
+  Form,
+  FormGroup,
+  Input,
+  TextField,
+} from "../base";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLogin, setPassword, signIn } from "../../store/actions";
+import { RootState } from "../../store/stores";
 
 export const SignInPage: React.FC = () => {
   const link = <Link to="/signup">Sign up</Link>;
+  const errorMessage = useSelector(
+    (state: RootState) => state.root.errorMessage
+  );
   const dispatch = useDispatch();
+  const loginAsync = async () => {
+    await dispatch(signIn());
+  };
 
   return (
     <FormContainer>
@@ -27,7 +36,12 @@ export const SignInPage: React.FC = () => {
       />
       <Form>
         {/* <!-- Login -->*/}
-        <FormGroup forName="login" label="Login" isVisible={false}>
+        <FormGroup
+          forName="login"
+          label="Login"
+          isVisible={false}
+          isWithLabel={true}
+        >
           <Input
             id="login"
             placeholder="Enter your login"
@@ -36,7 +50,12 @@ export const SignInPage: React.FC = () => {
           />
         </FormGroup>
         {/* <!-- Password -->*/}
-        <FormGroup forName="password" label="Password" isVisible={false}>
+        <FormGroup
+          forName="password"
+          label="Password"
+          isVisible={false}
+          isWithLabel={true}
+        >
           <Input
             id="password"
             placeholder="Enter your password"
@@ -45,6 +64,14 @@ export const SignInPage: React.FC = () => {
             onChange={(password) => dispatch(setPassword(password))}
           />
         </FormGroup>
+        {/* <!-- Error text --> */}
+        <TextField
+          isCenter={true}
+          isBold={false}
+          classes="mb-6 text-danger"
+          text={errorMessage}
+          type="p"
+        />
         <FormGroup isWithLabel={false}>
           <Link to="/send-reset-link" className="text-center">
             Reset password
@@ -54,7 +81,7 @@ export const SignInPage: React.FC = () => {
           isPrimary={true}
           text="Sign in"
           classes="btn-lg btn-block"
-          onClick={() => dispatch(signIn())}
+          onClick={loginAsync}
         />
       </Form>
       <TextField isCenter={true} isBold={false} type="p">
@@ -63,3 +90,6 @@ export const SignInPage: React.FC = () => {
     </FormContainer>
   );
 };
+
+//export default connect<StateProps, {}, {}>(mapStateToProps)(SignInPage);
+//export default connector(SignInPage);

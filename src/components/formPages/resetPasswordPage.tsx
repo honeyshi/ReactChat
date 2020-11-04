@@ -33,7 +33,7 @@ export const ResetPasswordPage: React.FC = () => {
       />
       <Form>
         {/* <!-- New password -->*/}
-        <FormGroup forName="password" label="Password" isVisible={false}>
+        <FormGroup forName="password" label="Password" isVisible={false} isWithLabel={true}>
           <Input
             id="password"
             placeholder="Enter new password"
@@ -47,6 +47,7 @@ export const ResetPasswordPage: React.FC = () => {
           forName="confirm-password"
           label="Confirm password"
           isVisible={false}
+          isWithLabel={true}
         >
           <Input
             id="confirm-password"
