@@ -90,6 +90,3 @@ export const SignInPage: React.FC = () => {
     </FormContainer>
   );
 };
-
-//export default connect<StateProps, {}, {}>(mapStateToProps)(SignInPage);
-//export default connector(SignInPage);

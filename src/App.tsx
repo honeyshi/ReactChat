@@ -8,14 +8,13 @@ import {
   SignInPage,
   SignUpPage,
 } from "./components/formPages";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
+import { RootState } from "./store/stores";
+import { connect, ConnectedProps } from "react-redux";
 
 import "./styles.scss";
 import "./components/layout.scss";
 import "./components/spacing.scss";
-
-import { RootState } from "./store/stores";
-import { connect, ConnectedProps } from "react-redux";
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -27,7 +26,7 @@ const connector = connect(mapStateToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
-export const App: React.FC<Props> = () => {
+const App: React.FC<Props> = () => {
   return (
     <div className="layout">
       {/*<Navbar />
@@ -48,4 +47,4 @@ export const App: React.FC<Props> = () => {
   );
 };
 
-export default connector(App);
+export default withRouter(connector(App));

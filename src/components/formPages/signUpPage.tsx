@@ -1,16 +1,22 @@
 import React from "react";
-import { Button } from "../base/button";
-import { FormGroup } from "../base/formGroup";
-import { Input } from "../base/input";
-import { TextField } from "../base/textField";
-import { FormContainer } from "../base/formContainer";
-import { Form } from "../base/form";
+import {
+  Button,
+  FormContainer,
+  Form,
+  FormGroup,
+  Input,
+  TextField,
+} from "../base";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setEmail, setLogin, setPassword, signUp } from "../../store/actions";
+import { RootState } from "../../store/stores";
 
 export const SignUpPage: React.FC = () => {
   const link = <Link to="/signin">Sign in</Link>;
+  const errorMessage = useSelector(
+    (state: RootState) => state.root.errorMessage
+  );
   const dispatch = useDispatch();
 
   return (
@@ -28,7 +34,12 @@ export const SignUpPage: React.FC = () => {
       {/* <!-- Registration form --> */}
       <Form>
         {/* <!-- Login -->*/}
-        <FormGroup forName="login" label="Login" isVisible={false} isWithLabel={true}>
+        <FormGroup
+          forName="login"
+          label="Login"
+          isVisible={false}
+          isWithLabel={true}
+        >
           <Input
             id="login"
             placeholder="Enter your login"
@@ -37,7 +48,12 @@ export const SignUpPage: React.FC = () => {
           />
         </FormGroup>
         {/* <!-- Email -->*/}
-        <FormGroup forName="email" label="Email Address" isVisible={false} isWithLabel={true}>
+        <FormGroup
+          forName="email"
+          label="Email Address"
+          isVisible={false}
+          isWithLabel={true}
+        >
           <Input
             id="email"
             placeholder="Enter your email"
@@ -46,7 +62,12 @@ export const SignUpPage: React.FC = () => {
           />
         </FormGroup>
         {/* <!-- Password -->*/}
-        <FormGroup forName="password" label="Password" isVisible={false} isWithLabel={true}>
+        <FormGroup
+          forName="password"
+          label="Password"
+          isVisible={false}
+          isWithLabel={true}
+        >
           <Input
             id="password"
             placeholder="Enter your password"
@@ -55,6 +76,14 @@ export const SignUpPage: React.FC = () => {
             onChange={(password) => dispatch(setPassword(password))}
           />
         </FormGroup>
+        {/* <!-- Error text --> */}
+        <TextField
+          isCenter={true}
+          isBold={false}
+          classes="mb-6 text-danger"
+          text={errorMessage}
+          type="p"
+        />
         <Button
           isPrimary={true}
           text="Sign up"

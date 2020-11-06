@@ -2,7 +2,8 @@ import https from "https";
 import axios from "axios";
 import querystring from "query-string";
 import { setErrorMessage } from "../store/actions";
-import { store } from "../store/stores";
+import { history } from "../store/stores";
+import { store } from "../index";
 
 const apiUrl =
   "http://messengerpy-env-1.eba-rs4kjrzc.us-east-2.elasticbeanstalk.com";
@@ -15,36 +16,33 @@ export const performSignUpRequest = (
   console.log(
     `Perform sign up request with login: ${login} email: ${email} pass: ${password}`
   );
-  const signUpData = JSON.stringify({
+  const url = `${apiUrl}/register`;
+  const config = {
     login: login,
     email: email,
     password: password,
-  });
-  let response = "";
-  var postOptions = {
-    host: "domain.com",
-    path: "/api/register",
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
   };
-  return new Promise((resolve, reject) => {
-    const postRequest = https.request(postOptions, (res) => {
-      res.setEncoding("utf8");
-      res.on("data", (chunk) => {
-        response = chunk;
-      });
-      res.on("end", () => {
-        resolve(response);
-      });
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      if (json.status !== "error") {
+        store.dispatch(setErrorMessage(""));
+        history.push("/signin");
+      } else
+        store.dispatch(
+          setErrorMessage(
+            json.description.charAt(0).toUpperCase() + json.description.slice(1)
+          )
+        );
+      console.log(response.data);
+    })
+    .catch((error) => {
+      store.dispatch(
+        setErrorMessage("Something went wrong. Please try again.")
+      );
+      console.log(error);
     });
-    postRequest.on("error", (error) => {
-      reject(error);
-    });
-    postRequest.write(signUpData);
-    postRequest.end();
-  });
 };
 
 export const performSignInRequest = (login: string, password: string) => {
@@ -58,7 +56,7 @@ export const performSignInRequest = (login: string, password: string) => {
     .post(url, config)
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
-      if (json.status != "error") store.dispatch(setErrorMessage(""));
+      if (json.status !== "error") store.dispatch(setErrorMessage(""));
       else
         store.dispatch(
           setErrorMessage(

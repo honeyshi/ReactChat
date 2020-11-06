@@ -5,9 +5,10 @@ import {
   performSignInRequest,
   performSendLinkRequest,
   performResetPasswordRequest,
-  testRequest,
 } from "../common/requests";
 import { combineReducers } from "redux";
+import { connectRouter } from "connected-react-router";
+import { History } from "history";
 
 interface IAuthInitialState {
   email: string;
@@ -49,8 +50,7 @@ export const authUserReducer = createReducer(authInitialState, {
     };
   },
   [Action.signUp.type]: (state, action) => {
-    //performSignUpRequest(state.login, state.email, state.password);
-    testRequest();
+    performSignUpRequest(state.login, state.email, state.password);
   },
   [Action.signIn.type]: (state, action) => {
     performSignInRequest(state.login, state.password);
@@ -100,3 +100,10 @@ export const mainReducer = combineReducers({
   auth: authUserReducer,
   root: rootReducer,
 });
+
+export default (history: History) =>
+  combineReducers({
+    router: connectRouter(history),
+    auth: authUserReducer,
+    root: rootReducer,
+  });
