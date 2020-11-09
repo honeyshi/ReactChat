@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Button,
   FormContainer,
@@ -9,7 +9,13 @@ import {
 } from "../base";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setEmail, setLogin, setPassword, signUp } from "../../store/actions";
+import {
+  setEmail,
+  setErrorMessage,
+  setLogin,
+  setPassword,
+} from "../../store/actions";
+import { performSignUpRequest } from "../../common/requests";
 import { RootState } from "../../store/stores";
 
 export const SignUpPage: React.FC = () => {
@@ -17,7 +23,11 @@ export const SignUpPage: React.FC = () => {
   const errorMessage = useSelector(
     (state: RootState) => state.root.errorMessage
   );
+  const authState = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setErrorMessage(""));
+  }, []);
 
   return (
     <FormContainer>
@@ -44,6 +54,7 @@ export const SignUpPage: React.FC = () => {
             id="login"
             placeholder="Enter your login"
             type="input"
+            isInvalid={errorMessage.toLowerCase().includes("login")}
             onChange={(login) => dispatch(setLogin(login))}
           />
         </FormGroup>
@@ -58,6 +69,7 @@ export const SignUpPage: React.FC = () => {
             id="email"
             placeholder="Enter your email"
             type="input"
+            isInvalid={errorMessage.toLowerCase().includes("email")}
             onChange={(email) => dispatch(setEmail(email))}
           />
         </FormGroup>
@@ -73,6 +85,7 @@ export const SignUpPage: React.FC = () => {
             placeholder="Enter your password"
             type="input"
             inputType="password"
+            isInvalid={errorMessage.toLowerCase().includes("password")}
             onChange={(password) => dispatch(setPassword(password))}
           />
         </FormGroup>
@@ -88,7 +101,13 @@ export const SignUpPage: React.FC = () => {
           isPrimary={true}
           text="Sign up"
           classes="btn-lg btn-block"
-          onClick={() => dispatch(signUp())}
+          onClick={() =>
+            performSignUpRequest(
+              authState.login,
+              authState.email,
+              authState.password
+            )
+          }
         />
       </Form>
       <TextField isCenter={true} isBold={false} type="p">

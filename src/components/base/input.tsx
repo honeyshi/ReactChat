@@ -6,6 +6,7 @@ interface InputProps {
   classes?: string;
   name?: string;
   id?: string;
+  isInvalid?: boolean;
   placeholder: string;
   row?: string;
   type: React.ElementType;
@@ -17,11 +18,12 @@ export const Input: React.FC<InputProps> = ({
   classes,
   name,
   id,
+  isInvalid,
   placeholder,
   row,
   type: Tag,
   inputType,
-  onChange
+  onChange,
 }) => {
   const onchange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value),
@@ -29,7 +31,11 @@ export const Input: React.FC<InputProps> = ({
   );
   return (
     <Tag
-      className={classNames("form-control form-control-lg", classes)}
+      className={classNames(
+        "form-control form-control-lg",
+        { "is-invalid": isInvalid },
+        classes
+      )}
       name={name}
       id={id}
       placeholder={placeholder}

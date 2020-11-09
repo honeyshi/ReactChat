@@ -1,7 +1,6 @@
-import https from "https";
 import axios from "axios";
 import querystring from "query-string";
-import { setErrorMessage } from "../store/actions";
+import { setErrorMessage, setResetState } from "../store/actions";
 import { history } from "../store/stores";
 import { store } from "../index";
 
@@ -45,7 +44,11 @@ export const performSignUpRequest = (
     });
 };
 
-export const performSignInRequest = (login: string, password: string) => {
+export const performSignInRequest = (
+  login: string,
+  password: string,
+  isReset: boolean
+) => {
   console.log(`Perform sign in request with login: ${login} pass: ${password}`);
   const url = `${apiUrl}/login`;
   const config = {
@@ -56,8 +59,11 @@ export const performSignInRequest = (login: string, password: string) => {
     .post(url, config)
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
-      if (json.status !== "error") store.dispatch(setErrorMessage(""));
-      else
+      if (json.status !== "error") {
+        store.dispatch(setErrorMessage(""));
+        if (isReset) history.push("/reset-password");
+        else history.push("/");
+      } else
         store.dispatch(
           setErrorMessage(
             json.description.charAt(0).toUpperCase() + json.description.slice(1)
@@ -65,83 +71,84 @@ export const performSignInRequest = (login: string, password: string) => {
         );
     })
     .catch((error) => {
-      //store.dispatch(setErrorMessage(error));
+      store.dispatch(
+        setErrorMessage("Something went wrong. Please try again.")
+      );
       console.log(error);
     });
 };
 
-export const performSendLinkRequest = (email: string) => {
-  console.log(`Perform send link request with email: ${email}`);
-  const sendLinkData = JSON.stringify({
-    email: email,
-  });
+export const performSendLinkRequest = (login: string) => {
+  console.log(`Perform send link request with login: ${login}`);
 
-  let response = "";
-  var postOptions = {
-    host: "domain.com",
-    path: "/api/restore",
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
+  const url = `${apiUrl}/forget`;
+  const config = {
+    login: login,
   };
-  return new Promise((resolve, reject) => {
-    const postRequest = https.request(postOptions, (res) => {
-      res.setEncoding("utf8");
-      res.on("data", (chunk) => {
-        response = chunk;
-      });
-      res.on("end", () => {
-        resolve(response);
-      });
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      if (json.status !== "error") {
+        store.dispatch(setErrorMessage(""));
+        store.dispatch(setResetState(true));
+        history.push("/success-reset");
+      } else
+        store.dispatch(
+          setErrorMessage(
+            json.description.charAt(0).toUpperCase() + json.description.slice(1)
+          )
+        );
+    })
+    .catch((error) => {
+      store.dispatch(
+        setErrorMessage("Something went wrong. Please try again.")
+      );
+      console.log(error);
     });
-    postRequest.on("error", (error) => {
-      reject(error);
-    });
-    postRequest.write(sendLinkData);
-    postRequest.end();
-  });
 };
 
 export const performResetPasswordRequest = (
+  login: string | null,
   password: string,
   confirmPassword: string
 ) => {
   console.log(
-    `Perform reset passsword request with password: ${password} and confirmed password: ${confirmPassword}`
+    `Perform reset passsword request for user: ${login} with password: ${password} and confirmed password: ${confirmPassword}`
   );
-  const resetPasswordData = JSON.stringify({
-    passsword: password,
-    confirmPassword: confirmPassword,
-  });
 
-  let response = "";
-  var postOptions = {
-    host: "domain.com",
-    path: "/api/restore",
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
+  const url = `${apiUrl}/restore`;
+  const config = {
+    login: login,
+    password: password,
   };
-  if (password === confirmPassword) {
-    return new Promise((resolve, reject) => {
-      const postRequest = https.request(postOptions, (res) => {
-        res.setEncoding("utf8");
-        res.on("data", (chunk) => {
-          response = chunk;
-        });
-        res.on("end", () => {
-          resolve(response);
-        });
+  if (confirmPassword === password) {
+    axios
+      .post(url, config)
+      .then((response) => {
+        const json = JSON.parse(JSON.stringify(response.data));
+        if (json.status !== "error") {
+          store.dispatch(setErrorMessage(""));
+          store.dispatch(setResetState(false));
+          history.push("/signin");
+        } else
+          store.dispatch(
+            setErrorMessage(
+              json.description.charAt(0).toUpperCase() +
+                json.description.slice(1)
+            )
+          );
+      })
+      .catch((error) => {
+        store.dispatch(
+          setErrorMessage("Something went wrong. Please try again.")
+        );
+        console.log(error);
       });
-      postRequest.on("error", (error) => {
-        reject(error);
-      });
-      postRequest.write(resetPasswordData);
-      postRequest.end();
-    });
-  } else console.log("Passwords are not equal");
+  } else {
+    console.log("ERROR!");
+    store.dispatch(setErrorMessage("Passwords are not equal"));
+  }
 };
 
 const testRequestAx = () => {

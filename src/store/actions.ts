@@ -12,8 +12,6 @@ export const setUserId = createAction<string>(ActionTypes.COMMON_SET_USERID);
 export const setErrorMessage = createAction<string>(
   ActionTypes.COMMON_SET_ERRORMESSAGE
 );
-
-export const signUp = createAction(ActionTypes.SIGN_UP);
-export const signIn = createAction(ActionTypes.SIGN_IN);
-export const sendResetLink = createAction(ActionTypes.SEND_RESET_LINK);
-export const resetPassword = createAction(ActionTypes.RESET_PASSWORD);
+export const setResetState = createAction<boolean>(
+  ActionTypes.COMMON_SET_ISRESET
+);

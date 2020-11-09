@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Button,
   FormContainer,
@@ -9,18 +9,18 @@ import {
 } from "../base";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setLogin, setPassword, signIn } from "../../store/actions";
+import { setLogin, setPassword, setErrorMessage } from "../../store/actions";
+import { performSignInRequest } from "../../common/requests";
 import { RootState } from "../../store/stores";
 
 export const SignInPage: React.FC = () => {
   const link = <Link to="/signup">Sign up</Link>;
-  const errorMessage = useSelector(
-    (state: RootState) => state.root.errorMessage
-  );
+  const rootState = useSelector((state: RootState) => state.root);
+  const authState = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
-  const loginAsync = async () => {
-    await dispatch(signIn());
-  };
+  useEffect(() => {
+    dispatch(setErrorMessage(""));
+  }, []);
 
   return (
     <FormContainer>
@@ -46,6 +46,7 @@ export const SignInPage: React.FC = () => {
             id="login"
             placeholder="Enter your login"
             type="input"
+            isInvalid={rootState.errorMessage.toLowerCase().includes("login")}
             onChange={(login) => dispatch(setLogin(login))}
           />
         </FormGroup>
@@ -61,6 +62,9 @@ export const SignInPage: React.FC = () => {
             placeholder="Enter your password"
             type="input"
             inputType="password"
+            isInvalid={rootState.errorMessage
+              .toLowerCase()
+              .includes("password")}
             onChange={(password) => dispatch(setPassword(password))}
           />
         </FormGroup>
@@ -69,7 +73,7 @@ export const SignInPage: React.FC = () => {
           isCenter={true}
           isBold={false}
           classes="mb-6 text-danger"
-          text={errorMessage}
+          text={rootState.errorMessage}
           type="p"
         />
         <FormGroup isWithLabel={false}>
@@ -81,7 +85,13 @@ export const SignInPage: React.FC = () => {
           isPrimary={true}
           text="Sign in"
           classes="btn-lg btn-block"
-          onClick={loginAsync}
+          onClick={() =>
+            performSignInRequest(
+              authState.login,
+              authState.password,
+              rootState.isReset
+            )
+          }
         />
       </Form>
       <TextField isCenter={true} isBold={false} type="p">

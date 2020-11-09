@@ -5,6 +5,7 @@ import { Navbar } from "./components/navigation/navbar";
 import {
   ResetPasswordPage,
   ResetPasswordSendLinkPage,
+  ResetPasswordSuccessPage,
   SignInPage,
   SignUpPage,
 } from "./components/formPages";
@@ -42,6 +43,11 @@ const App: React.FC<Props> = () => {
           component={ResetPasswordSendLinkPage}
         />
         <Route exact path="/reset-password" component={ResetPasswordPage} />
+        <Route
+          exact
+          path="/success-reset"
+          component={ResetPasswordSuccessPage}
+        />
       </Switch>
     </div>
   );

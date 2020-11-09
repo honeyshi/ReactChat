@@ -1,15 +1,27 @@
-import React from "react";
-import { Form } from "../base/form";
-import { FormGroup } from "../base/formGroup";
-import { Input } from "../base/input";
-import { FormContainer } from "../base/formContainer";
-import { TextField } from "../base/textField";
-import { Button } from "../base/button";
-import { useDispatch } from "react-redux";
-import { setEmail, sendResetLink } from "../../store/actions";
+import React, { useEffect } from "react";
+import {
+  Button,
+  FormContainer,
+  Form,
+  FormGroup,
+  Input,
+  TextField,
+} from "../base";
+import { useDispatch, useSelector } from "react-redux";
+import { setLogin, setErrorMessage } from "../../store/actions";
+import { performSendLinkRequest } from "../../common/requests";
+import { RootState } from "../../store/stores";
 
 export const ResetPasswordSendLinkPage: React.FC = () => {
   const dispatch = useDispatch();
+  const errorMessage = useSelector(
+    (state: RootState) => state.root.errorMessage
+  );
+  const login = useSelector((state: RootState) => state.auth.login);
+  useEffect(() => {
+    dispatch(setErrorMessage(""));
+  }, []);
+
   return (
     <FormContainer>
       {/* <!-- Header --> */}
@@ -24,24 +36,37 @@ export const ResetPasswordSendLinkPage: React.FC = () => {
         isCenter={true}
         isBold={false}
         classes="mb-6"
-        text="Enter your email address to reset password."
+        text="Enter your login to reset password."
         type="p"
       />
       <Form>
-        {/* <!-- Email -->*/}
-        <FormGroup forName="email" label="Email Address" isVisible={false} isWithLabel={true}>
+        {/* <!-- Login -->*/}
+        <FormGroup
+          forName="login"
+          label="Login"
+          isVisible={false}
+          isWithLabel={true}
+        >
           <Input
-            id="email"
-            placeholder="Enter your email"
+            id="login"
+            placeholder="Enter your login"
             type="input"
-            onChange={(email) => dispatch(setEmail(email))}
+            onChange={(login) => dispatch(setLogin(login))}
           />
         </FormGroup>
+        {/* <!-- Error text --> */}
+        <TextField
+          isCenter={true}
+          isBold={false}
+          classes="mb-6 text-danger"
+          text={errorMessage}
+          type="p"
+        />
         <Button
           isPrimary={true}
-          text="Send Reset Link"
+          text="Send New Password"
           classes="btn-lg btn-block"
-          onClick={() => dispatch(sendResetLink())}
+          onClick={() => performSendLinkRequest(login)}
         />
       </Form>
     </FormContainer>

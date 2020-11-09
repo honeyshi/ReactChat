@@ -1,11 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import * as Action from "./actions";
-import {
-  performSignUpRequest,
-  performSignInRequest,
-  performSendLinkRequest,
-  performResetPasswordRequest,
-} from "../common/requests";
+import { performSignUpRequest } from "../common/requests";
 import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
 import { History } from "history";
@@ -49,30 +44,20 @@ export const authUserReducer = createReducer(authInitialState, {
       confirmPassword: action.payload,
     };
   },
-  [Action.signUp.type]: (state, action) => {
-    performSignUpRequest(state.login, state.email, state.password);
-  },
-  [Action.signIn.type]: (state, action) => {
-    performSignInRequest(state.login, state.password);
-  },
-  [Action.sendResetLink.type]: (state, action) => {
-    performSendLinkRequest(state.email);
-  },
-  [Action.resetPassword.type]: (state, action) => {
-    performResetPasswordRequest(state.password, state.confirmPassword);
-  },
 });
 
 interface IRootState {
   isAuth: boolean;
   userId: string;
   errorMessage: string;
+  isReset: boolean;
 }
 
 const rootState: IRootState = {
   isAuth: false,
   userId: "",
   errorMessage: "",
+  isReset: false,
 };
 
 export const rootReducer = createReducer(rootState, {
@@ -92,6 +77,12 @@ export const rootReducer = createReducer(rootState, {
     return {
       ...state,
       errorMessage: action.payload,
+    };
+  },
+  [Action.setResetState.type]: (state, action) => {
+    return {
+      ...state,
+      isReset: action.payload,
     };
   },
 });

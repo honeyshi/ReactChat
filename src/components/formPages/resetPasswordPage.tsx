@@ -1,19 +1,31 @@
-import React from "react";
-import { Form } from "../base/form";
-import { FormGroup } from "../base/formGroup";
-import { Input } from "../base/input";
-import { FormContainer } from "../base/formContainer";
-import { TextField } from "../base/textField";
-import { Button } from "../base/button";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import {
+  Button,
+  FormContainer,
+  Form,
+  FormGroup,
+  Input,
+  TextField,
+} from "../base";
 import {
   setPassword,
   confirmPassword,
-  resetPassword
+  setErrorMessage,
 } from "../../store/actions";
+import { RootState } from "../../store/stores";
+import { performResetPasswordRequest } from "../../common/requests";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ResetPasswordPage: React.FC = () => {
   const dispatch = useDispatch();
+  const errorMessage = useSelector(
+    (state: RootState) => state.root.errorMessage
+  );
+  const state = useSelector((state: RootState) => state.auth);
+  useEffect(() => {
+    dispatch(setErrorMessage(""));
+  }, []);
+
   return (
     <FormContainer>
       {/* <!-- Header --> */}
@@ -33,12 +45,18 @@ export const ResetPasswordPage: React.FC = () => {
       />
       <Form>
         {/* <!-- New password -->*/}
-        <FormGroup forName="password" label="Password" isVisible={false} isWithLabel={true}>
+        <FormGroup
+          forName="password"
+          label="Password"
+          isVisible={false}
+          isWithLabel={true}
+        >
           <Input
             id="password"
             placeholder="Enter new password"
             type="input"
             inputType="password"
+            isInvalid={errorMessage.toLowerCase().includes("password")}
             onChange={(password) => dispatch(setPassword(password))}
           />
         </FormGroup>
@@ -54,14 +72,29 @@ export const ResetPasswordPage: React.FC = () => {
             placeholder="Confirm password"
             type="input"
             inputType="password"
+            isInvalid={errorMessage.toLowerCase().includes("password")}
             onChange={(password) => dispatch(confirmPassword(password))}
           />
         </FormGroup>
+        {/* <!-- Error text --> */}
+        <TextField
+          isCenter={true}
+          isBold={false}
+          classes="mb-6 text-danger"
+          text={errorMessage}
+          type="p"
+        />
         <Button
           isPrimary={true}
           text="Reset password"
           classes="btn-lg btn-block"
-          onClick={() => dispatch(resetPassword())}
+          onClick={() =>
+            performResetPasswordRequest(
+              localStorage.getItem("login"),
+              state.password,
+              state.confirmPassword
+            )
+          }
         />
       </Form>
     </FormContainer>
