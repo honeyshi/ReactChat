@@ -3,7 +3,7 @@ import {
   ISidebarChatItem,
   ISidebarFriendItem,
   ISidebarUserInfoItem,
-  ISidebarUserProfileProps
+  ISidebarUserProfileProps,
 } from "../../common/interfaces";
 import { SidebarChat } from "./sidebarChat";
 import { SidebarChatContainer } from "./sidebarChatContainer";
@@ -26,7 +26,7 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
   sidebarChatItems,
   sidebarFriendItems,
   sidebarUserInfoItems,
-  sidebarUserInfo
+  sidebarUserInfo,
 }) => {
   let sidebarItems;
   if (sidebarChatItems !== undefined) {
@@ -58,6 +58,7 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
       return (
         <SidebarItem type="div" classes="card mb-6">
           <SidebarFriend
+            canDelete={sidebarFriendItemInfo.canDelete}
             friendImage={sidebarFriendItemInfo.friendImage}
             friendName={sidebarFriendItemInfo.friendName}
             friendStatus={sidebarFriendItemInfo.friendStatus}

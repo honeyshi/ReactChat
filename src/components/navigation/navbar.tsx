@@ -12,23 +12,28 @@ const navbarItems: INavbarItem[] = [
   {
     title: "Create chat",
     link: "tab-content-create-chat",
-    child: Icon.Edit
+    child: Icon.Edit,
   },
   {
-    title: "Friends",
-    link: "tab-content-friends",
-    child: Icon.Users
+    title: "Search user",
+    link: "tab-content-search-user",
+    child: Icon.Search,
+  },
+  {
+    title: "Blocked users",
+    link: "tab-content-blocked-users",
+    child: Icon.UserX,
   },
   {
     title: "Chats",
     link: "tab-content-dialogs",
-    child: Icon.MessageSquare
+    child: Icon.MessageSquare,
   },
   {
     title: "User",
     link: "tab-content-user",
-    child: Icon.User
-  }
+    child: Icon.User,
+  },
 ];
 
 export const Navbar: React.FC = () => {

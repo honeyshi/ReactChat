@@ -1,7 +1,9 @@
 import React from "react";
 import classNames from "classnames";
+import { X } from "react-feather";
 
 interface ISidebarFriendProps {
+  canDelete: boolean;
   friendImage: string;
   friendName: string;
   friendStatus: string;
@@ -9,10 +11,11 @@ interface ISidebarFriendProps {
 }
 
 export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
+  canDelete,
   friendImage,
   friendName,
   friendStatus,
-  isOnline
+  isOnline,
 }) => {
   return (
     <div className="card-body">
@@ -27,6 +30,7 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
           <h6 className="mb-0">{friendName}</h6>
           <small className="text-muted">{friendStatus}</small>
         </div>
+        {canDelete && <X size={20} strokeWidth={1} />}
       </div>
 
       <a href="#" className="stretched-link"></a>

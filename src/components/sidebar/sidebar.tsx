@@ -3,7 +3,7 @@ import * as Icon from "react-feather";
 import { SidebarTab } from "./sidebarTab";
 import { SidebarTitle } from "./sidebarTitle";
 import { SidebarItemsContainer } from "./sidebarItemsContainer";
-import { Button, FormGroup, Input } from "../base";
+import { Button, FormGroup, Input, TextField } from "../base";
 import {
   ISidebarChatItem,
   ISidebarFriendItem,
@@ -34,30 +34,35 @@ const sidebarChatItems: ISidebarChatItem[] = [
 
 const sidebarFriendItems: ISidebarFriendItem[] = [
   {
+    canDelete: true,
     friendImage: "/fake-link",
     friendName: "Anna Bridges",
     friendStatus: "Online",
     isOnline: true,
   },
   {
+    canDelete: false,
     friendImage: "/fake-link",
     friendName: "Brian Dawson",
     friendStatus: "last seen 2 hours ago",
     isOnline: false,
   },
   {
+    canDelete: true,
     friendImage: "/fake-link",
     friendName: "Leslie Sutton",
     friendStatus: "last seen 3 days ago",
     isOnline: false,
   },
   {
+    canDelete: true,
     friendImage: "/fake-link",
     friendName: "Simon Haskell",
     friendStatus: "last seen 3 days ago",
     isOnline: false,
   },
   {
+    canDelete: false,
     friendImage: "/fake-link",
     friendName: "Tina Turner",
     friendStatus: "last seen 3 days ago",
@@ -91,13 +96,17 @@ const Sidebar: React.FC = () => {
           />
         </SidebarTab>
 
-        <SidebarTab id="tab-content-friends" isActive={true} isOuter={true}>
-          <SidebarTitle text="Friends" />
+        <SidebarTab
+          id="tab-content-search-users"
+          isActive={false}
+          isOuter={true}
+        >
+          <SidebarTitle text="Search users" />
           <form className="mb-6">
             <div className="input-group">
               <Input
                 type="input"
-                placeholder="Search for messages or users..."
+                placeholder="Type user's login..."
                 onChange={() => void 0}
               />
               <div className="input-group-append">
@@ -110,6 +119,24 @@ const Sidebar: React.FC = () => {
               </div>
             </div>
           </form>
+          {/*<SidebarItemsContainer
+            classes="mb-n6"
+            sidebarFriendItems={sidebarFriendItems}
+          />*/}
+          <TextField
+            isCenter={true}
+            isBold={false}
+            text="Users not found"
+            type="p"
+          />
+        </SidebarTab>
+
+        <SidebarTab
+          id="tab-content-blocked-users"
+          isActive={true}
+          isOuter={true}
+        >
+          <SidebarTitle text="Blocked users" />
           <SidebarItemsContainer
             classes="mb-n6"
             sidebarFriendItems={sidebarFriendItems}

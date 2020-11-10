@@ -12,6 +12,7 @@ export interface ISidebarChatItem {
 }
 
 export interface ISidebarFriendItem {
+  canDelete: boolean;
   friendImage: string;
   friendName: string;
   friendStatus: string;
