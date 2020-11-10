@@ -1,8 +1,6 @@
 import * as React from "react";
-import { ChatLayout } from "./components/chat/chatLayout";
-import { Sidebar } from "./components/sidebar/sidebar";
-import { Navbar } from "./components/navigation/navbar";
 import {
+  ChatPage,
   ResetPasswordPage,
   ResetPasswordSendLinkPage,
   ResetPasswordSuccessPage,
@@ -30,11 +28,8 @@ type Props = ConnectedProps<typeof connector>;
 const App: React.FC<Props> = () => {
   return (
     <div className="layout">
-      {/*<Navbar />
-      <Sidebar />
-      <ChatLayout />*/}
       <Switch>
-        <Route exact path="/" component={SignUpPage} />
+        <Route exact path="/" component={ChatPage} />
         <Route exact path="/signin" component={SignInPage} />
         <Route exact path="/signup" component={SignUpPage} />
         <Route

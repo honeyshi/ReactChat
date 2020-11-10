@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../base/button";
+import { Button } from "../base";
 import { Send } from "react-feather";
 
 export const ChatFooter: React.FC = () => {

@@ -1,3 +1,4 @@
+export { ChatPage } from "./chatPage";
 export { ResetPasswordPage } from "./resetPasswordPage";
 export { ResetPasswordSendLinkPage } from "./resetPasswordSendLinkPage";
 export { ResetPasswordSuccessPage } from "./resetPasswordSuccessPage";

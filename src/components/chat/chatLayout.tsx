@@ -22,17 +22,17 @@ const chatMessageItems: IChatMessageItem[] = [
       "I'm going to meet a friend of mine at the department store. Yeah, I have to buy some presents for my parents.",
     messageTime: "6 minutes ago",
     senderName: "Anna Bridges",
-    userImage: "/fake-link"
+    userImage: "/fake-link",
   },
   {
     isRight: true,
     messageText:
       "Yeah, I'm going to meet a friend of mine at the department store. I have to buy some presents for my parents",
-    messageTime: "2 minutes ago"
-  }
+    messageTime: "2 minutes ago",
+  },
 ];
 
-export const ChatLayout: React.FC = () => {
+const ChatLayout: React.FC = () => {
   const [currentChatName, setCurrentChatName] = useState<string>();
   const [currentChatStatus, setCurrentChatStatus] = useState<string>();
 
@@ -68,3 +68,5 @@ export const ChatLayout: React.FC = () => {
     </div>
   );
 };
+
+export default ChatLayout;

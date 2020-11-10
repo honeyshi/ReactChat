@@ -3,16 +3,14 @@ import * as Icon from "react-feather";
 import { SidebarTab } from "./sidebarTab";
 import { SidebarTitle } from "./sidebarTitle";
 import { SidebarItemsContainer } from "./sidebarItemsContainer";
-import { Button } from "../base/button";
-import { FormGroup } from "../base/formGroup";
-import { Input } from "../base/input";
+import { Button, FormGroup, Input } from "../base";
 import {
   ISidebarChatItem,
   ISidebarFriendItem,
   ISidebarUserInfoItem,
   ISidebarUserProfileProps,
 } from "../../common/interfaces";
-import { NavbarItem } from "../navigation/navbarItem";
+import { NavbarItem } from "../navigation";
 
 const sidebarChatItems: ISidebarChatItem[] = [
   {
@@ -81,7 +79,7 @@ const userProfileInfoItems: ISidebarUserInfoItem[] = [
   { itemHeader: "Time", itemValue: "10:03 am", icon: Icon.Clock },
 ];
 
-export const Sidebar: React.FC = () => {
+const Sidebar: React.FC = () => {
   return (
     <div className="sidebar">
       <div className="tab-content h-100" role="tablist">
@@ -229,3 +227,5 @@ export const Sidebar: React.FC = () => {
     </div>
   );
 };
+
+export default Sidebar;
