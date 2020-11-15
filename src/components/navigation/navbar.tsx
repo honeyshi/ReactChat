@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { NavbarItem } from "./navbarItem";
+import { setActiveNavbar } from "../../store/actions";
+import { useDispatch } from "react-redux";
 import * as Icon from "react-feather";
 
 interface INavbarItem {
@@ -16,7 +18,7 @@ const navbarItems: INavbarItem[] = [
   },
   {
     title: "Search user",
-    link: "tab-content-search-user",
+    link: "tab-content-search-users",
     child: Icon.Search,
   },
   {
@@ -38,20 +40,25 @@ const navbarItems: INavbarItem[] = [
 
 export const Navbar: React.FC = () => {
   const [activeItem, setActiveItem] = useState<string>();
+  const dispatch = useDispatch();
 
-  const onNavbarItemClick = (item: string) => setActiveItem(item);
+  const onNavbarItemClick = (item: string) => {
+    console.log(`Click on ${item}`);
+    setActiveItem(item);
+    dispatch(setActiveNavbar(item));
+  };
 
-  if (activeItem === undefined) setActiveItem("Chats");
+  if (activeItem === undefined) setActiveItem("tab-content-dialogs");
 
   const navbarItemComponents = useMemo(() => {
     const innerNavbar = navbarItems.map((itemInfo) => {
       return (
         <NavbarItem
-          isActive={itemInfo.title === activeItem ? true : false}
+          isActive={itemInfo.link === activeItem ? true : false}
           isMenu={true}
           link={itemInfo.link}
           title={itemInfo.title}
-          onClick={() => onNavbarItemClick(itemInfo.title)}
+          onClick={() => onNavbarItemClick(itemInfo.link)}
         >
           {<itemInfo.child />}
         </NavbarItem>

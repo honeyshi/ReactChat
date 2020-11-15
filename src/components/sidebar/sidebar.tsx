@@ -11,6 +11,8 @@ import {
   ISidebarUserProfileProps,
 } from "../../common/interfaces";
 import { NavbarItem } from "../navigation";
+import { RootState } from "../../store/stores";
+import { useSelector } from "react-redux";
 
 const sidebarChatItems: ISidebarChatItem[] = [
   {
@@ -85,10 +87,18 @@ const userProfileInfoItems: ISidebarUserInfoItem[] = [
 ];
 
 const Sidebar: React.FC = () => {
+  const activeNavbar = useSelector(
+    (state: RootState) => state.root.activeNavbar
+  );
+  console.log(`Active in Sidebar fc ${activeNavbar}`);
   return (
     <div className="sidebar">
       <div className="tab-content h-100" role="tablist">
-        <SidebarTab id="tab-content-dialogs" isActive={false} isOuter={true}>
+        <SidebarTab
+          id="tab-content-dialogs"
+          isActive={activeNavbar.includes("tab-content-dialogs")}
+          isOuter={true}
+        >
           <SidebarTitle text="Chats" />
           <SidebarItemsContainer
             classes="nav d-block list-discussions-js mb-n6"
@@ -98,7 +108,7 @@ const Sidebar: React.FC = () => {
 
         <SidebarTab
           id="tab-content-search-users"
-          isActive={false}
+          isActive={activeNavbar.includes("tab-content-search-users")}
           isOuter={true}
         >
           <SidebarTitle text="Search users" />
@@ -133,7 +143,7 @@ const Sidebar: React.FC = () => {
 
         <SidebarTab
           id="tab-content-blocked-users"
-          isActive={true}
+          isActive={activeNavbar.includes("tab-content-blocked-users")}
           isOuter={true}
         >
           <SidebarTitle text="Blocked users" />
@@ -143,7 +153,11 @@ const Sidebar: React.FC = () => {
           />
         </SidebarTab>
 
-        <SidebarTab id="tab-content-user" isActive={false} isOuter={true}>
+        <SidebarTab
+          id="tab-content-user"
+          isActive={activeNavbar.includes("tab-content-user")}
+          isOuter={true}
+        >
           <SidebarTitle text="Profile" />
           <SidebarItemsContainer
             classes="card mb-6"
@@ -177,7 +191,7 @@ const Sidebar: React.FC = () => {
 
         <SidebarTab
           id="tab-content-create-chat"
-          isActive={false}
+          isActive={activeNavbar.includes("tab-content-create-chat")}
           isOuter={true}
         >
           <SidebarTitle text="Create group" />
@@ -187,12 +201,14 @@ const Sidebar: React.FC = () => {
               isMenu={false}
               link="create-group-details"
               text="Details"
+              onClick={() => void 0}
             />
             <NavbarItem
               isActive={false}
               isMenu={false}
               link="create-group-members"
               text="Members"
+              onClick={() => void 0}
             />
           </ul>
           <SidebarTab id="create-group-details" isActive={true} isOuter={false}>

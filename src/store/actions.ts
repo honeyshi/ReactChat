@@ -15,3 +15,6 @@ export const setErrorMessage = createAction<string>(
 export const setResetState = createAction<boolean>(
   ActionTypes.COMMON_SET_ISRESET
 );
+export const setActiveNavbar = createAction<string>(
+  ActionTypes.COMMON_SET_ACTIVENAVBAR
+);

@@ -51,6 +51,7 @@ interface IRootState {
   userId: string;
   errorMessage: string;
   isReset: boolean;
+  activeNavbar: string;
 }
 
 const rootState: IRootState = {
@@ -58,6 +59,7 @@ const rootState: IRootState = {
   userId: "",
   errorMessage: "",
   isReset: false,
+  activeNavbar: "tab-content-dialogs",
 };
 
 export const rootReducer = createReducer(rootState, {
@@ -83,6 +85,12 @@ export const rootReducer = createReducer(rootState, {
     return {
       ...state,
       isReset: action.payload,
+    };
+  },
+  [Action.setActiveNavbar.type]: (state, action) => {
+    return {
+      ...state,
+      activeNavbar: action.payload,
     };
   },
 });

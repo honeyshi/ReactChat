@@ -9,7 +9,7 @@ interface INavbarItemProps {
   link: string;
   title?: string;
   text?: string;
-  onClick?: (arg0: string) => void;
+  onClick: (arg0: string) => void;
 }
 
 export const NavbarItem: React.FC<INavbarItemProps> = ({
@@ -30,11 +30,10 @@ export const NavbarItem: React.FC<INavbarItemProps> = ({
           { active: isActive }
         )}
         data-toggle="tab"
-        href={`#${link}`}
         title={title}
         role="tab"
         aria-selected={isActive}
-        onClick={() => onClick}
+        onClick={() => onClick(link)}
       >
         {text}
         {children}
