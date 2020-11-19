@@ -4,7 +4,6 @@ import classNames from "classnames";
 interface ISidebarChatProps {
   chatHeader: string;
   chatImage: string;
-  isOnline: boolean;
   lastMessageAuthor?: string;
   lastMessageText: string;
   lastMessageTime: string;
@@ -13,10 +12,9 @@ interface ISidebarChatProps {
 export const SidebarChat: React.FC<ISidebarChatProps> = ({
   chatHeader,
   chatImage,
-  isOnline,
   lastMessageAuthor,
   lastMessageText,
-  lastMessageTime
+  lastMessageTime,
 }) => {
   const lastMessageFullText =
     lastMessageAuthor === undefined
@@ -25,9 +23,7 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
   return (
     <div className="card-body">
       <div className="media">
-        <div
-          className={classNames("avatar mr-5", { "avatar-online": isOnline })}
-        >
+        <div className="avatar mr-5">
           <img className="avatar-img" src={chatImage} alt="" />
         </div>
 

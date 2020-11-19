@@ -1,8 +1,16 @@
 import axios from "axios";
 import querystring from "query-string";
-import { setErrorMessage, setResetState } from "../store/actions";
+import {
+  setDialogs,
+  setErrorMessage,
+  setIsAuth,
+  setResetState,
+  setUserId,
+} from "../store/actions";
 import { history } from "../store/stores";
 import { store } from "../index";
+import { ISidebarChatItem } from "./interfaces";
+import { formatLastChatActivityDate, checkUserSawChat } from "./functions";
 
 const apiUrl =
   "http://messengerpy-env-1.eba-rs4kjrzc.us-east-2.elasticbeanstalk.com";
@@ -61,14 +69,19 @@ export const performSignInRequest = (
       const json = JSON.parse(JSON.stringify(response.data));
       if (json.status !== "error") {
         store.dispatch(setErrorMessage(""));
+        store.dispatch(setIsAuth(true));
+        store.dispatch(setUserId(json.userId));
         if (isReset) history.push("/reset-password");
         else history.push("/");
-      } else
+      } else {
         store.dispatch(
           setErrorMessage(
             json.description.charAt(0).toUpperCase() + json.description.slice(1)
           )
         );
+        store.dispatch(setIsAuth(false));
+        store.dispatch(setUserId(""));
+      }
     })
     .catch((error) => {
       store.dispatch(
@@ -149,6 +162,60 @@ export const performResetPasswordRequest = (
     console.log("ERROR!");
     store.dispatch(setErrorMessage("Passwords are not equal"));
   }
+};
+
+export const performGetLastChatsRequest = (userId: string) => {
+  console.log(`Perform get last chats request for user with id ${userId}`);
+
+  const url = `${apiUrl}/chats`;
+  const config = {
+    id: userId,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      if (json.status !== "error") {
+        let sidebarChatItems: ISidebarChatItem[] = [];
+        for (var item in json) {
+          sidebarChatItems.push({
+            chatHeader: json[item].name,
+            chatImage: json[item].image,
+            isUnread: checkUserSawChat(json[item].date, json[item].last),
+            lastMessageText: json[item].text,
+            lastMessageTime: formatLastChatActivityDate(json[item].date),
+          });
+        }
+        store.dispatch(setDialogs(sidebarChatItems));
+      } else console.log(json);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const performGetBlockedUsersRequest = (userId: string) => {
+  console.log(`Perform get blocked users request for user with id ${userId}`);
+
+  const url = `${apiUrl}/getBlockedUsers`;
+  const config = {
+    id: userId,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      if (json.status !== "error") {
+        for (var item in json) {
+          //console.log("Item is ", item);
+          //console.log("Name ", json[item].name);
+        }
+        console.log(json);
+      } else console.log(json);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 const testRequestAx = () => {

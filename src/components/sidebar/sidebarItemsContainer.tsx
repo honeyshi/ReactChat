@@ -37,16 +37,11 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
             <SidebarChat
               chatHeader={sidebarChatItemInfo.chatHeader}
               chatImage={sidebarChatItemInfo.chatImage}
-              isOnline={sidebarChatItemInfo.isOnline}
               lastMessageText={sidebarChatItemInfo.lastMessageText}
               lastMessageAuthor={sidebarChatItemInfo.lastMessageAuthor}
               lastMessageTime={sidebarChatItemInfo.lastMessageTime}
             />
-            {sidebarChatItemInfo.countUnreadMessages > 0 && (
-              <SidebarMessagesCount
-                numberMessages={sidebarChatItemInfo.countUnreadMessages}
-              />
-            )}
+            {sidebarChatItemInfo.isUnread && <SidebarMessagesCount />}
           </SidebarChatContainer>
         </SidebarItem>
       );

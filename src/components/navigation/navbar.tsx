@@ -3,11 +3,19 @@ import { NavbarItem } from "./navbarItem";
 import { setActiveNavbar } from "../../store/actions";
 import { useDispatch } from "react-redux";
 import * as Icon from "react-feather";
+import {
+  performGetBlockedUsersRequest,
+  performGetLastChatsRequest,
+} from "../../common/requests";
+import { RootState } from "../../store/stores";
+import { useSelector } from "react-redux";
+import { string } from "yup";
 
 interface INavbarItem {
   title: string;
   link: string;
   child: React.FC<Icon.Props>;
+  clickVoid: (arg0: string) => void;
 }
 
 const navbarItems: INavbarItem[] = [
@@ -15,32 +23,38 @@ const navbarItems: INavbarItem[] = [
     title: "Create chat",
     link: "tab-content-create-chat",
     child: Icon.Edit,
+    clickVoid: () => void 0,
   },
   {
     title: "Search user",
     link: "tab-content-search-users",
     child: Icon.Search,
+    clickVoid: () => void 0,
   },
   {
     title: "Blocked users",
     link: "tab-content-blocked-users",
     child: Icon.UserX,
+    clickVoid: performGetBlockedUsersRequest,
   },
   {
     title: "Chats",
     link: "tab-content-dialogs",
     child: Icon.MessageSquare,
+    clickVoid: performGetLastChatsRequest,
   },
   {
     title: "User",
     link: "tab-content-user",
     child: Icon.User,
+    clickVoid: () => void 0,
   },
 ];
 
 export const Navbar: React.FC = () => {
   const [activeItem, setActiveItem] = useState<string>();
   const dispatch = useDispatch();
+  const userId = useSelector((state: RootState) => state.root.userId);
 
   const onNavbarItemClick = (item: string) => {
     console.log(`Click on ${item}`);
@@ -58,7 +72,10 @@ export const Navbar: React.FC = () => {
           isMenu={true}
           link={itemInfo.link}
           title={itemInfo.title}
-          onClick={() => onNavbarItemClick(itemInfo.link)}
+          onClick={() => {
+            onNavbarItemClick(itemInfo.link);
+            itemInfo.clickVoid("2");
+          }}
         >
           {<itemInfo.child />}
         </NavbarItem>

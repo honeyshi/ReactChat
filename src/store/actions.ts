@@ -1,4 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
+import { ISidebarChatItem } from "../common/interfaces";
 import { ActionTypes } from "./actionTypes";
 
 export const setEmail = createAction<string>(ActionTypes.COMMON_SETEMAIL);
@@ -17,4 +18,8 @@ export const setResetState = createAction<boolean>(
 );
 export const setActiveNavbar = createAction<string>(
   ActionTypes.COMMON_SET_ACTIVENAVBAR
+);
+
+export const setDialogs = createAction<ISidebarChatItem[]>(
+  ActionTypes.CHAT_SETDIALOGS
 );

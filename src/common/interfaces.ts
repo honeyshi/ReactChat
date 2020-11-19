@@ -4,8 +4,7 @@ import React from "react";
 export interface ISidebarChatItem {
   chatHeader: string;
   chatImage: string;
-  countUnreadMessages: number;
-  isOnline: boolean;
+  isUnread: boolean;
   lastMessageAuthor?: string;
   lastMessageText: string;
   lastMessageTime: string;

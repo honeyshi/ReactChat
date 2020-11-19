@@ -4,6 +4,7 @@ import { performSignUpRequest } from "../common/requests";
 import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
 import { History } from "history";
+import { ISidebarChatItem } from "../common/interfaces";
 
 interface IAuthInitialState {
   email: string;
@@ -95,9 +96,27 @@ export const rootReducer = createReducer(rootState, {
   },
 });
 
+interface ChatState {
+  sidebarDialogs: ISidebarChatItem[];
+}
+
+const chatState: ChatState = {
+  sidebarDialogs: [],
+};
+
+const chatReducer = createReducer(chatState, {
+  [Action.setDialogs.type]: (state, action) => {
+    return {
+      ...state,
+      sidebarDialogs: action.payload,
+    };
+  },
+});
+
 export const mainReducer = combineReducers({
   auth: authUserReducer,
   root: rootReducer,
+  chat: chatReducer,
 });
 
 export default (history: History) =>
@@ -105,4 +124,5 @@ export default (history: History) =>
     router: connectRouter(history),
     auth: authUserReducer,
     root: rootReducer,
+    chat: chatReducer,
   });

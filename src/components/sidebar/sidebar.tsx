@@ -14,7 +14,9 @@ import { NavbarItem } from "../navigation";
 import { RootState } from "../../store/stores";
 import { useSelector } from "react-redux";
 
-const sidebarChatItems: ISidebarChatItem[] = [
+import "./sidebar.scss";
+
+/*const sidebarChatItems: ISidebarChatItem[] = [
   {
     chatHeader: "Bootstrap Themes",
     chatImage: "/fake-link",
@@ -32,7 +34,7 @@ const sidebarChatItems: ISidebarChatItem[] = [
     lastMessageText: "is typing...",
     lastMessageTime: "10:42 AM",
   },
-];
+];*/
 
 const sidebarFriendItems: ISidebarFriendItem[] = [
   {
@@ -90,7 +92,9 @@ const Sidebar: React.FC = () => {
   const activeNavbar = useSelector(
     (state: RootState) => state.root.activeNavbar
   );
-  console.log(`Active in Sidebar fc ${activeNavbar}`);
+  const sidebarChats = useSelector(
+    (state: RootState) => state.chat.sidebarDialogs
+  );
   return (
     <div className="sidebar">
       <div className="tab-content h-100" role="tablist">
@@ -102,7 +106,7 @@ const Sidebar: React.FC = () => {
           <SidebarTitle text="Chats" />
           <SidebarItemsContainer
             classes="nav d-block list-discussions-js mb-n6"
-            sidebarChatItems={sidebarChatItems}
+            sidebarChatItems={sidebarChats}
           />
         </SidebarTab>
 
