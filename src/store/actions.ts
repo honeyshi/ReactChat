@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { ISidebarChatItem } from "../common/interfaces";
+import { ISidebarChatItem, ISidebarFriendItem } from "../common/interfaces";
 import { ActionTypes } from "./actionTypes";
 
 export const setEmail = createAction<string>(ActionTypes.COMMON_SETEMAIL);
@@ -22,4 +22,7 @@ export const setActiveNavbar = createAction<string>(
 
 export const setDialogs = createAction<ISidebarChatItem[]>(
   ActionTypes.CHAT_SETDIALOGS
+);
+export const setBlockedUsers = createAction<ISidebarFriendItem[]>(
+  ActionTypes.CHAT_SETBLOCKEDUSERS
 );

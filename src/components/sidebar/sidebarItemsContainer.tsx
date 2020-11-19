@@ -56,7 +56,6 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
             canDelete={sidebarFriendItemInfo.canDelete}
             friendImage={sidebarFriendItemInfo.friendImage}
             friendName={sidebarFriendItemInfo.friendName}
-            friendStatus={sidebarFriendItemInfo.friendStatus}
             isOnline={sidebarFriendItemInfo.isOnline}
           />
         </SidebarItem>

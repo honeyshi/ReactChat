@@ -1,6 +1,7 @@
 import axios from "axios";
 import querystring from "query-string";
 import {
+  setBlockedUsers,
   setDialogs,
   setErrorMessage,
   setIsAuth,
@@ -9,8 +10,12 @@ import {
 } from "../store/actions";
 import { history } from "../store/stores";
 import { store } from "../index";
-import { ISidebarChatItem } from "./interfaces";
-import { formatLastChatActivityDate, checkUserSawChat } from "./functions";
+import { ISidebarChatItem, ISidebarFriendItem } from "./interfaces";
+import {
+  formatLastChatActivityDate,
+  checkUserSawChat,
+  getUserIsOnline,
+} from "./functions";
 
 const apiUrl =
   "http://messengerpy-env-1.eba-rs4kjrzc.us-east-2.elasticbeanstalk.com";
@@ -187,6 +192,8 @@ export const performGetLastChatsRequest = (userId: string) => {
           });
         }
         store.dispatch(setDialogs(sidebarChatItems));
+        console.log(json);
+        console.log(sidebarChatItems);
       } else console.log(json);
     })
     .catch((error) => {
@@ -206,11 +213,18 @@ export const performGetBlockedUsersRequest = (userId: string) => {
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
       if (json.status !== "error") {
+        let sidebarBlockedUsers: ISidebarFriendItem[] = [];
         for (var item in json) {
-          //console.log("Item is ", item);
-          //console.log("Name ", json[item].name);
+          sidebarBlockedUsers.push({
+            canDelete: true,
+            friendImage: json[item].avatarUrl,
+            friendName: json[item].login,
+            isOnline: getUserIsOnline(json[item].lastActivity),
+          });
         }
+        store.dispatch(setBlockedUsers(sidebarBlockedUsers));
         console.log(json);
+        console.log(sidebarBlockedUsers);
       } else console.log(json);
     })
     .catch((error) => {

@@ -36,7 +36,7 @@ import "./sidebar.scss";
   },
 ];*/
 
-const sidebarFriendItems: ISidebarFriendItem[] = [
+/*const sidebarFriendItems: ISidebarFriendItem[] = [
   {
     canDelete: true,
     friendImage: "/fake-link",
@@ -72,7 +72,7 @@ const sidebarFriendItems: ISidebarFriendItem[] = [
     friendStatus: "last seen 3 days ago",
     isOnline: false,
   },
-];
+];*/
 
 const userProfileItem: ISidebarUserProfileProps = {
   userDescription:
@@ -92,9 +92,7 @@ const Sidebar: React.FC = () => {
   const activeNavbar = useSelector(
     (state: RootState) => state.root.activeNavbar
   );
-  const sidebarChats = useSelector(
-    (state: RootState) => state.chat.sidebarDialogs
-  );
+  const sidebarState = useSelector((state: RootState) => state.sidebar);
   return (
     <div className="sidebar">
       <div className="tab-content h-100" role="tablist">
@@ -106,7 +104,7 @@ const Sidebar: React.FC = () => {
           <SidebarTitle text="Chats" />
           <SidebarItemsContainer
             classes="nav d-block list-discussions-js mb-n6"
-            sidebarChatItems={sidebarChats}
+            sidebarChatItems={sidebarState.sidebarDialogs}
           />
         </SidebarTab>
 
@@ -153,7 +151,7 @@ const Sidebar: React.FC = () => {
           <SidebarTitle text="Blocked users" />
           <SidebarItemsContainer
             classes="mb-n6"
-            sidebarFriendItems={sidebarFriendItems}
+            sidebarFriendItems={sidebarState.sidebarBlockedUsers}
           />
         </SidebarTab>
 

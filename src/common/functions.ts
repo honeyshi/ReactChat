@@ -55,3 +55,13 @@ export const checkUserSawChat = (messageDate: string, userSawDate: string) => {
   if (messageDateObj > userSawDateObj) return true;
   return false;
 };
+
+export const getUserIsOnline = (lastActivityDate: string) => {
+  const timeDifferenceMinutes = Math.floor(
+    Math.abs(new Date().getTime() - new Date(lastActivityDate).getTime()) /
+      60000
+  );
+  const activityLimit = 2000;
+  if (timeDifferenceMinutes <= activityLimit) return true;
+  else return false;
+};

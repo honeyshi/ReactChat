@@ -6,3 +6,30 @@
   min-width: 3.125rem;
   border-radius: 50%;
 }
+
+.avatar.avatar-online::before {
+  position: absolute;
+  border: 3px solid #fff;
+  display: block;
+  bottom: -3px;
+  right: 0;
+  content: "";
+  border-radius: 50%;
+  -webkit-transform: translate(-10%, 0);
+  transform: translate(-10%, 0);
+  height: 30%;
+  min-height: 30%;
+  width: 30%;
+  min-width: 30%;
+}
+
+.avatar.avatar-online::before {
+  background: #42ba96;
+}
+
+.avatar {
+  background: #f5f6fa;
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+}

@@ -6,7 +6,6 @@ interface ISidebarFriendProps {
   canDelete: boolean;
   friendImage: string;
   friendName: string;
-  friendStatus: string;
   isOnline: boolean;
 }
 
@@ -14,7 +13,6 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
   canDelete,
   friendImage,
   friendName,
-  friendStatus,
   isOnline,
 }) => {
   return (
@@ -28,7 +26,6 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
 
         <div className="media-body align-self-center">
           <h6 className="mb-0">{friendName}</h6>
-          <small className="text-muted">{friendStatus}</small>
         </div>
         {canDelete && <X size={20} strokeWidth={1} />}
       </div>
