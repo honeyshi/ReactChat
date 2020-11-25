@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Icon from "react-feather";
 import { SidebarTab } from "./sidebarTab";
 import { SidebarTitle } from "./sidebarTitle";
@@ -15,64 +15,7 @@ import { RootState } from "../../store/stores";
 import { useSelector } from "react-redux";
 
 import "./sidebar.scss";
-
-/*const sidebarChatItems: ISidebarChatItem[] = [
-  {
-    chatHeader: "Bootstrap Themes",
-    chatImage: "/fake-link",
-    countUnreadMessages: 3,
-    isOnline: false,
-    lastMessageAuthor: "Anna Bridges",
-    lastMessageText: "Hey, Maher! How are you? The weather is great isn't it?",
-    lastMessageTime: "10:15 AM",
-  },
-  {
-    chatHeader: "Anna Bridges",
-    chatImage: "/fake-link-ann",
-    countUnreadMessages: 0,
-    isOnline: true,
-    lastMessageText: "is typing...",
-    lastMessageTime: "10:42 AM",
-  },
-];*/
-
-/*const sidebarFriendItems: ISidebarFriendItem[] = [
-  {
-    canDelete: true,
-    friendImage: "/fake-link",
-    friendName: "Anna Bridges",
-    friendStatus: "Online",
-    isOnline: true,
-  },
-  {
-    canDelete: false,
-    friendImage: "/fake-link",
-    friendName: "Brian Dawson",
-    friendStatus: "last seen 2 hours ago",
-    isOnline: false,
-  },
-  {
-    canDelete: true,
-    friendImage: "/fake-link",
-    friendName: "Leslie Sutton",
-    friendStatus: "last seen 3 days ago",
-    isOnline: false,
-  },
-  {
-    canDelete: true,
-    friendImage: "/fake-link",
-    friendName: "Simon Haskell",
-    friendStatus: "last seen 3 days ago",
-    isOnline: false,
-  },
-  {
-    canDelete: false,
-    friendImage: "/fake-link",
-    friendName: "Tina Turner",
-    friendStatus: "last seen 3 days ago",
-    isOnline: false,
-  },
-];*/
+import { performSearchUserRequest } from "../../common/requests";
 
 const userProfileItem: ISidebarUserProfileProps = {
   userDescription:
@@ -93,6 +36,8 @@ const Sidebar: React.FC = () => {
     (state: RootState) => state.root.activeNavbar
   );
   const sidebarState = useSelector((state: RootState) => state.sidebar);
+  const [searchLogin, setSearchLogin] = useState<string>();
+
   return (
     <div className="sidebar">
       <div className="tab-content h-100" role="tablist">
@@ -119,28 +64,36 @@ const Sidebar: React.FC = () => {
               <Input
                 type="input"
                 placeholder="Type user's login..."
-                onChange={() => void 0}
+                value={searchLogin}
+                onChange={(login) => setSearchLogin(login)}
               />
               <div className="input-group-append">
                 <Button
                   isPrimary={false}
                   classes="btn-lg btn-ico btn-secondary btn-minimal"
+                  onClick={() => {
+                    performSearchUserRequest(searchLogin);
+                    setSearchLogin("");
+                  }}
                 >
                   <Icon.Search size={15} />
                 </Button>
               </div>
             </div>
           </form>
-          {/*<SidebarItemsContainer
-            classes="mb-n6"
-            sidebarFriendItems={sidebarFriendItems}
-          />*/}
-          <TextField
-            isCenter={true}
-            isBold={false}
-            text="Users not found"
-            type="p"
-          />
+          {sidebarState.sidebarFoundUsers.length !== 0 ? (
+            <SidebarItemsContainer
+              classes="mb-n6"
+              sidebarFriendItems={sidebarState.sidebarFoundUsers}
+            />
+          ) : (
+            <TextField
+              isCenter={true}
+              isBold={false}
+              text="Users not found"
+              type="p"
+            />
+          )}
         </SidebarTab>
 
         <SidebarTab

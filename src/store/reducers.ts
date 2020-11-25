@@ -1,6 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
 import * as Action from "./actions";
-import { performSignUpRequest } from "../common/requests";
 import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
 import { History } from "history";
@@ -99,11 +98,13 @@ export const rootReducer = createReducer(rootState, {
 interface SidebarState {
   sidebarDialogs: ISidebarChatItem[];
   sidebarBlockedUsers: ISidebarFriendItem[];
+  sidebarFoundUsers: ISidebarFriendItem[];
 }
 
 const sidebarState: SidebarState = {
   sidebarDialogs: [],
   sidebarBlockedUsers: [],
+  sidebarFoundUsers: [],
 };
 
 const sidebarReducer = createReducer(sidebarState, {
@@ -117,6 +118,12 @@ const sidebarReducer = createReducer(sidebarState, {
     return {
       ...state,
       sidebarBlockedUsers: action.payload,
+    };
+  },
+  [Action.setFoundUsers.type]: (state, action) => {
+    return {
+      ...state,
+      sidebarFoundUsers: action.payload,
     };
   },
 });

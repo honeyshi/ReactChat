@@ -21,8 +21,11 @@ export const setActiveNavbar = createAction<string>(
 );
 
 export const setDialogs = createAction<ISidebarChatItem[]>(
-  ActionTypes.CHAT_SETDIALOGS
+  ActionTypes.SIDEBAR_SETDIALOGS
 );
 export const setBlockedUsers = createAction<ISidebarFriendItem[]>(
-  ActionTypes.CHAT_SETBLOCKEDUSERS
+  ActionTypes.SIDEBAR_SETBLOCKEDUSERS
+);
+export const setFoundUsers = createAction<ISidebarFriendItem[]>(
+  ActionTypes.SIDEBAR_SETFOUNDUSERS
 );

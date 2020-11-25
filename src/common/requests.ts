@@ -4,6 +4,7 @@ import {
   setBlockedUsers,
   setDialogs,
   setErrorMessage,
+  setFoundUsers,
   setIsAuth,
   setResetState,
   setUserId,
@@ -226,6 +227,40 @@ export const performGetBlockedUsersRequest = (userId: string) => {
         console.log(json);
         console.log(sidebarBlockedUsers);
       } else console.log(json);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const performSearchUserRequest = (login: string | undefined) => {
+  console.log(`Perform search user request by login ${login}`);
+
+  const url = `${apiUrl}/findUser`;
+  const config = {
+    login: login,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      if (json.status !== "error") {
+        let sidebarFoundUsers: ISidebarFriendItem[] = [];
+        for (var item in json) {
+          sidebarFoundUsers.push({
+            canDelete: false,
+            friendImage: json[item].avatarUrl,
+            friendName: json[item].login,
+            isOnline: getUserIsOnline(json[item].lastActivity),
+          });
+        }
+        store.dispatch(setFoundUsers(sidebarFoundUsers));
+        console.log(json);
+        console.log(sidebarFoundUsers);
+      } else {
+        console.log(json);
+        store.dispatch(setFoundUsers([]));
+      }
     })
     .catch((error) => {
       console.log(error);

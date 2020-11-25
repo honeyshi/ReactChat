@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { NavbarItem } from "./navbarItem";
-import { setActiveNavbar } from "../../store/actions";
+import { setActiveNavbar, setFoundUsers } from "../../store/actions";
 import { useDispatch } from "react-redux";
 import * as Icon from "react-feather";
 import {
@@ -9,7 +9,6 @@ import {
 } from "../../common/requests";
 import { RootState } from "../../store/stores";
 import { useSelector } from "react-redux";
-import { string } from "yup";
 
 interface INavbarItem {
   title: string;
@@ -75,6 +74,8 @@ export const Navbar: React.FC = () => {
           onClick={() => {
             onNavbarItemClick(itemInfo.link);
             itemInfo.clickVoid("2");
+            if (itemInfo.link == "tab-content-search-users")
+              dispatch(setFoundUsers([]));
           }}
         >
           {<itemInfo.child />}

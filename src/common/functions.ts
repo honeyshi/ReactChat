@@ -61,7 +61,7 @@ export const getUserIsOnline = (lastActivityDate: string) => {
     Math.abs(new Date().getTime() - new Date(lastActivityDate).getTime()) /
       60000
   );
-  const activityLimit = 2000;
+  const activityLimit = 5;
   if (timeDifferenceMinutes <= activityLimit) return true;
   else return false;
 };

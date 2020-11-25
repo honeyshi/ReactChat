@@ -10,6 +10,7 @@ interface InputProps {
   placeholder: string;
   row?: string;
   type: React.ElementType;
+  value?: string;
   inputType?: string;
   onChange: (value: string) => void;
 }
@@ -22,6 +23,7 @@ export const Input: React.FC<InputProps> = ({
   placeholder,
   row,
   type: Tag,
+  value,
   inputType,
   onChange,
 }) => {
@@ -42,6 +44,7 @@ export const Input: React.FC<InputProps> = ({
       rows={row}
       type={inputType}
       onChange={onchange}
+      value={value}
     />
   );
 };
