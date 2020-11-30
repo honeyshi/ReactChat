@@ -1,17 +1,24 @@
 import React from "react";
 import classNames from "classnames";
+import { Button } from "../base/button";
 
 interface ISidebarTabProps {
   id: string;
-  isActive: boolean;
+  isActive?: boolean;
   isOuter: boolean;
+  outsideScroll?: boolean;
+  buttonClasses?: string;
+  buttonText?: string;
 }
 
 export const SidebarTab: React.FC<ISidebarTabProps> = ({
   id,
   isActive,
   isOuter,
-  children
+  outsideScroll,
+  buttonClasses,
+  buttonText,
+  children,
 }) => {
   return (
     <div
@@ -29,6 +36,17 @@ export const SidebarTab: React.FC<ISidebarTabProps> = ({
           <div className="hide-scrollbar">
             <div className="container-fluid py-6">{children}</div>
           </div>
+          {outsideScroll == true && (
+            <div className="pb-6">
+              <div className="container-fluid">
+                <Button
+                  isPrimary={true}
+                  classes={buttonClasses}
+                  text={buttonText}
+                />
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <form action="#">{children}</form>

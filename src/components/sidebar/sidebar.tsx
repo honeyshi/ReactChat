@@ -37,6 +37,7 @@ const Sidebar: React.FC = () => {
   );
   const sidebarState = useSelector((state: RootState) => state.sidebar);
   const [searchLogin, setSearchLogin] = useState<string>();
+  const [activeCreateGroupTab, setActiveCreateGroupTab] = useState<string>("create-group-details");
 
   return (
     <div className="sidebar">
@@ -148,78 +149,88 @@ const Sidebar: React.FC = () => {
           id="tab-content-create-chat"
           isActive={activeNavbar.includes("tab-content-create-chat")}
           isOuter={true}
+          outsideScroll={true}
+          buttonClasses="btn-lg btn-block"
+          buttonText="Create Group"
         >
           <SidebarTitle text="Create group" />
           <ul className="nav nav-tabs nav-justified mb-6" role="tablist">
             <NavbarItem
-              isActive={true}
+              isActive={activeCreateGroupTab?.includes("create-group-details")}
               isMenu={false}
               link="create-group-details"
               text="Details"
-              onClick={() => void 0}
+              onClick={() => setActiveCreateGroupTab("create-group-details")}
             />
             <NavbarItem
-              isActive={false}
+              isActive={activeCreateGroupTab?.includes("create-group-members")}
               isMenu={false}
               link="create-group-members"
               text="Members"
-              onClick={() => void 0}
+              onClick={() => setActiveCreateGroupTab("create-group-members")}
             />
           </ul>
-          <SidebarTab id="create-group-details" isActive={true} isOuter={false}>
-            <FormGroup
-              forName="new-chat-title"
-              label="Name"
-              isVisible={true}
-              isWithLabel={true}
+          <div className="tab-content" role="tablist">
+            <SidebarTab
+              id="create-group-details"
+              isActive={activeCreateGroupTab?.includes("create-group-details")}
+              isOuter={false}
             >
-              <Input
-                name="new-chat-title"
-                id="new-chat-title"
-                placeholder="Group Name"
-                type="input"
-                onChange={() => void 0}
-              />
-            </FormGroup>
-            <FormGroup
-              forName="new-chat-topic"
-              label="Topic (optional)"
-              isVisible={true}
-              isWithLabel={true}
-            >
-              <Input
-                name="new-chat-topic"
-                id="new-chat-topic"
-                placeholder="Group Topic"
-                type="input"
-                onChange={() => void 0}
-              />
-            </FormGroup>
-            <FormGroup
-              forName="new-chat-description"
-              label="Description"
-              isVisible={true}
-              isWithLabel={true}
-            >
-              <Input
-                name="new-chat-description"
-                id="new-chat-description"
-                placeholder="Group Description"
-                type="textarea"
-                row="6"
-                onChange={() => void 0}
-              />
-            </FormGroup>
-            <div className="pb-6">
-              <div className="container-fluid">
-                <Button
-                  isPrimary={true}
-                  classes="btn-lg btn-block"
-                  text="Create Group"
+              <FormGroup
+                forName="new-chat-title"
+                label="Name"
+                isVisible={true}
+                isWithLabel={true}
+              >
+                <Input
+                  name="new-chat-title"
+                  id="new-chat-title"
+                  placeholder="Group Name"
+                  type="input"
+                  onChange={() => void 0}
                 />
-              </div>
-            </div>
-          </SidebarTab>
+              </FormGroup>
+              <FormGroup
+                forName="new-chat-topic"
+                label="Topic (optional)"
+                isVisible={true}
+                isWithLabel={true}
+              >
+                <Input
+                  name="new-chat-topic"
+                  id="new-chat-topic"
+                  placeholder="Group Topic"
+                  type="input"
+                  onChange={() => void 0}
+                />
+              </FormGroup>
+              <FormGroup
+                forName="new-chat-description"
+                label="Description"
+                isVisible={true}
+                isWithLabel={true}
+              >
+                <Input
+                  name="new-chat-description"
+                  id="new-chat-description"
+                  placeholder="Group Description"
+                  type="textarea"
+                  row="6"
+                  onChange={() => void 0}
+                />
+              </FormGroup>
+            </SidebarTab>
+            <SidebarTab
+              id="create-group-members"
+              isActive={activeCreateGroupTab?.includes("create-group-members")}
+              isOuter={false}
+            >
+              <SidebarItemsContainer
+                classes="list-group list-group-flush mb-n6"
+                sidebarGroupMembersItems={sidebarState.sidebarDialogs}
+              />
+            </SidebarTab>
+          </div>
         </SidebarTab>
       </div>
     </div>

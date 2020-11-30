@@ -19,6 +19,7 @@ interface ISidebarItemsProps {
   sidebarFriendItems?: ISidebarFriendItem[];
   sidebarUserInfoItems?: ISidebarUserInfoItem[];
   sidebarUserInfo?: ISidebarUserProfileProps;
+  sidebarGroupMembersItems?: ISidebarChatItem[];
 }
 
 export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
@@ -27,6 +28,7 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
   sidebarFriendItems,
   sidebarUserInfoItems,
   sidebarUserInfo,
+  sidebarGroupMembersItems,
 }) => {
   let sidebarItems;
   if (sidebarChatItems !== undefined) {
@@ -53,6 +55,7 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
       return (
         <SidebarItem type="div" classes="card mb-6">
           <SidebarFriend
+            canChoose={false}
             canDelete={sidebarFriendItemInfo.canDelete}
             friendImage={sidebarFriendItemInfo.friendImage}
             friendName={sidebarFriendItemInfo.friendName}
@@ -74,6 +77,25 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
         userImage={sidebarUserInfo.userImage}
       />
     );
+
+  if (sidebarGroupMembersItems !== undefined) {
+    sidebarItems = sidebarGroupMembersItems.map(
+      (sidebarGroupMemberInfo, userIndex) => {
+        return (
+          <SidebarItem type="div" classes="card mb-6">
+            <SidebarFriend
+              canChoose={true}
+              canDelete={false}
+              friendImage={sidebarGroupMemberInfo.chatImage}
+              friendName={sidebarGroupMemberInfo.chatHeader}
+              isOnline={false}
+              checkboxName={`user-${userIndex}`}
+            />
+          </SidebarItem>
+        );
+      }
+    );
+  }
 
   return <nav className={classes}>{sidebarItems}</nav>;
 };

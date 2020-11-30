@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import classNames from "classnames";
 import { X } from "react-feather";
+import { CheckBox } from "../base";
 
 interface ISidebarFriendProps {
   canDelete: boolean;
   friendImage: string;
   friendName: string;
   isOnline: boolean;
+  canChoose: boolean;
+  checkboxName?: string;
 }
 
 export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
@@ -14,7 +17,10 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
   friendImage,
   friendName,
   isOnline,
+  canChoose,
+  checkboxName,
 }) => {
+  const [checked, setChecked] = useState(true);
   return (
     <div className="card-body">
       <div className="media">
@@ -28,9 +34,26 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
           <h6 className="mb-0">{friendName}</h6>
         </div>
         {canDelete && <X size={20} strokeWidth={1} />}
+        {canChoose && (
+          <div className="align-self-center ml-auto">
+            <CheckBox
+              name={checkboxName}
+              value={checked}
+              onChange={(checkedValue) => {
+                setChecked(!checkedValue);
+                console.log(`Checked value ${checked}`);
+              }}
+              onClick={() => {
+                setChecked(!checked);
+                console.log(`Checked value ${checked}`);
+              }}
+              disabled={false}
+            />
+          </div>
+        )}
       </div>
 
-      <a href="#" className="stretched-link"></a>
+      {!canChoose && <a href="#" className="stretched-link"></a>}
     </div>
   );
 };
