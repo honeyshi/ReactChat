@@ -8,6 +8,7 @@ interface ISidebarTabProps {
   isOuter: boolean;
   outsideScroll?: boolean;
   buttonClasses?: string;
+  buttonDisabled?: boolean;
   buttonText?: string;
 }
 
@@ -17,6 +18,7 @@ export const SidebarTab: React.FC<ISidebarTabProps> = ({
   isOuter,
   outsideScroll,
   buttonClasses,
+  buttonDisabled,
   buttonText,
   children,
 }) => {
@@ -43,6 +45,7 @@ export const SidebarTab: React.FC<ISidebarTabProps> = ({
                   isPrimary={true}
                   classes={buttonClasses}
                   text={buttonText}
+                  disabled={buttonDisabled}
                 />
               </div>
             </div>

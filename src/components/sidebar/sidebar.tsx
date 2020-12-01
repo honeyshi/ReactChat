@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 
 import "./sidebar.scss";
 import { performSearchUserRequest } from "../../common/requests";
+import { checkUserHasPrivateChats } from "../../common/functions";
 
 const userProfileItem: ISidebarUserProfileProps = {
   userDescription:
@@ -171,6 +172,9 @@ const Sidebar: React.FC = () => {
           isOuter={true}
           outsideScroll={true}
           buttonClasses="btn-lg btn-block"
+          buttonDisabled={
+            !checkUserHasPrivateChats(sidebarState.sidebarDialogs)
+          }
           buttonText="Create Group"
         >
           <SidebarTitle text="Create group" />
@@ -245,10 +249,19 @@ const Sidebar: React.FC = () => {
               isActive={activeCreateGroupTab?.includes("create-group-members")}
               isOuter={false}
             >
-              <SidebarItemsContainer
-                classes="list-group list-group-flush mb-n6"
-                sidebarGroupMembersItems={sidebarState.sidebarDialogs}
-              />
+              {checkUserHasPrivateChats(sidebarState.sidebarDialogs) ? (
+                <SidebarItemsContainer
+                  classes="list-group list-group-flush mb-n6"
+                  sidebarGroupMembersItems={sidebarState.sidebarDialogs}
+                />
+              ) : (
+                <TextField
+                  isCenter={true}
+                  isBold={false}
+                  text="You do not have any private conversations with users. Search user to start messaging"
+                  type="p"
+                />
+              )}
             </SidebarTab>
           </div>
         </SidebarTab>

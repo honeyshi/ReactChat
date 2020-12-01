@@ -17,15 +17,17 @@ export const Button: React.FC<IButtonProps> = ({
   shapeType,
   text,
   onClick,
-  children
+  children,
+  ...other
 }) => {
   return (
     <button
       className={classNames("btn", shapeType, classes, {
-        "btn-primary": isPrimary
+        "btn-primary": isPrimary,
       })}
       type="button"
       onClick={onClick}
+      {...other}
     >
       {text}
       {children}

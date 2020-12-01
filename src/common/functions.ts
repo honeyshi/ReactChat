@@ -1,3 +1,5 @@
+import { ISidebarChatItem } from "./interfaces";
+
 export const formatLastChatActivityDate = (date: string) => {
   const monthNames = [
     "Jan",
@@ -64,4 +66,8 @@ export const getUserIsOnline = (lastActivityDate: string) => {
   const activityLimit = 5;
   if (timeDifferenceMinutes <= activityLimit) return true;
   else return false;
+};
+
+export const checkUserHasPrivateChats = (userChats: ISidebarChatItem[]) => {
+  return userChats.some((userChat) => userChat.chatType === 0);
 };
