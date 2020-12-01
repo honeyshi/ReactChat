@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { ChatHeader } from "./chatHeader";
 import { ChatMessage } from "./chatMessage";
 import { ChatFooter } from "./chatFooter";
 import { ChatContent } from "./chatContent";
 import { ChatDescription } from "./chatDescription";
+import { RootState } from "../../store/stores";
 
 import "../layout.scss";
 
@@ -34,11 +36,9 @@ const chatMessageItems: IChatMessageItem[] = [
 ];
 
 const ChatLayout: React.FC = () => {
-  const [currentChatName, setCurrentChatName] = useState<string>(
-    "Anna Bridges"
-  );
-  const [currentChatStatus, setCurrentChatStatus] = useState<string>("Online");
   const [isActiveDescription, setDescriptionStatus] = useState<boolean>(false);
+  const chatState = useSelector((state: RootState) => state.chat.chatItem);
+  const privateChatType = 0;
 
   const chatMessageComponents = chatMessageItems.map((chatMessageInfo) => {
     return (
@@ -59,20 +59,25 @@ const ChatLayout: React.FC = () => {
         {/*<!-- Chat: body -->*/}
         <div className="chat-body">
           <ChatHeader
-            chatName={currentChatName}
-            chatStatus={currentChatStatus}
+            chatImage={chatState.chatImage}
+            chatName={chatState.chatHeader}
+            chatStatus={
+              chatState.chatType === privateChatType ? chatState.isOnline : ""
+            }
             onDetailsClick={() => setDescriptionStatus(true)}
           />
           <ChatContent>{chatMessageComponents}</ChatContent>
           <ChatFooter />
         </div>
-        <ChatDescription
-          avatarUrl="/fakeUrl"
-          isActive={isActiveDescription}
-          onCloseClick={() => setDescriptionStatus(false)}
-          userLogin="Anna Bridges"
-          userNote="Test user note"
-        />
+        {chatState.chatType === privateChatType && (
+          <ChatDescription
+            avatarUrl={chatState.chatImage}
+            isActive={isActiveDescription}
+            onCloseClick={() => setDescriptionStatus(false)}
+            userLogin={chatState.chatHeader}
+            userNote="Test user note"
+          />
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,9 @@
 import { createAction } from "@reduxjs/toolkit";
-import { ISidebarChatItem, ISidebarFriendItem } from "../common/interfaces";
+import {
+  IChat,
+  ISidebarChatItem,
+  ISidebarFriendItem,
+} from "../common/interfaces";
 import { ActionTypes } from "./actionTypes";
 
 export const setEmail = createAction<string>(ActionTypes.COMMON_SETEMAIL);
@@ -29,3 +33,5 @@ export const setBlockedUsers = createAction<ISidebarFriendItem[]>(
 export const setFoundUsers = createAction<ISidebarFriendItem[]>(
   ActionTypes.SIDEBAR_SETFOUNDUSERS
 );
+
+export const setCurrentChat = createAction<IChat>(ActionTypes.SET_CURRENTCHAT);

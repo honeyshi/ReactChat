@@ -30,3 +30,19 @@ export interface ISidebarUserProfileProps {
   userImage: string;
   userName: string;
 }
+
+export interface IChatMessageItem {
+  isRight: boolean;
+  messageText: string;
+  messageTime: string;
+  senderName?: string;
+  userImage?: string;
+}
+
+export interface IChat {
+  chatHeader: string;
+  chatImage: string;
+  chatType: number;
+  isOnline?: string;
+  chatMessages: IChatMessageItem[];
+}

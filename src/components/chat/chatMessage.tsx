@@ -1,16 +1,9 @@
 import React from "react";
 import classNames from "classnames";
+import { IChatMessageItem } from "../../common/interfaces";
 import "./message.scss";
 
-interface IChatMessageProps {
-  isRight: boolean;
-  messageText: string;
-  messageTime: string;
-  senderName?: string;
-  userImage?: string;
-}
-
-export const ChatMessage: React.FC<IChatMessageProps> = ({
+export const ChatMessage: React.FC<IChatMessageItem> = ({
   isRight,
   messageText,
   messageTime,
