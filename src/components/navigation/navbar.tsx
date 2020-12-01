@@ -51,7 +51,7 @@ const navbarItems: INavbarItem[] = [
 ];
 
 export const Navbar: React.FC = () => {
-  const [activeItem, setActiveItem] = useState<string>();
+  const [activeItem, setActiveItem] = useState<string>("tab-content-dialogs");
   const dispatch = useDispatch();
   const userId = useSelector((state: RootState) => state.root.userId);
 
@@ -60,8 +60,6 @@ export const Navbar: React.FC = () => {
     setActiveItem(item);
     dispatch(setActiveNavbar(item));
   };
-
-  if (activeItem === undefined) setActiveItem("tab-content-dialogs");
 
   const navbarItemComponents = useMemo(() => {
     const innerNavbar = navbarItems.map((itemInfo) => {

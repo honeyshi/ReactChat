@@ -6,7 +6,6 @@ interface ICheckboxProps {
   name: string | undefined;
   value: boolean;
   onChange: (value: boolean) => void;
-  onClick: () => void;
   disabled?: boolean;
 }
 

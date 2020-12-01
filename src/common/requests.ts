@@ -187,6 +187,8 @@ export const performGetLastChatsRequest = (userId: string) => {
           sidebarChatItems.push({
             chatHeader: json[item].name,
             chatImage: json[item].image,
+            chatId: json[item].chat_id,
+            chatType: json[item].type_chat,
             isUnread: checkUserSawChat(json[item].date, json[item].last),
             lastMessageText: json[item].text,
             lastMessageTime: formatLastChatActivityDate(json[item].date),

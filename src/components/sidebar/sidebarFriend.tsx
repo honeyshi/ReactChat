@@ -20,7 +20,7 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
   canChoose,
   checkboxName,
 }) => {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   return (
     <div className="card-body">
       <div className="media">
@@ -39,14 +39,7 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
             <CheckBox
               name={checkboxName}
               value={checked}
-              onChange={(checkedValue) => {
-                setChecked(!checkedValue);
-                console.log(`Checked value ${checked}`);
-              }}
-              onClick={() => {
-                setChecked(!checked);
-                console.log(`Checked value ${checked}`);
-              }}
+              onChange={(checkedValue) => setChecked(!checkedValue)}
               disabled={false}
             />
           </div>

@@ -30,11 +30,16 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
   sidebarUserInfo,
   sidebarGroupMembersItems,
 }) => {
+  const chatTypePrivate = 0;
   let sidebarItems;
   if (sidebarChatItems !== undefined) {
-    sidebarItems = sidebarChatItems.map((sidebarChatItemInfo) => {
+    sidebarItems = sidebarChatItems.map((sidebarChatItemInfo, chatIndex) => {
       return (
-        <SidebarItem type="a" classes="text-reset nav-link p-0 mb-6">
+        <SidebarItem
+          type="a"
+          classes="text-reset nav-link p-0 mb-6"
+          key={`chat-${chatIndex}`}
+        >
           <SidebarChatContainer>
             <SidebarChat
               chatHeader={sidebarChatItemInfo.chatHeader}
@@ -81,18 +86,24 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
   if (sidebarGroupMembersItems !== undefined) {
     sidebarItems = sidebarGroupMembersItems.map(
       (sidebarGroupMemberInfo, userIndex) => {
-        return (
-          <SidebarItem type="div" classes="card mb-6">
-            <SidebarFriend
-              canChoose={true}
-              canDelete={false}
-              friendImage={sidebarGroupMemberInfo.chatImage}
-              friendName={sidebarGroupMemberInfo.chatHeader}
-              isOnline={false}
-              checkboxName={`user-${userIndex}`}
-            />
-          </SidebarItem>
-        );
+        if (sidebarGroupMemberInfo.chatType === chatTypePrivate) {
+          return (
+            <SidebarItem
+              type="div"
+              classes="card mb-6"
+              key={`user-${userIndex}`}
+            >
+              <SidebarFriend
+                canChoose={true}
+                canDelete={false}
+                friendImage={sidebarGroupMemberInfo.chatImage}
+                friendName={sidebarGroupMemberInfo.chatHeader}
+                isOnline={false}
+                checkboxName={`user-${userIndex}`}
+              />
+            </SidebarItem>
+          );
+        }
       }
     );
   }
