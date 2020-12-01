@@ -3,6 +3,7 @@ import { ChatHeader } from "./chatHeader";
 import { ChatMessage } from "./chatMessage";
 import { ChatFooter } from "./chatFooter";
 import { ChatContent } from "./chatContent";
+import { ChatDescription } from "./chatDescription";
 
 import "../layout.scss";
 
@@ -33,8 +34,11 @@ const chatMessageItems: IChatMessageItem[] = [
 ];
 
 const ChatLayout: React.FC = () => {
-  const [currentChatName, setCurrentChatName] = useState<string>();
-  const [currentChatStatus, setCurrentChatStatus] = useState<string>();
+  const [currentChatName, setCurrentChatName] = useState<string>(
+    "Anna Bridges"
+  );
+  const [currentChatStatus, setCurrentChatStatus] = useState<string>("Online");
+  const [isActiveDescription, setDescriptionStatus] = useState<boolean>(false);
 
   const chatMessageComponents = chatMessageItems.map((chatMessageInfo) => {
     return (
@@ -48,9 +52,6 @@ const ChatLayout: React.FC = () => {
     );
   });
 
-  if (currentChatName === undefined) setCurrentChatName("Anna Bridges");
-  if (currentChatStatus === undefined) setCurrentChatStatus("Online");
-
   return (
     <div className="main main-visible">
       {/*<!-- Chat -->*/}
@@ -60,10 +61,18 @@ const ChatLayout: React.FC = () => {
           <ChatHeader
             chatName={currentChatName}
             chatStatus={currentChatStatus}
+            onDetailsClick={() => setDescriptionStatus(true)}
           />
           <ChatContent>{chatMessageComponents}</ChatContent>
           <ChatFooter />
         </div>
+        <ChatDescription
+          avatarUrl="/fakeUrl"
+          isActive={isActiveDescription}
+          onCloseClick={() => setDescriptionStatus(false)}
+          userLogin="Anna Bridges"
+          userNote="Test user note"
+        />
       </div>
     </div>
   );

@@ -15,12 +15,21 @@ export const ChatMessage: React.FC<IChatMessageProps> = ({
   messageText,
   messageTime,
   senderName,
-  userImage
+  userImage,
 }) => {
   return (
     <div className={classNames("message", { "message-right": isRight })}>
       {/* Avatar */}
-      <div className="avatar avatar-sm mr-4 mr-lg-5">
+      <div
+        className={classNames(
+          "avatar avatar-sm",
+          { "mr-4 mr-lg-5": !isRight },
+          { "ml-4 ml-lg-5": isRight },
+          {
+            "d-none d-lg-block": isRight,
+          }
+        )}
+      >
         <img className="avatar-img" src={userImage} alt=""></img>
       </div>
       {/* Message: Body */}
@@ -29,7 +38,7 @@ export const ChatMessage: React.FC<IChatMessageProps> = ({
         <div className="message-row">
           <div
             className={classNames("d-flex align-items-center", {
-              "justify-content-end": isRight
+              "justify-content-end": isRight,
             })}
           >
             {/* Message: content */}
@@ -44,7 +53,7 @@ export const ChatMessage: React.FC<IChatMessageProps> = ({
               <h6
                 className="mb-2"
                 style={{
-                  display: isRight ? "none" : "block"
+                  display: isRight ? "none" : "block",
                 }}
               >
                 {senderName}
