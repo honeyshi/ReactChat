@@ -36,7 +36,7 @@ export const SidebarTab: React.FC<ISidebarTabProps> = ({
           <div className="hide-scrollbar">
             <div className="container-fluid py-6">{children}</div>
           </div>
-          {outsideScroll == true && (
+          {outsideScroll && (
             <div className="pb-6">
               <div className="container-fluid">
                 <Button

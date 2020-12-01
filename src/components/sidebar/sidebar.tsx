@@ -37,7 +37,9 @@ const Sidebar: React.FC = () => {
   );
   const sidebarState = useSelector((state: RootState) => state.sidebar);
   const [searchLogin, setSearchLogin] = useState<string>();
-  const [activeCreateGroupTab, setActiveCreateGroupTab] = useState<string>("create-group-details");
+  const [activeCreateGroupTab, setActiveCreateGroupTab] = useState<string>(
+    "create-group-details"
+  );
 
   return (
     <div className="sidebar">
@@ -48,10 +50,19 @@ const Sidebar: React.FC = () => {
           isOuter={true}
         >
           <SidebarTitle text="Chats" />
-          <SidebarItemsContainer
-            classes="nav d-block list-discussions-js mb-n6"
-            sidebarChatItems={sidebarState.sidebarDialogs}
-          />
+          {sidebarState.sidebarDialogs.length !== 0 ? (
+            <SidebarItemsContainer
+              classes="nav d-block list-discussions-js mb-n6"
+              sidebarChatItems={sidebarState.sidebarDialogs}
+            />
+          ) : (
+            <TextField
+              isCenter={true}
+              isBold={false}
+              text="You do not have any chats. Search user to start messaging"
+              type="p"
+            />
+          )}
         </SidebarTab>
 
         <SidebarTab
@@ -103,10 +114,19 @@ const Sidebar: React.FC = () => {
           isOuter={true}
         >
           <SidebarTitle text="Blocked users" />
-          <SidebarItemsContainer
-            classes="mb-n6"
-            sidebarFriendItems={sidebarState.sidebarBlockedUsers}
-          />
+          {sidebarState.sidebarBlockedUsers.length !== 0 ? (
+            <SidebarItemsContainer
+              classes="mb-n6"
+              sidebarFriendItems={sidebarState.sidebarBlockedUsers}
+            />
+          ) : (
+            <TextField
+              isCenter={true}
+              isBold={false}
+              text="You do not have blocked users"
+              type="p"
+            />
+          )}
         </SidebarTab>
 
         <SidebarTab
