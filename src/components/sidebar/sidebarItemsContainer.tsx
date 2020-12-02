@@ -58,19 +58,25 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
   }
 
   if (sidebarFriendItems !== undefined) {
-    sidebarItems = sidebarFriendItems.map((sidebarFriendItemInfo) => {
-      return (
-        <SidebarItem type="div" classes="card mb-6">
-          <SidebarFriend
-            canChoose={false}
-            canDelete={sidebarFriendItemInfo.canDelete}
-            friendImage={sidebarFriendItemInfo.friendImage}
-            friendName={sidebarFriendItemInfo.friendName}
-            isOnline={sidebarFriendItemInfo.isOnline}
-          />
-        </SidebarItem>
-      );
-    });
+    sidebarItems = sidebarFriendItems.map(
+      (sidebarFriendItemInfo, userIndex) => {
+        return (
+          <SidebarItem
+            type="div"
+            classes="card mb-6"
+            key={`search-user-${userIndex}`}
+          >
+            <SidebarFriend
+              canChoose={false}
+              canDelete={sidebarFriendItemInfo.canDelete}
+              friendImage={sidebarFriendItemInfo.friendImage}
+              friendName={sidebarFriendItemInfo.friendName}
+              isOnline={sidebarFriendItemInfo.isOnline}
+            />
+          </SidebarItem>
+        );
+      }
+    );
   }
 
   if (sidebarUserInfoItems !== undefined)

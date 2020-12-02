@@ -74,6 +74,7 @@ export const Navbar: React.FC = () => {
             if (itemInfo.link == "tab-content-search-users")
               dispatch(setFoundUsers([]));
           }}
+          key={itemInfo.link}
         >
           {<itemInfo.child />}
         </NavbarItem>

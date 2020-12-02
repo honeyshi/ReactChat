@@ -1,3 +1,7 @@
+.custom-control-label {
+  cursor: pointer;
+}
+
 .custom-control-label::before {
   position: absolute;
   top: 0.2rem;
