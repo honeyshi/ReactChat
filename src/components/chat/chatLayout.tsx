@@ -8,6 +8,7 @@ import { ChatDescription } from "./chatDescription";
 import { RootState } from "../../store/stores";
 
 import "../layout.scss";
+import { TextField } from "../base";
 
 interface IChatMessageItem {
   isRight: boolean;
@@ -55,30 +56,44 @@ const ChatLayout: React.FC = () => {
   return (
     <div className="main main-visible">
       {/*<!-- Chat -->*/}
-      <div className="chat dropzone-form-js">
-        {/*<!-- Chat: body -->*/}
-        <div className="chat-body">
-          <ChatHeader
-            chatImage={chatState.chatImage}
-            chatName={chatState.chatHeader}
-            chatStatus={
-              chatState.chatType === privateChatType ? chatState.isOnline : ""
-            }
-            onDetailsClick={() => setDescriptionStatus(true)}
-          />
-          <ChatContent>{chatMessageComponents}</ChatContent>
-          <ChatFooter />
+      {chatState.chatHeader !== "" ? (
+        <div className="chat dropzone-form-js">
+          {/*<!-- Chat: body -->*/}
+          <div className="chat-body">
+            <ChatHeader
+              chatImage={chatState.chatImage}
+              chatName={chatState.chatHeader}
+              chatStatus={
+                chatState.chatType === privateChatType ? chatState.isOnline : ""
+              }
+              onDetailsClick={() => setDescriptionStatus(true)}
+            />
+            <ChatContent>{chatMessageComponents}</ChatContent>
+            <ChatFooter />
+          </div>
+          {chatState.chatType === privateChatType && (
+            <ChatDescription
+              avatarUrl={chatState.chatImage}
+              isActive={isActiveDescription}
+              onCloseClick={() => setDescriptionStatus(false)}
+              userLogin={chatState.chatHeader}
+              userNote="Test user note"
+            />
+          )}
         </div>
-        {chatState.chatType === privateChatType && (
-          <ChatDescription
-            avatarUrl={chatState.chatImage}
-            isActive={isActiveDescription}
-            onCloseClick={() => setDescriptionStatus(false)}
-            userLogin={chatState.chatHeader}
-            userNote="Test user note"
-          />
-        )}
-      </div>
+      ) : (
+        <div className="chat flex-column justify-content-center text-center">
+          {/*<!-- Chat: body when chat is not selected -->*/}
+          <div className="container-xxl">
+            <TextField
+              isCenter={true}
+              isBold={false}
+              type="p"
+              text="Please select a chat to start messaging."
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
