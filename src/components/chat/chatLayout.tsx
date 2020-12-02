@@ -6,6 +6,7 @@ import { ChatFooter } from "./chatFooter";
 import { ChatContent } from "./chatContent";
 import { ChatDescription } from "./chatDescription";
 import { RootState } from "../../store/stores";
+import { ChatType } from "../../common/variables";
 
 import "../layout.scss";
 import { TextField } from "../base";
@@ -39,7 +40,6 @@ const chatMessageItems: IChatMessageItem[] = [
 const ChatLayout: React.FC = () => {
   const [isActiveDescription, setDescriptionStatus] = useState<boolean>(false);
   const chatState = useSelector((state: RootState) => state.chat.chatItem);
-  const privateChatType = 0;
 
   const chatMessageComponents = chatMessageItems.map((chatMessageInfo) => {
     return (
@@ -64,7 +64,9 @@ const ChatLayout: React.FC = () => {
               chatImage={chatState.chatImage}
               chatName={chatState.chatHeader}
               chatStatus={
-                chatState.chatType === privateChatType ? chatState.isOnline : ""
+                chatState.chatType === ChatType.private
+                  ? chatState.isOnline
+                  : ""
               }
               onDetailsClick={() => setDescriptionStatus(true)}
             />
@@ -82,7 +84,7 @@ const ChatLayout: React.FC = () => {
             )}
             <ChatFooter />
           </div>
-          {chatState.chatType === privateChatType && (
+          {chatState.chatType === ChatType.private && (
             <ChatDescription
               avatarUrl={chatState.chatImage}
               isActive={isActiveDescription}

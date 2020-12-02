@@ -1,7 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 import { X } from "react-feather";
+import { useDispatch } from "react-redux";
 import { CheckBox } from "../base";
+import { setCurrentChat } from "../../store/actions";
+import { ChatType } from "../../common/variables";
 
 interface ISidebarFriendProps {
   canDelete: boolean;
@@ -21,6 +24,8 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
   checkboxName,
 }) => {
   const [checked, setChecked] = useState(false);
+  const dispatch = useDispatch();
+
   return (
     <div className="card-body">
       <div className="media">
@@ -46,7 +51,22 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
         )}
       </div>
 
-      {!canChoose && <a href="#" className="stretched-link"></a>}
+      {!canChoose && (
+        <a
+          className="stretched-link"
+          onClick={() =>
+            dispatch(
+              setCurrentChat({
+                chatHeader: friendName,
+                chatImage: friendImage,
+                chatType: ChatType.private,
+                isOnline: isOnline ? "Online" : "Offline",
+                chatMessages: [],
+              })
+            )
+          }
+        />
+      )}
     </div>
   );
 };
