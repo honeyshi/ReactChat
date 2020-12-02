@@ -68,7 +68,18 @@ const ChatLayout: React.FC = () => {
               }
               onDetailsClick={() => setDescriptionStatus(true)}
             />
-            <ChatContent>{chatMessageComponents}</ChatContent>
+            {chatState.chatMessages.length !== 0 ? (
+              <ChatContent>{chatMessageComponents}</ChatContent>
+            ) : (
+              <ChatContent>
+                <TextField
+                  isCenter={true}
+                  isBold={false}
+                  type="p"
+                  text="You do not have messages yet."
+                />
+              </ChatContent>
+            )}
             <ChatFooter />
           </div>
           {chatState.chatType === privateChatType && (
