@@ -12,6 +12,7 @@ import { SidebarFriend } from "./sidebarFriend";
 import { SidebarMessagesCount } from "./sidebarMessagesCount";
 import { SidebarUserProfileInfo } from "./sidebarUserProfileInfo";
 import { SidebarUserProfile } from "./sidebarUserProfile";
+import { ChatType } from "../../common/variables";
 
 interface ISidebarItemsProps {
   classes: string;
@@ -30,8 +31,8 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
   sidebarUserInfo,
   sidebarGroupMembersItems,
 }) => {
-  const chatTypePrivate = 0;
   let sidebarItems;
+
   if (sidebarChatItems !== undefined) {
     sidebarItems = sidebarChatItems.map((sidebarChatItemInfo, chatIndex) => {
       return (
@@ -87,7 +88,7 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
   if (sidebarGroupMembersItems !== undefined) {
     sidebarItems = sidebarGroupMembersItems.map(
       (sidebarGroupMemberInfo, userIndex) => {
-        if (sidebarGroupMemberInfo.chatType === chatTypePrivate) {
+        if (sidebarGroupMemberInfo.chatType === ChatType.private) {
           return (
             <SidebarItem
               type="div"

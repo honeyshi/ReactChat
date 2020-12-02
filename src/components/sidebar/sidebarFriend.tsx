@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import { X } from "react-feather";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CheckBox } from "../base";
 import { setCurrentChat } from "../../store/actions";
 import { ChatType } from "../../common/variables";
+import { performRemoveBlockedUserRequest } from "../../common/requests";
+import { RootState } from "../../store/stores";
 
 interface ISidebarFriendProps {
   canDelete: boolean;
@@ -25,6 +27,7 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
 }) => {
   const [checked, setChecked] = useState(false);
   const dispatch = useDispatch();
+  const userId = useSelector((state: RootState) => state.root.userId);
 
   return (
     <div className="card-body">
@@ -38,7 +41,14 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
         <div className="media-body align-self-center">
           <h6 className="mb-0">{friendName}</h6>
         </div>
-        {canDelete && <X size={20} strokeWidth={1} />}
+        {canDelete && (
+          <X
+            size={20}
+            strokeWidth={1}
+            onClick={() => performRemoveBlockedUserRequest(userId, friendName)}
+            cursor="pointer"
+          />
+        )}
         {canChoose && (
           <div className="align-self-center ml-auto">
             <CheckBox
@@ -51,7 +61,7 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
         )}
       </div>
 
-      {!canChoose && (
+      {!(canChoose || canDelete) && (
         <a
           className="stretched-link"
           onClick={() =>

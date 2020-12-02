@@ -2,6 +2,7 @@ import axios from "axios";
 import querystring from "query-string";
 import {
   setBlockedUsers,
+  setCurrentChat,
   setDialogs,
   setErrorMessage,
   setFoundUsers,
@@ -16,6 +17,7 @@ import {
   formatLastChatActivityDate,
   checkUserSawChat,
   getUserIsOnline,
+  createNotification,
 } from "./functions";
 
 const apiUrl =
@@ -265,6 +267,87 @@ export const performSearchUserRequest = (login: string | undefined) => {
       }
     })
     .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const performAddBlockedUserRequest = (
+  userId: string,
+  blockedUserLogin: string
+) => {
+  console.log(
+    `Perform block user request. Id of user who blocks: ${userId}. Blocked user: ${blockedUserLogin}`
+  );
+  const url = `${apiUrl}/addBlockedUsers`;
+  const config = {
+    id: userId,
+    blocked_user_login: blockedUserLogin,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      if (json.status !== "error") {
+        createNotification("success", "User is blocked");
+        const sidebarChats = store
+          .getState()
+          .sidebar.sidebarDialogs.filter((sidebarChat) => {
+            return sidebarChat.chatHeader !== blockedUserLogin;
+          });
+        store.dispatch(setDialogs(sidebarChats));
+        store.dispatch(
+          setCurrentChat({
+            chatHeader: "",
+            chatImage: "",
+            chatType: 1,
+            isOnline: "",
+            chatMessages: [],
+          })
+        );
+      } else
+        createNotification(
+          "error",
+          json.description.charAt(0).toUpperCase() + json.description.slice(1)
+        );
+    })
+    .catch((error) => {
+      createNotification("error", "Something went wrong. Please try again.");
+      console.log(error);
+    });
+};
+
+export const performRemoveBlockedUserRequest = (
+  userId: string,
+  blockedUserLogin: string
+) => {
+  console.log(
+    `Perform remove blocked user request. Id of user who blocks: ${userId}. Blocked user: ${blockedUserLogin}`
+  );
+  const url = `${apiUrl}/removeBlockedUsers`;
+  const config = {
+    id: userId,
+    blocked_user_login: blockedUserLogin,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      if (json.status !== "error") {
+        createNotification("success", "User is removed from blocked users");
+        const sidebarBlockedUsers = store
+          .getState()
+          .sidebar.sidebarBlockedUsers.filter((blockedUser) => {
+            return blockedUser.friendName !== blockedUserLogin;
+          });
+        store.dispatch(setBlockedUsers(sidebarBlockedUsers));
+      } else
+        createNotification(
+          "error",
+          json.description.charAt(0).toUpperCase() + json.description.slice(1)
+        );
+    })
+    .catch((error) => {
+      createNotification("error", "Something went wrong. Please try again.");
       console.log(error);
     });
 };

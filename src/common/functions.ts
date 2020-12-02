@@ -1,5 +1,6 @@
 import { ISidebarChatItem } from "./interfaces";
 import { ChatType } from "./variables";
+import { NotificationManager } from "react-notifications";
 
 export const formatLastChatActivityDate = (date: string) => {
   const monthNames = [
@@ -71,4 +72,15 @@ export const getUserIsOnline = (lastActivityDate: string) => {
 
 export const checkUserHasPrivateChats = (userChats: ISidebarChatItem[]) => {
   return userChats.some((userChat) => userChat.chatType === ChatType.private);
+};
+
+export const createNotification = (type: string, message: string) => {
+  switch (type) {
+    case "success":
+      NotificationManager.success(message, "Success");
+      break;
+    case "error":
+      NotificationManager.error(message, "Something went wrong");
+      break;
+  }
 };

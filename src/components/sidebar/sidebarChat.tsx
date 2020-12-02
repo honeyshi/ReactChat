@@ -25,8 +25,8 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
       : (lastMessageAuthor += `: ${lastMessageText}`);
   const dispatch = useDispatch();
   return (
-    <a
-      className="text-reset nav-link p-0 mb-6"
+    <div
+      className="card-body"
       onClick={() =>
         dispatch(
           setCurrentChat({
@@ -39,23 +39,21 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
         )
       }
     >
-      <div className="card-body">
-        <div className="media">
-          <div className="avatar mr-5">
-            <img className="avatar-img" src={chatImage} alt="" />
-          </div>
+      <div className="media">
+        <div className="avatar mr-5">
+          <img className="avatar-img" src={chatImage} alt="" />
+        </div>
 
-          <div className="media-body overflow-hidden">
-            <div className="d-flex align-items-center mb-1">
-              <h6 className="text-truncate mb-0 mr-auto">{chatHeader}</h6>
-              <p className="small text-muted text-nowrap ml-4">
-                {lastMessageTime}
-              </p>
-            </div>
-            <div className="text-truncate">{lastMessageFullText}</div>
+        <div className="media-body overflow-hidden">
+          <div className="d-flex align-items-center mb-1">
+            <h6 className="text-truncate mb-0 mr-auto">{chatHeader}</h6>
+            <p className="small text-muted text-nowrap ml-4">
+              {lastMessageTime}
+            </p>
           </div>
+          <div className="text-truncate">{lastMessageFullText}</div>
         </div>
       </div>
-    </a>
+    </div>
   );
 };

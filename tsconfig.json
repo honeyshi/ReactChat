@@ -2,6 +2,9 @@
   "include": [
     "./src/*"
   ],
+  "files": [
+    "src/declaration.d.ts"
+  ],
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,

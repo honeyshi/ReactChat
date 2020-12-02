@@ -1,7 +1,10 @@
 import React from "react";
 import classNames from "classnames";
 import { ChevronLeft, Save, Slash } from "react-feather";
+import { useSelector } from "react-redux";
 import { Button, FormGroup, Input, TextField } from "../base";
+import { performAddBlockedUserRequest } from "../../common/requests";
+import { RootState } from "../../store/stores";
 
 interface IChatDescriptionProps {
   avatarUrl: string;
@@ -18,6 +21,8 @@ export const ChatDescription: React.FC<IChatDescriptionProps> = ({
   userLogin,
   userNote,
 }) => {
+  const rootState = useSelector((state: RootState) => state.root);
+
   return (
     <div
       className={classNames("chat-sidebar", {
@@ -94,6 +99,12 @@ export const ChatDescription: React.FC<IChatDescriptionProps> = ({
                         isPrimary={false}
                         classes="btn-lg btn-block btn-basic d-flex align-items-center"
                         text="Block user"
+                        onClick={() =>
+                          performAddBlockedUserRequest(
+                            rootState.userId,
+                            userLogin
+                          )
+                        }
                       >
                         <Slash className="ml-auto text-muted" size={15} />
                       </Button>

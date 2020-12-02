@@ -60,7 +60,7 @@ interface IRootState {
 
 const rootState: IRootState = {
   isAuth: false,
-  userId: "",
+  userId: "2",
   errorMessage: "",
   isReset: false,
   activeNavbar: "tab-content-dialogs",

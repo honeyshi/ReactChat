@@ -14,6 +14,7 @@ import { connect, ConnectedProps } from "react-redux";
 import "./styles.scss";
 import "./components/layout.scss";
 import "./components/spacing.scss";
+import "react-notifications/lib/notifications.css";
 
 const mapStateToProps = (state: RootState) => {
   return {

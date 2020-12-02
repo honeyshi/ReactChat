@@ -1,14 +1,13 @@
 import React, { useMemo, useState } from "react";
 import { NavbarItem } from "./navbarItem";
 import { setActiveNavbar, setFoundUsers } from "../../store/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Icon from "react-feather";
 import {
   performGetBlockedUsersRequest,
   performGetLastChatsRequest,
 } from "../../common/requests";
 import { RootState } from "../../store/stores";
-import { useSelector } from "react-redux";
 
 interface INavbarItem {
   title: string;
@@ -71,7 +70,7 @@ export const Navbar: React.FC = () => {
           title={itemInfo.title}
           onClick={() => {
             onNavbarItemClick(itemInfo.link);
-            itemInfo.clickVoid("2");
+            itemInfo.clickVoid(userId);
             if (itemInfo.link == "tab-content-search-users")
               dispatch(setFoundUsers([]));
           }}

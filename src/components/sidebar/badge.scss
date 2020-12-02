@@ -6,21 +6,22 @@ $badge-font-size: 3;
   border-radius: 50%;
   padding: 0;
   vertical-align: middle;
-  height: 28px;
-  width: 28px;
+  height: 1.2rem;
+  width: 1.2rem;
+  min-width: 1.2rem;
   > i,
   > span {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      left: 50%;
-      top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
   }
 }
 
 .badge-top-right {
-    top: 0;
-    right: 0;
-    transform: translate(25%, -25%);
+  top: 0;
+  right: 0;
+  transform: translate(25%, -25%);
 }
 
 .badge-top-right {
