@@ -90,7 +90,7 @@ const ChatLayout: React.FC = () => {
               isActive={isActiveDescription}
               onCloseClick={() => setDescriptionStatus(false)}
               userLogin={chatState.chatHeader}
-              userNote="Test user note"
+              userNote={chatState.userNote}
             />
           )}
         </div>

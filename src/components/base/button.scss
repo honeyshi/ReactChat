@@ -1,15 +1,16 @@
 $btn-text-color: #212529;
-$btn-background-color:#fff; 
-$btn-secondary-text-color: rgba(33,37,41,.35);
+$btn-background-color: #fff;
+$btn-secondary-text-color: rgba(33, 37, 41, 0.35);
 $btn-secondary-background-color: #edeef6;
-$btn-secondary-text-color-hover: rgba(33,37,41,.5);
-$btn-secondary-focus-color: rgba(206,208,215,.5);
+$btn-secondary-text-color-hover: rgba(33, 37, 41, 0.5);
+$btn-secondary-focus-color: rgba(206, 208, 215, 0.5);
 
-.btn-group-lg > .btn, .btn-lg {
-  padding: .9375rem 1.25rem;
-  font-size: .9375rem;
+.btn-group-lg > .btn,
+.btn-lg {
+  padding: 0.9375rem 1.25rem;
+  font-size: 0.9375rem;
   line-height: 1.6;
-  border-radius: .375rem;
+  border-radius: 0.375rem;
 }
 
 .btn-basic {
@@ -19,8 +20,8 @@ $btn-secondary-focus-color: rgba(206,208,215,.5);
 }
 
 .btn-secondary.btn-minimal {
-    color: $btn-secondary-text-color;
-    fill: $btn-secondary-text-color;
+  color: $btn-secondary-text-color;
+  fill: $btn-secondary-text-color;
 }
 
 .btn-secondary {
@@ -29,19 +30,43 @@ $btn-secondary-focus-color: rgba(206,208,215,.5);
 }
 
 .btn-ico {
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
 }
 
-.btn-secondary.btn-minimal.focus, .btn-secondary.btn-minimal:focus, .btn-secondary.btn-minimal:hover, .btn-secondary.btn-minimal:not(:disabled):not(.disabled).active, .btn-secondary.btn-minimal:not(:disabled):not(.disabled):active {
+.btn-secondary.btn-minimal.focus,
+.btn-secondary.btn-minimal:focus,
+.btn-secondary.btn-minimal:hover,
+.btn-secondary.btn-minimal:not(:disabled):not(.disabled).active,
+.btn-secondary.btn-minimal:not(:disabled):not(.disabled):active {
   border-color: $btn-secondary-background-color;
   background: $btn-secondary-background-color;
   color: $btn-secondary-text-color-hover;
   fill: $btn-secondary-text-color-hover;
 }
 
-btn-secondary.focus, .btn-secondary:focus {
+btn-secondary.focus,
+.btn-secondary:focus {
   box-shadow: 0 0 0 0 $btn-secondary-focus-color;
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+  cursor: not-allowed;
+}
+
+.btn-basic.focus,
+.btn-basic:focus {
+  color: #212529;
+  background-color: #ececec;
+  border-color: #ececec;
+  box-shadow: 0 0 0 0 rgba(222, 222, 223, 0.5);
+}
+
+.btn-basic:hover {
+  color: #212529;
+  background-color: #ececec;
+  border-color: #ececec;
 }

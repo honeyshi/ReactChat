@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { CheckBox } from "../base";
 import { setCurrentChat } from "../../store/actions";
 import { ChatType } from "../../common/variables";
-import { performRemoveBlockedUserRequest } from "../../common/requests";
+import {
+  performGetUserNoteRequest,
+  performRemoveBlockedUserRequest,
+} from "../../common/requests";
 import { RootState } from "../../store/stores";
 
 interface ISidebarFriendProps {
@@ -28,6 +31,9 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
   const [checked, setChecked] = useState(false);
   const dispatch = useDispatch();
   const userId = useSelector((state: RootState) => state.root.userId);
+  const userNote = useSelector(
+    (state: RootState) => state.chat.chatItem.userNote
+  );
 
   return (
     <div className="card-body">
@@ -64,7 +70,7 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
       {!(canChoose || canDelete) && (
         <a
           className="stretched-link"
-          onClick={() =>
+          onClick={() => {
             dispatch(
               setCurrentChat({
                 chatHeader: friendName,
@@ -72,9 +78,11 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
                 chatType: ChatType.private,
                 isOnline: isOnline ? "Online" : "Offline",
                 chatMessages: [],
+                userNote: userNote,
               })
-            )
-          }
+            );
+            performGetUserNoteRequest(userId, friendName);
+          }}
         />
       )}
     </div>

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 import { ChevronLeft, Save, Slash } from "react-feather";
 import { useSelector } from "react-redux";
 import { Button, FormGroup, Input, TextField } from "../base";
-import { performAddBlockedUserRequest } from "../../common/requests";
+import {
+  performAddBlockedUserRequest,
+  performUpdateUserNoteRequest,
+} from "../../common/requests";
 import { RootState } from "../../store/stores";
 
 interface IChatDescriptionProps {
@@ -21,7 +24,8 @@ export const ChatDescription: React.FC<IChatDescriptionProps> = ({
   userLogin,
   userNote,
 }) => {
-  const rootState = useSelector((state: RootState) => state.root);
+  const userId = useSelector((state: RootState) => state.root.userId);
+  const [newUserNote, setNewUserNote] = useState<string>("");
 
   return (
     <div
@@ -78,7 +82,8 @@ export const ChatDescription: React.FC<IChatDescriptionProps> = ({
                       placeholder="Input new user note"
                       type="textarea"
                       row="6"
-                      onChange={() => void 0}
+                      value={newUserNote}
+                      onChange={(note) => setNewUserNote(note)}
                     />
                   </FormGroup>
                 </li>
@@ -90,6 +95,15 @@ export const ChatDescription: React.FC<IChatDescriptionProps> = ({
                         isPrimary={false}
                         classes="btn-lg btn-block btn-basic d-flex align-items-center"
                         text="Save"
+                        onClick={() => {
+                          newUserNote !== "" &&
+                            performUpdateUserNoteRequest(
+                              userId,
+                              userLogin,
+                              newUserNote
+                            );
+                          setNewUserNote("");
+                        }}
                       >
                         <Save className="ml-auto text-muted" size={15} />
                       </Button>
@@ -100,10 +114,7 @@ export const ChatDescription: React.FC<IChatDescriptionProps> = ({
                         classes="btn-lg btn-block btn-basic d-flex align-items-center"
                         text="Block user"
                         onClick={() =>
-                          performAddBlockedUserRequest(
-                            rootState.userId,
-                            userLogin
-                          )
+                          performAddBlockedUserRequest(userId, userLogin)
                         }
                       >
                         <Slash className="ml-auto text-muted" size={15} />

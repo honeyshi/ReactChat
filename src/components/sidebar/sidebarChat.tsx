@@ -1,6 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { performGetUserNoteRequest } from "../../common/requests";
+import { ChatType } from "../../common/variables";
 import { setCurrentChat } from "../../store/actions";
+import { RootState } from "../../store/stores";
 
 interface ISidebarChatProps {
   chatHeader: string;
@@ -24,10 +27,14 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
       ? lastMessageText
       : (lastMessageAuthor += `: ${lastMessageText}`);
   const dispatch = useDispatch();
+  const userId = useSelector((state: RootState) => state.root.userId);
+  const userNote = useSelector(
+    (state: RootState) => state.chat.chatItem.userNote
+  );
   return (
     <div
       className="card-body"
-      onClick={() =>
+      onClick={() => {
         dispatch(
           setCurrentChat({
             chatHeader: chatHeader,
@@ -35,9 +42,12 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
             chatType: chatType,
             isOnline: "Offline",
             chatMessages: [],
+            userNote: userNote,
           })
-        )
-      }
+        );
+        chatType === ChatType.private &&
+          performGetUserNoteRequest(userId, chatHeader);
+      }}
     >
       <div className="media">
         <div className="avatar mr-5">

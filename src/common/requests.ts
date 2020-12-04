@@ -19,6 +19,7 @@ import {
   getUserIsOnline,
   createNotification,
 } from "./functions";
+import { ChatType } from "./variables";
 
 const apiUrl =
   "http://messengerpy-env-1.eba-rs4kjrzc.us-east-2.elasticbeanstalk.com";
@@ -299,9 +300,10 @@ export const performAddBlockedUserRequest = (
           setCurrentChat({
             chatHeader: "",
             chatImage: "",
-            chatType: 1,
+            chatType: ChatType.group,
             isOnline: "",
             chatMessages: [],
+            userNote: "",
           })
         );
       } else
@@ -340,6 +342,82 @@ export const performRemoveBlockedUserRequest = (
             return blockedUser.friendName !== blockedUserLogin;
           });
         store.dispatch(setBlockedUsers(sidebarBlockedUsers));
+      } else
+        createNotification(
+          "error",
+          json.description.charAt(0).toUpperCase() + json.description.slice(1)
+        );
+    })
+    .catch((error) => {
+      createNotification("error", "Something went wrong. Please try again.");
+      console.log(error);
+    });
+};
+
+export const performGetUserNoteRequest = (
+  userId: string,
+  userGetLogin: string
+) => {
+  console.log(
+    `Perform get note for user. Id of user who gets: ${userId}. Login user with note: ${userGetLogin}`
+  );
+  const url = `${apiUrl}/getNote`;
+  const config = {
+    id: userId,
+    noted_user_login: userGetLogin,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      if (json.status !== "error") {
+        const currentChat = store.getState().chat.chatItem;
+        store.dispatch(
+          setCurrentChat({
+            chatHeader: currentChat.chatHeader,
+            chatImage: currentChat.chatImage,
+            chatType: currentChat.chatType,
+            isOnline: currentChat.isOnline,
+            chatMessages: currentChat.chatMessages,
+            userNote: json.note,
+          })
+        );
+      } else console.log(json);
+    })
+    .catch((error) => console.log(error));
+};
+
+export const performUpdateUserNoteRequest = (
+  userId: string,
+  userNoteLogin: string,
+  newNote: string
+) => {
+  console.log(
+    `Perform update user's note request. Id of user who updates: ${userId}. User with not: ${userNoteLogin}. New note: ${newNote}`
+  );
+  const url = `${apiUrl}/addNote`;
+  const config = {
+    id: userId,
+    noted_user_login: userNoteLogin,
+    note: newNote,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      if (json.status !== "error") {
+        createNotification("success", "User's note is updated");
+        const currentChat = store.getState().chat.chatItem;
+        store.dispatch(
+          setCurrentChat({
+            chatHeader: currentChat.chatHeader,
+            chatImage: currentChat.chatImage,
+            chatType: currentChat.chatType,
+            isOnline: currentChat.isOnline,
+            chatMessages: currentChat.chatMessages,
+            userNote: newNote,
+          })
+        );
       } else
         createNotification(
           "error",

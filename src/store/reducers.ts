@@ -8,6 +8,7 @@ import {
   ISidebarChatItem,
   ISidebarFriendItem,
 } from "../common/interfaces";
+import { ChatType } from "../common/variables";
 
 interface IAuthInitialState {
   email: string;
@@ -140,9 +141,10 @@ const chatState: IChatState = {
   chatItem: {
     chatHeader: "",
     chatImage: "",
-    chatType: 1,
+    chatType: ChatType.group,
     isOnline: "",
     chatMessages: [],
+    userNote: "",
   },
 };
 
