@@ -3,7 +3,7 @@ import * as Icon from "react-feather";
 import { SidebarTab } from "./sidebarTab";
 import { SidebarTitle } from "./sidebarTitle";
 import { SidebarItemsContainer } from "./sidebarItemsContainer";
-import { Button, FormGroup, Input, TextField } from "../base";
+import { Button, FileInput, FormGroup, Input, TextField } from "../base";
 import {
   ISidebarChatItem,
   ISidebarFriendItem,
@@ -16,7 +16,10 @@ import { useSelector } from "react-redux";
 
 import "./sidebar.scss";
 import { performSearchUserRequest } from "../../common/requests";
-import { checkUserHasPrivateChats } from "../../common/functions";
+import {
+  checkInputFile,
+  checkUserHasPrivateChats,
+} from "../../common/functions";
 
 const userProfileItem: ISidebarUserProfileProps = {
   userDescription:
@@ -41,6 +44,16 @@ const Sidebar: React.FC = () => {
   const [activeCreateGroupTab, setActiveCreateGroupTab] = useState<string>(
     "create-group-details"
   );
+  const [uploadedFile, setUploadedFile] = useState<File>();
+  const handleChange = (selectorFiles: FileList | null) => {
+    console.log(selectorFiles);
+    if (
+      selectorFiles !== null &&
+      selectorFiles.length !== 0 &&
+      checkInputFile(selectorFiles[0])
+    )
+      setUploadedFile(selectorFiles[0]);
+  };
 
   return (
     <div className="sidebar">
@@ -200,6 +213,29 @@ const Sidebar: React.FC = () => {
               isActive={activeCreateGroupTab?.includes("create-group-details")}
               isOuter={false}
             >
+              <FormGroup label="Photo" isVisible={true} isWithLabel={true}>
+                <div className="position-relative text-center bg-secondary rounded p-6">
+                  <div className="avatar bg-primary text-white mb-5">
+                    <Icon.Image size={19} />
+                  </div>
+                  <TextField
+                    classes="small text-muted mb-0"
+                    text="You can upload jpg, jpeg or png files."
+                    type="p"
+                    isCenter={false}
+                    isBold={false}
+                  />
+                  <FileInput
+                    id="upload-chat-photo"
+                    classes="d-none"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <label
+                    className="stretched-label mb-0"
+                    htmlFor="upload-chat-photo"
+                  />
+                </div>
+              </FormGroup>
               <FormGroup
                 forName="new-chat-title"
                 label="Name"
@@ -211,35 +247,6 @@ const Sidebar: React.FC = () => {
                   id="new-chat-title"
                   placeholder="Group Name"
                   type="input"
-                  onChange={() => void 0}
-                />
-              </FormGroup>
-              <FormGroup
-                forName="new-chat-topic"
-                label="Topic (optional)"
-                isVisible={true}
-                isWithLabel={true}
-              >
-                <Input
-                  name="new-chat-topic"
-                  id="new-chat-topic"
-                  placeholder="Group Topic"
-                  type="input"
-                  onChange={() => void 0}
-                />
-              </FormGroup>
-              <FormGroup
-                forName="new-chat-description"
-                label="Description"
-                isVisible={true}
-                isWithLabel={true}
-              >
-                <Input
-                  name="new-chat-description"
-                  id="new-chat-description"
-                  placeholder="Group Description"
-                  type="textarea"
-                  row="6"
                   onChange={() => void 0}
                 />
               </FormGroup>

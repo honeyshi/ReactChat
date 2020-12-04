@@ -1,5 +1,5 @@
 import { ISidebarChatItem } from "./interfaces";
-import { ChatType } from "./variables";
+import { AcceptedFileTypes, ChatType } from "./variables";
 import { NotificationManager } from "react-notifications";
 
 export const formatLastChatActivityDate = (date: string) => {
@@ -82,5 +82,21 @@ export const createNotification = (type: string, message: string) => {
     case "error":
       NotificationManager.error(message, "Something went wrong");
       break;
+  }
+};
+
+export const checkInputFile = (file: File) => {
+  if (
+    file.type.includes(AcceptedFileTypes.jpeg) ||
+    file.type.includes(AcceptedFileTypes.png)
+  ) {
+    createNotification("success", "File is uploaded");
+    return true;
+  } else {
+    createNotification(
+      "error",
+      "Incorrect file type. Should be jpeg, jpg or png."
+    );
+    return false;
   }
 };

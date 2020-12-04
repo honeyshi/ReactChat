@@ -41,3 +41,19 @@
   width: 5.75rem;
   min-width: 5.75rem;
 }
+
+.avatar > svg {
+  height: 100%;
+}
+
+.bg-secondary {
+  background-color: #edeef6 !important;
+}
+
+.stretched-label {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
