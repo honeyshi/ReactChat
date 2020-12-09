@@ -19,39 +19,25 @@ interface IChatMessageItem {
   userImage?: string;
 }
 
-const chatMessageItems: IChatMessageItem[] = [
-  { isRight: true, messageText: "Hello!", messageTime: "10:15 AM" },
-  {
-    isRight: false,
-    messageText:
-      "I'm going to meet a friend of mine at the department store. Yeah, I have to buy some presents for my parents.",
-    messageTime: "6 minutes ago",
-    senderName: "Anna Bridges",
-    userImage: "/fake-link",
-  },
-  {
-    isRight: true,
-    messageText:
-      "Yeah, I'm going to meet a friend of mine at the department store. I have to buy some presents for my parents",
-    messageTime: "2 minutes ago",
-  },
-];
-
 const ChatLayout: React.FC = () => {
   const [isActiveDescription, setDescriptionStatus] = useState<boolean>(false);
   const chatState = useSelector((state: RootState) => state.chat.chatItem);
 
-  const chatMessageComponents = chatMessageItems.map((chatMessageInfo) => {
-    return (
-      <ChatMessage
-        isRight={chatMessageInfo.isRight}
-        messageText={chatMessageInfo.messageText}
-        messageTime={chatMessageInfo.messageTime}
-        senderName={chatMessageInfo.senderName}
-        userImage={chatMessageInfo.userImage}
-      />
-    );
-  });
+  const chatMessageComponents = chatState.chatMessages.map(
+    (chatMessageInfo) => {
+      return (
+        <ChatMessage
+          isRight={chatMessageInfo.isRight}
+          messageId={chatMessageInfo.messageId}
+          messageText={chatMessageInfo.messageText}
+          messageTime={chatMessageInfo.messageTime}
+          senderName={chatMessageInfo.senderName}
+          userImage={chatMessageInfo.userImage}
+          key={chatMessageInfo.messageId}
+        />
+      );
+    }
+  );
 
   return (
     <div className="main main-visible">

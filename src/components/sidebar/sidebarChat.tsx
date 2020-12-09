@@ -1,12 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { performGetUserNoteRequest } from "../../common/requests";
+import {
+  performGetMessagesRequest,
+  performGetUserNoteRequest,
+} from "../../common/requests";
 import { ChatType } from "../../common/variables";
 import { setCurrentChat } from "../../store/actions";
 import { RootState } from "../../store/stores";
 
 interface ISidebarChatProps {
   chatHeader: string;
+  chatId: string;
   chatImage: string;
   chatType: number;
   lastMessageAuthor?: string;
@@ -16,6 +20,7 @@ interface ISidebarChatProps {
 
 export const SidebarChat: React.FC<ISidebarChatProps> = ({
   chatHeader,
+  chatId,
   chatImage,
   chatType,
   lastMessageAuthor,
@@ -47,6 +52,7 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
         );
         chatType === ChatType.private &&
           performGetUserNoteRequest(userId, chatHeader);
+        performGetMessagesRequest(userId, chatId, 0);
       }}
     >
       <div className="media">

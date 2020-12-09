@@ -6,10 +6,12 @@ import { CheckBox } from "../base";
 import { setCurrentChat } from "../../store/actions";
 import { ChatType } from "../../common/variables";
 import {
+  performGetMessagesRequest,
   performGetUserNoteRequest,
   performRemoveBlockedUserRequest,
 } from "../../common/requests";
 import { RootState } from "../../store/stores";
+import { getChatIdByUserLogin } from "../../common/functions";
 
 interface ISidebarFriendProps {
   canDelete: boolean;
@@ -33,6 +35,10 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
   const userId = useSelector((state: RootState) => state.root.userId);
   const userNote = useSelector(
     (state: RootState) => state.chat.chatItem.userNote
+  );
+  const chatId = getChatIdByUserLogin(
+    useSelector((state: RootState) => state.sidebar.sidebarDialogs),
+    friendName
   );
 
   return (
@@ -82,6 +88,8 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
               })
             );
             performGetUserNoteRequest(userId, friendName);
+            chatId !== undefined &&
+              performGetMessagesRequest(userId, chatId, 0);
           }}
         />
       )}

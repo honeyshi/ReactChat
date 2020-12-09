@@ -5,6 +5,7 @@ import "./message.scss";
 
 export const ChatMessage: React.FC<IChatMessageItem> = ({
   isRight,
+  messageId,
   messageText,
   messageTime,
   senderName,
@@ -23,7 +24,7 @@ export const ChatMessage: React.FC<IChatMessageItem> = ({
           }
         )}
       >
-        <img className="avatar-img" src={userImage} alt=""></img>
+        <img className="avatar-img" src={userImage} alt="" />
       </div>
       {/* Message: Body */}
       <div className="message-body">

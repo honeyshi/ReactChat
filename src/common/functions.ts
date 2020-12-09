@@ -2,22 +2,22 @@ import { ISidebarChatItem } from "./interfaces";
 import { AcceptedFileTypes, ChatType } from "./variables";
 import { NotificationManager } from "react-notifications";
 
-export const formatLastChatActivityDate = (date: string) => {
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+const monthNames = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
+export const formatLastChatActivityDate = (date: string) => {
   if (date === "None") return "";
 
   const today = new Date();
@@ -43,11 +43,60 @@ export const formatLastChatActivityDate = (date: string) => {
     // If last message in chat was sent in this year -> chat date should be dd:mm (like Nov 25)
     if (yyyy === messageYear)
       formattedChatDate = monthNames[messageDate.getMonth()] + " " + messageDay;
-    // If last message in chat was sent in another year -> chat date should be dd:mm:yyyy (like 25 Nov 2013)
+    // If last message in chat was sent in another year -> chat date should be dd:mm:yyyy (like 25.11.2013)
     else
       formattedChatDate = messageDay + "." + messageMonth + "." + messageYear;
   }
   return formattedChatDate;
+};
+
+export const formatMessageDate = (date: string) => {
+  if (date === "None") return "";
+
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, "0");
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const yyyy = today.getFullYear();
+  const todayStr = mm + "/" + dd + "/" + yyyy;
+
+  const messageDate = new Date(date);
+  const messageDay = String(messageDate.getDate()).padStart(2, "0");
+  const messageMonth = String(messageDate.getMonth() + 1).padStart(2, "0");
+  const messageYear = messageDate.getFullYear();
+  const messageDateStr = messageMonth + "/" + messageDay + "/" + messageYear;
+
+  let formattedMessageDate = "";
+  // If message date is equal with today's date -> date should be hh:mm
+  if (todayStr === messageDateStr)
+    formattedMessageDate =
+      String(messageDate.getHours()).padStart(2, "0") +
+      ":" +
+      String(messageDate.getMinutes()).padStart(2, "0");
+  else {
+    // If message date is in this year -> message date should be dd:mm hh:mm (like Nov 25 10:15)
+    if (yyyy === messageYear)
+      formattedMessageDate =
+        monthNames[messageDate.getMonth()] +
+        " " +
+        messageDay +
+        " " +
+        String(messageDate.getHours()).padStart(2, "0") +
+        ":" +
+        String(messageDate.getMinutes()).padStart(2, "0");
+    // If message date is in another year -> message date should be dd:mm:yyyy hh:mm (like 25.12.2013 10:15)
+    else
+      formattedMessageDate =
+        messageDay +
+        "." +
+        messageMonth +
+        "." +
+        messageYear +
+        " " +
+        String(messageDate.getHours()).padStart(2, "0") +
+        ":" +
+        String(messageDate.getMinutes()).padStart(2, "0");
+  }
+  return formattedMessageDate;
 };
 
 export const checkUserSawChat = (messageDate: string, userSawDate: string) => {
@@ -99,4 +148,13 @@ export const checkInputFile = (file: File) => {
     );
     return false;
   }
+};
+
+export const getChatIdByUserLogin = (
+  chats: ISidebarChatItem[],
+  userLogin: string
+) => {
+  return chats.find((chat) => {
+    return chat.chatHeader === userLogin;
+  })?.chatId;
 };

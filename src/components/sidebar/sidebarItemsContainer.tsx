@@ -44,6 +44,7 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
           <SidebarChatContainer>
             <SidebarChat
               chatHeader={sidebarChatItemInfo.chatHeader}
+              chatId={sidebarChatItemInfo.chatId}
               chatImage={sidebarChatItemInfo.chatImage}
               chatType={sidebarChatItemInfo.chatType}
               lastMessageText={sidebarChatItemInfo.lastMessageText}

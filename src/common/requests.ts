@@ -12,12 +12,17 @@ import {
 } from "../store/actions";
 import { history } from "../store/stores";
 import { store } from "../index";
-import { ISidebarChatItem, ISidebarFriendItem } from "./interfaces";
+import {
+  IChatMessageItem,
+  ISidebarChatItem,
+  ISidebarFriendItem,
+} from "./interfaces";
 import {
   formatLastChatActivityDate,
   checkUserSawChat,
   getUserIsOnline,
   createNotification,
+  formatMessageDate,
 } from "./functions";
 import { ChatType } from "./variables";
 
@@ -428,6 +433,91 @@ export const performUpdateUserNoteRequest = (
       createNotification("error", "Something went wrong. Please try again.");
       console.log(error);
     });
+};
+
+export const performGetMessagesRequest = (
+  userId: string,
+  chatId: string,
+  page: number
+) => {
+  console.log(
+    `Perform request get messages for user. User's id: ${userId}. Chat id: ${chatId}`
+  );
+  const url = `${apiUrl}/getMessages`;
+  const config = {
+    id: userId,
+    chatId: chatId,
+    page: page,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      if (json.status !== "error") {
+        const messages = json.messages;
+        console.log(messages);
+        let chatMessages: IChatMessageItem[] = [];
+        for (var item in messages) {
+          chatMessages.push({
+            isRight: messages[item].user.id === store.getState().root.userId,
+            messageId: messages[item].id,
+            messageText: messages[item].message,
+            messageTime: formatMessageDate(messages[item].timestamp),
+            senderName: messages[item].user.name,
+            userImage: messages[item].user.avatarUrl,
+          });
+        }
+        const currentChat = store.getState().chat.chatItem;
+        store.dispatch(
+          setCurrentChat({
+            chatHeader: currentChat.chatHeader,
+            chatImage: currentChat.chatImage,
+            chatType: currentChat.chatType,
+            isOnline: currentChat.isOnline,
+            chatMessages: chatMessages,
+            userNote: json.note,
+          })
+        );
+      } else console.log(json);
+    })
+    .catch((error) => console.log(error));
+};
+
+export const performSendMessageRequest = (
+  userId: string,
+  chatId: string,
+  message: string
+) => {
+  console.log(
+    `Perform send request with text ${message}. User's id: ${userId}. Chat id: ${chatId}`
+  );
+  const url = `${apiUrl}/newMessage`;
+  const config = {
+    id: userId,
+    chatId: chatId,
+    message: message,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      if (json.status !== "error") {
+        /*const currentChat = store.getState().chat.chatItem;
+        store.dispatch(
+          setCurrentChat({
+            chatHeader: currentChat.chatHeader,
+            chatImage: currentChat.chatImage,
+            chatType: currentChat.chatType,
+            isOnline: currentChat.isOnline,
+            chatMessages: currentChat.chatMessages,
+            userNote: json.note,
+          })
+        );*/
+        console.log("Success1!");
+        console.log(json);
+      } else console.log(json);
+    })
+    .catch((error) => console.log(error));
 };
 
 const testRequestAx = () => {

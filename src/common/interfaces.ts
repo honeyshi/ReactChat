@@ -4,7 +4,7 @@ import React from "react";
 export interface ISidebarChatItem {
   chatHeader: string;
   chatImage: string;
-  chatId: number;
+  chatId: string;
   chatType: number;
   isUnread: boolean;
   lastMessageAuthor?: string;
@@ -33,6 +33,7 @@ export interface ISidebarUserProfileProps {
 
 export interface IChatMessageItem {
   isRight: boolean;
+  messageId: string;
   messageText: string;
   messageTime: string;
   senderName?: string;
