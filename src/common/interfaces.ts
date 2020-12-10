@@ -42,6 +42,7 @@ export interface IChatMessageItem {
 
 export interface IChat {
   chatHeader: string;
+  chatId: string;
   chatImage: string;
   chatType: number;
   isOnline?: string;

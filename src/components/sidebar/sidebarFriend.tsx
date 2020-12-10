@@ -80,6 +80,7 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
             dispatch(
               setCurrentChat({
                 chatHeader: friendName,
+                chatId: chatId === undefined ? "" : chatId,
                 chatImage: friendImage,
                 chatType: ChatType.private,
                 isOnline: isOnline ? "Online" : "Offline",

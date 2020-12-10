@@ -11,14 +11,6 @@ import { ChatType } from "../../common/variables";
 import "../layout.scss";
 import { TextField } from "../base";
 
-interface IChatMessageItem {
-  isRight: boolean;
-  messageText: string;
-  messageTime: string;
-  senderName?: string;
-  userImage?: string;
-}
-
 const ChatLayout: React.FC = () => {
   const [isActiveDescription, setDescriptionStatus] = useState<boolean>(false);
   const chatState = useSelector((state: RootState) => state.chat.chatItem);

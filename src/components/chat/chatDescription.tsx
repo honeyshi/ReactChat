@@ -61,7 +61,7 @@ export const ChatDescription: React.FC<IChatDescriptionProps> = ({
               type="p"
               isBold={false}
               isCenter={false}
-              text={userNote}
+              text={userNote === "NONE" ? "" : userNote}
             />
           </div>
 

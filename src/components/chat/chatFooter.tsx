@@ -1,8 +1,14 @@
-import React from "react";
-import { Button } from "../base";
+import React, { useState } from "react";
+import { Button, Input } from "../base";
 import { Send } from "react-feather";
+import { performSendMessageRequest } from "../../common/requests";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/stores";
 
 export const ChatFooter: React.FC = () => {
+  const chatId = useSelector((state: RootState) => state.chat.chatItem.chatId);
+  const userId = useSelector((state: RootState) => state.root.userId);
+  const [message, setMessage] = useState<string>("");
   return (
     <div className="chat-footer border-top py-4 py-lg-6 px-lg-8">
       <div className="container-xxl">
@@ -11,16 +17,30 @@ export const ChatFooter: React.FC = () => {
             <div className="col">
               <div className="input-group">
                 {/*<!-- Textarea -->*/}
-                <textarea
+                {/*<textarea
                   id="chat-id-2-input"
                   className="form-control bg-transparent border-0"
                   placeholder="Type your message..."
                   data-autosize="true"
+                />*/}
+                <Input
+                  type="textarea"
+                  placeholder="Type your message..."
+                  classes="form-control bg-transparent border-0"
+                  id="chat-input"
+                  value={message}
+                  onChange={(message) => setMessage(message)}
                 />
               </div>
             </div>
             <div className="col-auto">
-              <Button isPrimary={true} shapeType="rounded-circle">
+              <Button
+                isPrimary={true}
+                shapeType="rounded-circle"
+                onClick={() =>
+                  performSendMessageRequest(userId, chatId, message)
+                }
+              >
                 {<Send size={19} />}
               </Button>
             </div>

@@ -140,6 +140,7 @@ interface IChatState {
 const chatState: IChatState = {
   chatItem: {
     chatHeader: "",
+    chatId: "",
     chatImage: "",
     chatType: ChatType.group,
     isOnline: "",

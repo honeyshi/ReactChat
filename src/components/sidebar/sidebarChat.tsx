@@ -43,6 +43,7 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
         dispatch(
           setCurrentChat({
             chatHeader: chatHeader,
+            chatId: chatId,
             chatImage: chatImage,
             chatType: chatType,
             isOnline: "Offline",

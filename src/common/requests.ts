@@ -304,6 +304,7 @@ export const performAddBlockedUserRequest = (
         store.dispatch(
           setCurrentChat({
             chatHeader: "",
+            chatId: "",
             chatImage: "",
             chatType: ChatType.group,
             isOnline: "",
@@ -380,6 +381,7 @@ export const performGetUserNoteRequest = (
         store.dispatch(
           setCurrentChat({
             chatHeader: currentChat.chatHeader,
+            chatId: currentChat.chatId,
             chatImage: currentChat.chatImage,
             chatType: currentChat.chatType,
             isOnline: currentChat.isOnline,
@@ -416,6 +418,7 @@ export const performUpdateUserNoteRequest = (
         store.dispatch(
           setCurrentChat({
             chatHeader: currentChat.chatHeader,
+            chatId: currentChat.chatId,
             chatImage: currentChat.chatImage,
             chatType: currentChat.chatType,
             isOnline: currentChat.isOnline,
@@ -471,6 +474,7 @@ export const performGetMessagesRequest = (
         store.dispatch(
           setCurrentChat({
             chatHeader: currentChat.chatHeader,
+            chatId: currentChat.chatId,
             chatImage: currentChat.chatImage,
             chatType: currentChat.chatType,
             isOnline: currentChat.isOnline,
@@ -502,22 +506,20 @@ export const performSendMessageRequest = (
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
       if (json.status !== "error") {
-        /*const currentChat = store.getState().chat.chatItem;
-        store.dispatch(
-          setCurrentChat({
-            chatHeader: currentChat.chatHeader,
-            chatImage: currentChat.chatImage,
-            chatType: currentChat.chatType,
-            isOnline: currentChat.isOnline,
-            chatMessages: currentChat.chatMessages,
-            userNote: json.note,
-          })
-        );*/
-        console.log("Success1!");
-        console.log(json);
-      } else console.log(json);
+        performGetMessagesRequest(userId, chatId, 0);
+      } else
+        createNotification(
+          "error",
+          "One or more errors occured while sending this messages. Please try again."
+        );
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      createNotification(
+        "error",
+        "One or more errors occured while sending this messages. Please try again."
+      );
+      console.log(error);
+    });
 };
 
 const testRequestAx = () => {
