@@ -7,7 +7,7 @@ export interface ISidebarChatItem {
   chatId: string;
   chatType: number;
   isUnread: boolean;
-  lastMessageAuthor?: string;
+  isUserOnline: boolean;
   lastMessageText: string;
   lastMessageTime: string;
 }

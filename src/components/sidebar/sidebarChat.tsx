@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,7 +14,7 @@ interface ISidebarChatProps {
   chatId: string;
   chatImage: string;
   chatType: number;
-  lastMessageAuthor?: string;
+  isUserOnline: boolean;
   lastMessageText: string;
   lastMessageTime: string;
 }
@@ -23,14 +24,10 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
   chatId,
   chatImage,
   chatType,
-  lastMessageAuthor,
+  isUserOnline,
   lastMessageText,
   lastMessageTime,
 }) => {
-  const lastMessageFullText =
-    lastMessageAuthor === undefined
-      ? lastMessageText
-      : (lastMessageAuthor += `: ${lastMessageText}`);
   const dispatch = useDispatch();
   const userId = useSelector((state: RootState) => state.root.userId);
   const userNote = useSelector(
@@ -46,7 +43,7 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
             chatId: chatId,
             chatImage: chatImage,
             chatType: chatType,
-            isOnline: "Offline",
+            isOnline: isUserOnline ? "Online" : "Offline",
             chatMessages: [],
             userNote: userNote,
           })
@@ -57,7 +54,11 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
       }}
     >
       <div className="media">
-        <div className="avatar mr-5">
+        <div
+          className={classNames("avatar mr-5", {
+            "avatar-online": isUserOnline,
+          })}
+        >
           <img className="avatar-img" src={chatImage} alt="" />
         </div>
 
@@ -68,7 +69,7 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
               {lastMessageTime}
             </p>
           </div>
-          <div className="text-truncate">{lastMessageFullText}</div>
+          <div className="text-truncate">{lastMessageText}</div>
         </div>
       </div>
     </div>

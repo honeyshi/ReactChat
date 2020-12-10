@@ -189,23 +189,22 @@ export const performGetLastChatsRequest = (userId: string) => {
     .post(url, config)
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
-      if (json.status !== "error") {
-        let sidebarChatItems: ISidebarChatItem[] = [];
-        for (var item in json) {
-          sidebarChatItems.push({
-            chatHeader: json[item].name,
-            chatImage: json[item].image,
-            chatId: json[item].chat_id,
-            chatType: json[item].type_chat,
-            isUnread: checkUserSawChat(json[item].date, json[item].last),
-            lastMessageText: json[item].text,
-            lastMessageTime: formatLastChatActivityDate(json[item].date),
-          });
-        }
-        store.dispatch(setDialogs(sidebarChatItems));
-        console.log(json);
-        console.log(sidebarChatItems);
-      } else console.log(json);
+      let sidebarChatItems: ISidebarChatItem[] = [];
+      for (var item in json) {
+        sidebarChatItems.push({
+          chatHeader: json[item].name,
+          chatImage: json[item].image,
+          chatId: json[item].chat_id,
+          chatType: json[item].type_chat,
+          isUnread: checkUserSawChat(json[item].date, json[item].last),
+          isUserOnline: getUserIsOnline(json[item].online),
+          lastMessageText: json[item].text,
+          lastMessageTime: formatLastChatActivityDate(json[item].date),
+        });
+      }
+      store.dispatch(setDialogs(sidebarChatItems));
+      console.log(json);
+      console.log(sidebarChatItems);
     })
     .catch((error) => {
       console.log(error);
