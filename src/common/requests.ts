@@ -522,6 +522,35 @@ export const performSendMessageRequest = (
     });
 };
 
+export const performCreatePrivateChatRequest = (
+  userId: string,
+  userLogin: string,
+  message: string
+) => {
+  console.log(
+    `Perform create private chat request and send message. User's id: ${userId}. User login: ${userLogin}`
+  );
+  const url = `${apiUrl}/addPrivateChat`;
+  const config = {
+    id: userId,
+    login: userLogin,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      console.log(json);
+      performSendMessageRequest(userId, json.chatId, message);
+    })
+    .catch((error) => {
+      createNotification(
+        "error",
+        "One or more errors occured while sending this messages. Please try again."
+      );
+      console.log(error);
+    });
+};
+
 const testRequestAx = () => {
   const sendLinkData = {
     after_id: -1,
