@@ -1,10 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  performGetMessagesRequest,
-  performGetUserNoteRequest,
-} from "../../common/requests";
-import { ChatType } from "../../common/variables";
+import { performGetMessagesRequest } from "../../common/requests";
 import { setCurrentChat } from "../../store/actions";
 import { RootState } from "../../store/stores";
 import { Avatar } from "../base";
@@ -48,8 +44,6 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
             userNote: userNote,
           })
         );
-        chatType === ChatType.private &&
-          performGetUserNoteRequest(userId, chatHeader);
         performGetMessagesRequest(userId, chatId, 0);
       }}
     >

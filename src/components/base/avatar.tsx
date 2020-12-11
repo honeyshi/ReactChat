@@ -2,6 +2,8 @@ import classNames from "classnames";
 import React from "react";
 import { propsToSpace, SpaceProps } from "../../common/utils/spaceUtil";
 
+import "./avatar.scss";
+
 interface IAvatarProps extends SpaceProps {
   block?: boolean;
   displayNone?: boolean;

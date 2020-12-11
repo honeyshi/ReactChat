@@ -6,7 +6,6 @@ import { setCurrentChat } from "../../store/actions";
 import { ChatType } from "../../common/variables";
 import {
   performGetMessagesRequest,
-  performGetUserNoteRequest,
   performRemoveBlockedUserRequest,
 } from "../../common/requests";
 import { RootState } from "../../store/stores";
@@ -83,7 +82,6 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
                 userNote: userNote,
               })
             );
-            performGetUserNoteRequest(userId, friendName);
             chatId !== undefined &&
               performGetMessagesRequest(userId, chatId, 0);
           }}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+
 import { ChatHeader } from "./chatHeader";
 import { ChatMessage } from "./chatMessage";
 import { ChatFooter } from "./chatFooter";
@@ -7,13 +8,15 @@ import { ChatContent } from "./chatContent";
 import { ChatDescription } from "./chatDescription";
 import { RootState } from "../../store/stores";
 import { ChatType } from "../../common/variables";
+import { TextField } from "../base";
+import { performGetUserNoteRequest } from "../../common/requests";
 
 import "../layout.scss";
-import { TextField } from "../base";
 
 const ChatLayout: React.FC = () => {
   const [isActiveDescription, setDescriptionStatus] = useState<boolean>(false);
   const chatState = useSelector((state: RootState) => state.chat.chatItem);
+  const userId = useSelector((state: RootState) => state.root.userId);
 
   const chatMessageComponents = chatState.chatMessages.map(
     (chatMessageInfo) => {
@@ -46,7 +49,11 @@ const ChatLayout: React.FC = () => {
                   ? chatState.isOnline
                   : ""
               }
-              onDetailsClick={() => setDescriptionStatus(true)}
+              onDetailsClick={() => {
+                setDescriptionStatus(true);
+                chatState.chatType === ChatType.private &&
+                  performGetUserNoteRequest(userId, chatState.chatHeader);
+              }}
             />
             {chatState.chatMessages.length !== 0 ? (
               <ChatContent>{chatMessageComponents}</ChatContent>
