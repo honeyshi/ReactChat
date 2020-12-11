@@ -13,7 +13,7 @@ import { performGetUserNoteRequest } from "../../common/requests";
 
 import "../layout.scss";
 
-const ChatLayout: React.FC = () => {
+export const ChatLayout: React.FC = () => {
   const [isActiveDescription, setDescriptionStatus] = useState<boolean>(false);
   const chatState = useSelector((state: RootState) => state.chat.chatItem);
   const userId = useSelector((state: RootState) => state.root.userId);
@@ -95,5 +95,3 @@ const ChatLayout: React.FC = () => {
     </div>
   );
 };
-
-export default ChatLayout;
