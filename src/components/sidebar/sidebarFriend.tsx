@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import classNames from "classnames";
 import { X } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
-import { CheckBox } from "../base";
+import { Avatar, CheckBox } from "../base";
 import { setCurrentChat } from "../../store/actions";
 import { ChatType } from "../../common/variables";
 import {
@@ -44,11 +43,7 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
   return (
     <div className="card-body">
       <div className="media">
-        <div
-          className={classNames("avatar mr-5", { "avatar-online": isOnline })}
-        >
-          <img className="avatar-img" src={friendImage} alt={friendName} />
-        </div>
+        <Avatar imagePath={friendImage} isOnline={isOnline} mr="5" />
 
         <div className="media-body align-self-center">
           <h6 className="mb-0">{friendName}</h6>

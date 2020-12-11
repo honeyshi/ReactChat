@@ -1,9 +1,9 @@
 import React from "react";
-import classNames from "classnames";
 import { MoreVertical } from "react-feather";
+import { Avatar } from "../base";
 
 interface IChatHeaderProps {
-  chatImage?: string;
+  chatImage: string;
   chatName: string | undefined;
   chatStatus: string | undefined;
   onDetailsClick: () => void;
@@ -22,18 +22,17 @@ export const ChatHeader: React.FC<IChatHeaderProps> = ({
           {/* Chat photo */}
           <div className="col-6 col-xl-6">
             <div className="media text-center text-xl-left">
-              <div
-                className={classNames(
-                  "avatar avatar-sm d-none d-lg-inline-block mr-5",
-                  { "avatar-online": chatStatus === "Online" }
-                )}
-              >
-                <img src={chatImage} className="avatar-img" alt="" />
-              </div>
+              <Avatar
+                small
+                displayNone
+                inlineBlock
+                mr="5"
+                isOnline={chatStatus === "Online"}
+                imagePath={chatImage}
+              />
               {/*Chat information*/}
               <div className="media-body align-self-center text-truncate">
                 <h6 className="text-truncate mb-n1">{chatName}</h6>
-                <span className="badge badge-dot badge-success d-inline-block d-xl-none mr-1" />
                 <small className="text-muted">{chatStatus}</small>
               </div>
             </div>

@@ -2,6 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { IChatMessageItem } from "../../common/interfaces";
 import "./message.scss";
+import { Avatar } from "../base";
 
 export const ChatMessage: React.FC<IChatMessageItem> = ({
   isRight,
@@ -14,18 +15,16 @@ export const ChatMessage: React.FC<IChatMessageItem> = ({
   return (
     <div className={classNames("message", { "message-right": isRight })}>
       {/* Avatar */}
-      <div
-        className={classNames(
-          "avatar avatar-sm",
-          { "mr-4 mr-lg-5": !isRight },
-          { "ml-4 ml-lg-5": isRight },
-          {
-            "d-none d-lg-block": isRight,
-          }
-        )}
-      >
-        <img className="avatar-img" src={userImage} alt="" />
-      </div>
+      <Avatar
+        small
+        displayNone
+        block
+        imagePath={userImage}
+        mr={!isRight ? "4" : undefined}
+        mr_lg={!isRight ? "5" : undefined}
+        ml={isRight ? "4" : undefined}
+        ml_lg={isRight ? "5" : undefined}
+      />
       {/* Message: Body */}
       <div className="message-body">
         {/* Message: row */}

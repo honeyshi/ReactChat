@@ -37,7 +37,7 @@ export interface IChatMessageItem {
   messageText: string;
   messageTime: string;
   senderName?: string;
-  userImage?: string;
+  userImage: string;
 }
 
 export interface IChat {

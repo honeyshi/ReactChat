@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import { ChevronLeft, Save, Slash } from "react-feather";
 import { useSelector } from "react-redux";
-import { Button, FormGroup, Input, TextField } from "../base";
+import { Avatar, Button, FormGroup, Input, TextField } from "../base";
 import {
   performAddBlockedUserRequest,
   performUpdateUserNoteRequest,
@@ -52,9 +52,7 @@ export const ChatDescription: React.FC<IChatDescriptionProps> = ({
         <div className="hide-scrollbar flex-fill">
           <div className="border-bottom text-center py-9 px-10">
             {/*<!-- Photo -->*/}
-            <div className="avatar avatar-xl mx-5 mb-5">
-              <img className="avatar-img" src={avatarUrl} alt="" />
-            </div>
+            <Avatar large mx="5" mb="5" imagePath={avatarUrl} />
             <h5>{userLogin}</h5>
             <TextField
               classes="text-muted"

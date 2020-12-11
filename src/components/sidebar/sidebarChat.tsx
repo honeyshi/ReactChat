@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,6 +7,7 @@ import {
 import { ChatType } from "../../common/variables";
 import { setCurrentChat } from "../../store/actions";
 import { RootState } from "../../store/stores";
+import { Avatar } from "../base";
 
 interface ISidebarChatProps {
   chatHeader: string;
@@ -54,13 +54,7 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
       }}
     >
       <div className="media">
-        <div
-          className={classNames("avatar mr-5", {
-            "avatar-online": isUserOnline,
-          })}
-        >
-          <img className="avatar-img" src={chatImage} alt="" />
-        </div>
+        <Avatar imagePath={chatImage} isOnline={isUserOnline} mr="5" />
 
         <div className="media-body overflow-hidden">
           <div className="d-flex align-items-center mb-1">
