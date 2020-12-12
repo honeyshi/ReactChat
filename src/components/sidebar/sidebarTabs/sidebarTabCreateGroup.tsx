@@ -3,6 +3,10 @@ import { useSelector } from "react-redux";
 import { SidebarSubtabGroupDetails } from ".";
 import { SidebarTab, SidebarTitle } from "..";
 import { checkUserHasPrivateChats } from "../../../common/functions";
+import {
+  performCreateGroupChatRequest,
+  performSetGroupChatImage,
+} from "../../../common/requests";
 import { RootState } from "../../../store/stores";
 import { NavbarItem } from "../../navigation";
 import { SidebarSubtabGroupMembers } from "./sidebarSubtabGroupMembers";
@@ -15,12 +19,11 @@ enum CreateGroupSubtabs {
 export const SidebarTabCreateGroup: React.FC<{ isActive: boolean }> = ({
   isActive,
 }) => {
-  const sidebarDialogs = useSelector(
-    (state: RootState) => state.sidebar.sidebarDialogs
-  );
   const [activeCreateGroupTab, setActiveCreateGroupTab] = useState<string>(
     CreateGroupSubtabs.GroupDetails
   );
+  const sidebarState = useSelector((state: RootState) => state.sidebar);
+  const userId = useSelector((state: RootState) => state.root.userId);
   return (
     <SidebarTab
       id="tab-content-create-chat"
@@ -28,8 +31,16 @@ export const SidebarTabCreateGroup: React.FC<{ isActive: boolean }> = ({
       isOuter={true}
       outsideScroll={true}
       buttonClasses="btn-lg btn-block"
-      buttonDisabled={!checkUserHasPrivateChats(sidebarDialogs)}
+      buttonDisabled={!checkUserHasPrivateChats(sidebarState.sidebarDialogs)}
       buttonText="Create Group"
+      onButtonClick={() =>
+        performCreateGroupChatRequest(
+          userId,
+          sidebarState.groupName,
+          sidebarState.groupMembers,
+          sidebarState.selectedFile
+        )
+      }
     >
       <SidebarTitle text="Create group" />
       <ul className="nav nav-tabs nav-justified mb-6" role="tablist">

@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import { Image } from "react-feather";
+import { useDispatch } from "react-redux";
 import { SidebarTab } from "..";
 import { checkInputFile } from "../../../common/functions";
+import { setGroupChatImage, setGroupChatName } from "../../../store/actions";
 import { FileInput, FormGroup, Input, TextField } from "../../base";
 
 export const SidebarSubtabGroupDetails: React.FC<{ isActive: boolean }> = ({
   isActive,
 }) => {
-  const [uploadedFile, setUploadedFile] = useState<File>();
+  const dispatch = useDispatch();
   const handleChange = (selectorFiles: FileList | null) => {
-    console.log(selectorFiles);
     if (
       selectorFiles !== null &&
       selectorFiles.length !== 0 &&
       checkInputFile(selectorFiles[0])
     )
-      setUploadedFile(selectorFiles[0]);
+      dispatch(setGroupChatImage(selectorFiles[0]));
   };
   return (
     <SidebarTab id="create-group-details" isActive={isActive} isOuter={false}>
@@ -45,7 +46,7 @@ export const SidebarSubtabGroupDetails: React.FC<{ isActive: boolean }> = ({
           id="new-chat-title"
           placeholder="Group Name"
           type="input"
-          onChange={() => void 0}
+          onChange={(groupName) => dispatch(setGroupChatName(groupName))}
         />
       </FormGroup>
     </SidebarTab>

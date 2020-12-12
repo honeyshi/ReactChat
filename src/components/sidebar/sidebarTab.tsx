@@ -10,6 +10,7 @@ interface ISidebarTabProps {
   buttonClasses?: string;
   buttonDisabled?: boolean;
   buttonText?: string;
+  onButtonClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 export const SidebarTab: React.FC<ISidebarTabProps> = ({
@@ -20,6 +21,7 @@ export const SidebarTab: React.FC<ISidebarTabProps> = ({
   buttonClasses,
   buttonDisabled,
   buttonText,
+  onButtonClick,
   children,
 }) => {
   return (
@@ -42,10 +44,11 @@ export const SidebarTab: React.FC<ISidebarTabProps> = ({
             <div className="pb-6">
               <div className="container-fluid">
                 <Button
-                  isPrimary={true}
+                  isPrimary
                   classes={buttonClasses}
                   text={buttonText}
                   disabled={buttonDisabled}
+                  onClick={onButtonClick}
                 />
               </div>
             </div>

@@ -550,6 +550,77 @@ export const performCreatePrivateChatRequest = (
     });
 };
 
+export const performCreateGroupChatRequest = (
+  userId: string,
+  groupName: string,
+  groupMembers: string[],
+  groupImage: Blob
+) => {
+  console.log(
+    `Perform create group chat request. User's id: ${userId}. Group name: ${groupName}. Members: ${groupMembers}. Image: ${groupImage}`
+  );
+  const url = `${apiUrl}/addChat`;
+  const config = {
+    id: userId,
+    name: groupName,
+    users: groupMembers,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      console.log(json);
+      performSetGroupChatImage(groupImage, json.chatId);
+      createNotification("success", "Group is created successfully.");
+    })
+    .catch((error) => {
+      createNotification(
+        "error",
+        "One or more errors occured during group creation. Please try again."
+      );
+      console.log(error);
+    });
+};
+
+export const performSetGroupChatImage = (imageFile: Blob, id: string) => {
+  console.log(imageFile);
+  console.log(`Perform post image ${imageFile} and get url`);
+  const postUrl = `${apiUrl}/postPhoto`;
+  const postConfig = new FormData();
+  postConfig.append("file", imageFile);
+  const setUrl = `${apiUrl}/setAvatarToGruop`;
+  axios
+    .post(postUrl, postConfig)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      console.log(json);
+      const setConfig = {
+        chat_id: id,
+        avatarUrl: json.url,
+      };
+      console.log(`Perform set image ${json.url} for group chat with id ${id}`);
+      axios
+        .post(setUrl, setConfig)
+        .then(() => {
+          createNotification("success", "Image for group is set.");
+        })
+        .catch((error) => {
+          createNotification(
+            "error",
+            "One or more errors occured while setting image. Please try again."
+          );
+          console.log(error);
+        });
+    })
+    .catch((error) => {
+      createNotification(
+        "error",
+        "One or more errors occured while setting image. Please try again."
+      );
+      console.log(error);
+    });
+};
+
 const testRequestAx = () => {
   const sendLinkData = {
     after_id: -1,

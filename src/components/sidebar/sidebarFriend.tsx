@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { X } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, CheckBox } from "../base";
-import { setCurrentChat } from "../../store/actions";
+import { setCurrentChat, setGroupChatMembers } from "../../store/actions";
 import { ChatType } from "../../common/variables";
 import {
   performGetMessagesRequest,
@@ -38,6 +38,9 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
     useSelector((state: RootState) => state.sidebar.sidebarDialogs),
     friendName
   );
+  const groupChatMembers = useSelector(
+    (state: RootState) => state.sidebar.groupMembers
+  );
 
   return (
     <div className="card-body">
@@ -60,7 +63,20 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
             <CheckBox
               name={checkboxName}
               value={checked}
-              onChange={(checkedValue) => setChecked(!checkedValue)}
+              onChange={(checkedValue) => {
+                setChecked(!checkedValue);
+                checkedValue
+                  ? dispatch(
+                      setGroupChatMembers(groupChatMembers.concat(friendName))
+                    )
+                  : dispatch(
+                      setGroupChatMembers(
+                        groupChatMembers.filter((member) => {
+                          return member !== friendName;
+                        })
+                      )
+                    );
+              }}
               disabled={false}
             />
           </div>

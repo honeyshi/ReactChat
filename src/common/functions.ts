@@ -134,7 +134,7 @@ export const createNotification = (type: string, message: string) => {
   }
 };
 
-export const checkInputFile = (file: File) => {
+export const checkInputFile = (file: Blob) => {
   if (
     file.type.includes(AcceptedFileTypes.jpeg) ||
     file.type.includes(AcceptedFileTypes.png)
