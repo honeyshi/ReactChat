@@ -26,8 +26,11 @@ export const SidebarTabSearch: React.FC<{ isActive: boolean }> = ({
           />
           <div className="input-group-append">
             <Button
-              isPrimary={false}
-              classes="btn-lg btn-ico btn-secondary btn-minimal"
+              primary
+              long
+              icon
+              secondary
+              minimal
               onClick={() => {
                 performSearchUserRequest(searchLogin);
                 setSearchLogin("");

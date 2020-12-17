@@ -37,20 +37,12 @@ export const SidebarTabUserProfile: React.FC<{ isActive: boolean }> = ({
       />
       <div className="form-row">
         <div className="col">
-          <Button
-            isPrimary={false}
-            classes="btn-lg btn-block btn-basic d-flex align-items-center"
-            text="Reset password"
-          >
+          <Button long block basic flex alignCenter text="Reset password">
             <Icon.Key className="ml-auto text-muted" size={15} />
           </Button>
         </div>
         <div className="col">
-          <Button
-            isPrimary={false}
-            classes="btn-lg btn-block btn-basic d-flex align-items-center"
-            text="Logout"
-          >
+          <Button long block basic flex alignCenter text="Logout">
             <Icon.LogOut className="ml-auto text-muted" size={15} />
           </Button>
         </div>

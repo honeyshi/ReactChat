@@ -82,9 +82,10 @@ export const SignInPage: React.FC = () => {
           </Link>
         </FormGroup>
         <Button
-          isPrimary={true}
+          primary
+          long
+          block
           text="Sign in"
-          classes="btn-lg btn-block"
           onClick={() =>
             performSignInRequest(
               authState.login,

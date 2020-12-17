@@ -85,9 +85,10 @@ export const ResetPasswordPage: React.FC = () => {
           type="p"
         />
         <Button
-          isPrimary={true}
+          primary
+          long
+          block
           text="Reset password"
-          classes="btn-lg btn-block"
           onClick={() =>
             performResetPasswordRequest(
               localStorage.getItem("login"),

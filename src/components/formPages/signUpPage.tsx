@@ -98,9 +98,10 @@ export const SignUpPage: React.FC = () => {
           type="p"
         />
         <Button
-          isPrimary={true}
+          primary
+          long
+          block
           text="Sign up"
-          classes="btn-lg btn-block"
           onClick={() =>
             performSignUpRequest(
               authState.login,

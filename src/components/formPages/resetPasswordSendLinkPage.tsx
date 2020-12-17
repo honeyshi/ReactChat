@@ -63,9 +63,10 @@ export const ResetPasswordSendLinkPage: React.FC = () => {
           type="p"
         />
         <Button
-          isPrimary={true}
+          primary
+          long
+          block
           text="Send New Password"
-          classes="btn-lg btn-block"
           onClick={() => performSendLinkRequest(login)}
         />
       </Form>

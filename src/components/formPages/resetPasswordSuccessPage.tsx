@@ -14,9 +14,10 @@ export const ResetPasswordSuccessPage: React.FC = () => {
         type="p"
       />
       <Button
-        isPrimary={true}
+        primary
+        long
+        block
         text="Continue"
-        classes="btn-lg btn-block"
         onClick={() => history.push("/signin")}
       />
     </FormContainer>

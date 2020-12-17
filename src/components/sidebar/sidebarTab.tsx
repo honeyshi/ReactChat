@@ -7,7 +7,6 @@ interface ISidebarTabProps {
   isActive?: boolean;
   isOuter: boolean;
   outsideScroll?: boolean;
-  buttonClasses?: string;
   buttonDisabled?: boolean;
   buttonText?: string;
   onButtonClick?: (e: React.MouseEvent<HTMLElement>) => void;
@@ -18,7 +17,6 @@ export const SidebarTab: React.FC<ISidebarTabProps> = ({
   isActive,
   isOuter,
   outsideScroll,
-  buttonClasses,
   buttonDisabled,
   buttonText,
   onButtonClick,
@@ -44,8 +42,9 @@ export const SidebarTab: React.FC<ISidebarTabProps> = ({
             <div className="pb-6">
               <div className="container-fluid">
                 <Button
-                  isPrimary
-                  classes={buttonClasses}
+                  primary
+                  long
+                  block
                   text={buttonText}
                   disabled={buttonDisabled}
                   onClick={onButtonClick}

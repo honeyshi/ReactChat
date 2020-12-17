@@ -33,7 +33,7 @@ export const ChatFooter: React.FC = () => {
             </div>
             <div className="col-auto">
               <Button
-                isPrimary={true}
+                primary
                 shapeType="rounded-circle"
                 onClick={() => {
                   chatState.chatMessages.length === 0 &&

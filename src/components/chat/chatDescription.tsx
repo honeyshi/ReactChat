@@ -90,8 +90,11 @@ export const ChatDescription: React.FC<IChatDescriptionProps> = ({
                   <div className="form-row">
                     <div className="col">
                       <Button
-                        isPrimary={false}
-                        classes="btn-lg btn-block btn-basic d-flex align-items-center"
+                        long
+                        block
+                        basic
+                        flex
+                        alignCenter
                         text="Save"
                         onClick={() => {
                           newUserNote !== "" &&
@@ -108,8 +111,11 @@ export const ChatDescription: React.FC<IChatDescriptionProps> = ({
                     </div>
                     <div className="col">
                       <Button
-                        isPrimary={false}
-                        classes="btn-lg btn-block btn-basic d-flex align-items-center"
+                        long
+                        block
+                        basic
+                        flex
+                        alignCenter
                         text="Block user"
                         onClick={() =>
                           performAddBlockedUserRequest(userId, userLogin)

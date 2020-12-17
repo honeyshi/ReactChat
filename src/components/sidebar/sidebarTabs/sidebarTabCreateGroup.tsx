@@ -28,9 +28,8 @@ export const SidebarTabCreateGroup: React.FC<{ isActive: boolean }> = ({
     <SidebarTab
       id="tab-content-create-chat"
       isActive={isActive}
-      isOuter={true}
-      outsideScroll={true}
-      buttonClasses="btn-lg btn-block"
+      isOuter
+      outsideScroll
       buttonDisabled={!checkUserHasPrivateChats(sidebarState.sidebarDialogs)}
       buttonText="Create Group"
       onButtonClick={() =>
