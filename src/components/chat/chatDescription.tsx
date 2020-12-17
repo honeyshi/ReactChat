@@ -67,10 +67,10 @@ export const ChatDescription: React.FC<IChatDescriptionProps> = ({
               <ul className="list-group list-group-flush mb-8">
                 <li className="list-group-item py-6">
                   <FormGroup
+                    visible
+                    withLabel
                     forName="user-note"
                     label="User note"
-                    isVisible={true}
-                    isWithLabel={true}
                   >
                     <Input
                       name="user-note"

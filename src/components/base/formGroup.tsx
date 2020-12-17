@@ -4,25 +4,22 @@ import classNames from "classnames";
 interface IFormGroupProps {
   forName?: string;
   label?: string;
-  isVisible?: boolean;
-  isWithLabel: boolean;
+  visible?: boolean;
+  withLabel?: boolean;
 }
 
 export const FormGroup: React.FC<IFormGroupProps> = ({
   forName,
   label,
-  isVisible,
-  isWithLabel,
-  children
+  visible,
+  withLabel,
+  children,
 }) => {
   return (
     <div className="form-group">
-      {isWithLabel && (
+      {withLabel && (
         <label
-          className={classNames(
-            { small: isVisible },
-            { "sr-only": !isVisible }
-          )}
+          className={classNames({ small: visible }, { "sr-only": !visible })}
           htmlFor={forName}
         >
           {label}
@@ -32,6 +29,3 @@ export const FormGroup: React.FC<IFormGroupProps> = ({
     </div>
   );
 };
-FormGroup.defaultProps = {
-  isWithLabel: true
-} as Partial<IFormGroupProps>;

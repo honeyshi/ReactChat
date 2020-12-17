@@ -35,12 +35,7 @@ export const ResetPasswordSendLinkPage: React.FC = () => {
       />
       <Form>
         {/* <!-- Login -->*/}
-        <FormGroup
-          forName="login"
-          label="Login"
-          isVisible={false}
-          isWithLabel={true}
-        >
+        <FormGroup withLabel forName="login" label="Login">
           <Input
             id="login"
             placeholder="Enter your login"

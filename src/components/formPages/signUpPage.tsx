@@ -43,12 +43,7 @@ export const SignUpPage: React.FC = () => {
       {/* <!-- Registration form --> */}
       <Form>
         {/* <!-- Login -->*/}
-        <FormGroup
-          forName="login"
-          label="Login"
-          isVisible={false}
-          isWithLabel={true}
-        >
+        <FormGroup withLabel forName="login" label="Login">
           <Input
             id="login"
             placeholder="Enter your login"
@@ -58,12 +53,7 @@ export const SignUpPage: React.FC = () => {
           />
         </FormGroup>
         {/* <!-- Email -->*/}
-        <FormGroup
-          forName="email"
-          label="Email Address"
-          isVisible={false}
-          isWithLabel={true}
-        >
+        <FormGroup withLabel forName="email" label="Email Address">
           <Input
             id="email"
             placeholder="Enter your email"
@@ -73,12 +63,7 @@ export const SignUpPage: React.FC = () => {
           />
         </FormGroup>
         {/* <!-- Password -->*/}
-        <FormGroup
-          forName="password"
-          label="Password"
-          isVisible={false}
-          isWithLabel={true}
-        >
+        <FormGroup withLabel forName="password" label="Password">
           <Input
             id="password"
             placeholder="Enter your password"

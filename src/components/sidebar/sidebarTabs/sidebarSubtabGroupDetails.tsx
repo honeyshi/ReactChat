@@ -20,7 +20,7 @@ export const SidebarSubtabGroupDetails: React.FC<{ isActive: boolean }> = ({
   };
   return (
     <SidebarTab id="create-group-details" isActive={isActive} isOuter={false}>
-      <FormGroup label="Photo" isVisible isWithLabel>
+      <FormGroup label="Photo" visible withLabel>
         <div className="position-relative text-center bg-secondary rounded p-6">
           <div className="avatar bg-primary text-white mb-5">
             <Image size={19} />
@@ -40,7 +40,7 @@ export const SidebarSubtabGroupDetails: React.FC<{ isActive: boolean }> = ({
           <label className="stretched-label mb-0" htmlFor="upload-chat-photo" />
         </div>
       </FormGroup>
-      <FormGroup forName="new-chat-title" label="Name" isVisible isWithLabel>
+      <FormGroup forName="new-chat-title" label="Name" visible withLabel>
         <Input
           name="new-chat-title"
           id="new-chat-title"

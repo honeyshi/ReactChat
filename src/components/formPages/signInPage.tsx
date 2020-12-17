@@ -35,12 +35,7 @@ export const SignInPage: React.FC = () => {
       />
       <Form>
         {/* <!-- Login -->*/}
-        <FormGroup
-          forName="login"
-          label="Login"
-          isVisible={false}
-          isWithLabel={true}
-        >
+        <FormGroup withLabel forName="login" label="Login">
           <Input
             id="login"
             placeholder="Enter your login"
@@ -50,12 +45,7 @@ export const SignInPage: React.FC = () => {
           />
         </FormGroup>
         {/* <!-- Password -->*/}
-        <FormGroup
-          forName="password"
-          label="Password"
-          isVisible={false}
-          isWithLabel={true}
-        >
+        <FormGroup withLabel forName="password" label="Password">
           <Input
             id="password"
             placeholder="Enter your password"
@@ -75,7 +65,7 @@ export const SignInPage: React.FC = () => {
           text={rootState.errorMessage}
           type="p"
         />
-        <FormGroup isWithLabel={false}>
+        <FormGroup>
           <Link to="/send-reset-link" className="text-center">
             Reset password
           </Link>
