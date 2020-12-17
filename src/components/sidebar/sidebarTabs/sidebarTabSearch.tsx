@@ -47,7 +47,7 @@ export const SidebarTabSearch: React.FC<{ isActive: boolean }> = ({
           sidebarFriendItems={sidebarFoundUsers}
         />
       ) : (
-        <TextField isCenter isBold={false} text="Users not found" type="p" />
+        <TextField center text="Users not found" type="p" />
       )}
     </SidebarTab>
   );

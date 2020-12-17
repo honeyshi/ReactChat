@@ -1,4 +1,4 @@
-type SpaceType = "0" | "1" | "2" | "3" | "4" | "5" | "auto";
+type SpaceType = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "auto";
 
 export interface SpaceProps {
   m?: SpaceType;

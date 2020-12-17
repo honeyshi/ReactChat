@@ -19,12 +19,7 @@ export const SidebarTabBlockedUsers: React.FC<{ isActive: boolean }> = ({
           sidebarFriendItems={sidebarBlockedUsers}
         />
       ) : (
-        <TextField
-          isCenter
-          isBold={false}
-          text="You do not have blocked users"
-          type="p"
-        />
+        <TextField center text="You do not have blocked users" type="p" />
       )}
     </SidebarTab>
   );

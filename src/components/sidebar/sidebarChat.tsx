@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { performGetMessagesRequest } from "../../common/requests";
 import { setCurrentChat } from "../../store/actions";
 import { RootState } from "../../store/stores";
-import { Avatar } from "../base";
+import { Avatar, TextField } from "../base";
 
 interface ISidebarChatProps {
   chatHeader: string;
@@ -52,12 +52,17 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
 
         <div className="media-body overflow-hidden">
           <div className="d-flex align-items-center mb-1">
-            <h6 className="text-truncate mb-0 mr-auto">{chatHeader}</h6>
-            <p className="small text-muted text-nowrap ml-4">
-              {lastMessageTime}
-            </p>
+            <TextField type="h6" text={chatHeader} truncate mb="0" mr="auto" />
+            <TextField
+              type="p"
+              text={lastMessageTime}
+              small
+              muted
+              nowrap
+              ml="4"
+            />
           </div>
-          <div className="text-truncate">{lastMessageText}</div>
+          <TextField type="div" text={lastMessageText} truncate />
         </div>
       </div>
     </div>

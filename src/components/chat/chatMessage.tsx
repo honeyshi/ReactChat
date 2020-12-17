@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { IChatMessageItem } from "../../common/interfaces";
 import "./message.scss";
-import { Avatar } from "../base";
+import { Avatar, TextField } from "../base";
 
 export const ChatMessage: React.FC<IChatMessageItem> = ({
   isRight,
@@ -43,18 +43,21 @@ export const ChatMessage: React.FC<IChatMessageItem> = ({
                 { "bg-light": !isRight }
               )}
             >
-              <h6
-                className="mb-2"
+              <TextField
+                type="h6"
+                text={senderName}
                 style={{
                   display: isRight ? "none" : "block",
                 }}
-              >
-                {senderName}
-              </h6>
-              <div>{messageText}</div>
+              />
+              <TextField type="div" text={messageText} />
 
               <div className="mt-1">
-                <small className="opacity-65">{messageTime}</small>
+                <TextField
+                  type="small"
+                  text={messageTime}
+                  classes="opacity-65"
+                />
               </div>
             </div>
             {/* Message: content */}

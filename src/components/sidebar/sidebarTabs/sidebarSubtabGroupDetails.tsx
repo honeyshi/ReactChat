@@ -26,11 +26,11 @@ export const SidebarSubtabGroupDetails: React.FC<{ isActive: boolean }> = ({
             <Image size={19} />
           </div>
           <TextField
-            classes="small text-muted mb-0"
+            small
+            muted
+            mb="0"
             text="You can upload jpg, jpeg or png files."
             type="p"
-            isCenter={false}
-            isBold={false}
           />
           <FileInput
             id="upload-chat-photo"

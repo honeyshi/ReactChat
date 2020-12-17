@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { X } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
-import { Avatar, CheckBox } from "../base";
+import { Avatar, CheckBox, TextField } from "../base";
 import { setCurrentChat, setGroupChatMembers } from "../../store/actions";
 import { ChatType } from "../../common/variables";
 import {
@@ -48,7 +48,7 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
         <Avatar imagePath={friendImage} isOnline={isOnline} mr="5" />
 
         <div className="media-body align-self-center">
-          <h6 className="mb-0">{friendName}</h6>
+          <TextField type="h6" text={friendName} mb="0" />
         </div>
         {canDelete && (
           <X
@@ -77,7 +77,6 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
                       )
                     );
               }}
-              disabled={false}
             />
           </div>
         )}

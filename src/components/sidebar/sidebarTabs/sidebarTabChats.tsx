@@ -20,8 +20,7 @@ export const SidebarTabChats: React.FC<{ isActive: boolean }> = ({
         />
       ) : (
         <TextField
-          isCenter
-          isBold={false}
+          center
           text="You do not have any chats. Search user to start messaging"
           type="p"
         />

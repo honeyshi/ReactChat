@@ -60,8 +60,7 @@ export const ChatLayout: React.FC = () => {
             ) : (
               <ChatContent>
                 <TextField
-                  isCenter={true}
-                  isBold={false}
+                  center
                   type="p"
                   text="You do not have messages yet."
                 />
@@ -84,8 +83,7 @@ export const ChatLayout: React.FC = () => {
           {/*<!-- Chat: body when chat is not selected -->*/}
           <div className="container-xxl">
             <TextField
-              isCenter={true}
-              isBold={false}
+              center
               type="p"
               text="Please select a chat to start messaging."
             />

@@ -1,6 +1,6 @@
 import React from "react";
 import { MoreVertical } from "react-feather";
-import { Avatar } from "../base";
+import { Avatar, TextField } from "../base";
 
 interface IChatHeaderProps {
   chatImage: string;
@@ -32,8 +32,8 @@ export const ChatHeader: React.FC<IChatHeaderProps> = ({
               />
               {/*Chat information*/}
               <div className="media-body align-self-center text-truncate">
-                <h6 className="text-truncate mb-n1">{chatName}</h6>
-                <small className="text-muted">{chatStatus}</small>
+                <TextField classes="mb-n1" type="h6" text={chatName} truncate />
+                <TextField type="small" text={chatStatus} muted />
               </div>
             </div>
           </div>

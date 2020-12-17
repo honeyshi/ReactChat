@@ -32,12 +32,11 @@ export const SignUpPage: React.FC = () => {
   return (
     <FormContainer>
       {/* <!-- Header --> */}
-      <TextField isCenter={true} isBold={true} text="Sign up" type="h1" />
+      <TextField center bold text="Sign up" type="h1" />
       {/* <!-- Text --> */}
       <TextField
-        isCenter={true}
-        isBold={false}
-        classes="mb-6"
+        center
+        mb="6"
         text="Welcome to the official Chat web-client."
         type="p"
       />
@@ -90,13 +89,7 @@ export const SignUpPage: React.FC = () => {
           />
         </FormGroup>
         {/* <!-- Error text --> */}
-        <TextField
-          isCenter={true}
-          isBold={false}
-          classes="mb-6 text-danger"
-          text={errorMessage}
-          type="p"
-        />
+        <TextField center danger mb="6" text={errorMessage} type="p" />
         <Button
           primary
           long
@@ -111,7 +104,7 @@ export const SignUpPage: React.FC = () => {
           }
         />
       </Form>
-      <TextField isCenter={true} isBold={false} type="p">
+      <TextField center type="p">
         Already have an account? {link}.
       </TextField>
     </FormContainer>

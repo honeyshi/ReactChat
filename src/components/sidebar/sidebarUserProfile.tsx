@@ -1,6 +1,6 @@
 import React from "react";
 import { ISidebarUserProfileProps } from "../../common/interfaces";
-import { Avatar } from "../base";
+import { Avatar, TextField } from "../base";
 
 export const SidebarUserProfile: React.FC<ISidebarUserProfileProps> = ({
   userDescription,
@@ -11,9 +11,8 @@ export const SidebarUserProfile: React.FC<ISidebarUserProfileProps> = ({
     <div className="card-body">
       <div className="text-center py-6">
         <Avatar large mb="5" imagePath={userImage} />
-
-        <h5>{userName}</h5>
-        <p className="text-muted">{userDescription}</p>
+        <TextField type="h5" text={userName} />
+        <TextField type="p" text={userDescription} muted />
       </div>
     </div>
   );

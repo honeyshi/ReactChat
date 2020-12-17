@@ -25,17 +25,11 @@ export const ResetPasswordSendLinkPage: React.FC = () => {
   return (
     <FormContainer>
       {/* <!-- Header --> */}
-      <TextField
-        isCenter={true}
-        isBold={true}
-        text="Reset password"
-        type="h1"
-      />
+      <TextField center bold text="Reset password" type="h1" />
       {/* <!-- Text --> */}
       <TextField
-        isCenter={true}
-        isBold={false}
-        classes="mb-6"
+        center
+        mb="6"
         text="Enter your login to reset password."
         type="p"
       />
@@ -55,13 +49,7 @@ export const ResetPasswordSendLinkPage: React.FC = () => {
           />
         </FormGroup>
         {/* <!-- Error text --> */}
-        <TextField
-          isCenter={true}
-          isBold={false}
-          classes="mb-6 text-danger"
-          text={errorMessage}
-          type="p"
-        />
+        <TextField center danger mb="6" text={errorMessage} type="p" />
         <Button
           primary
           long

@@ -20,8 +20,7 @@ export const SidebarSubtabGroupMembers: React.FC<{ isActive: boolean }> = ({
         />
       ) : (
         <TextField
-          isCenter
-          isBold={false}
+          center
           text="You do not have any private conversations with users. Search user to start messaging"
           type="p"
         />

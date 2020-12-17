@@ -25,12 +25,11 @@ export const SignInPage: React.FC = () => {
   return (
     <FormContainer>
       {/* <!-- Header --> */}
-      <TextField isCenter={true} isBold={true} text="Sign in" type="h1" />
+      <TextField center bold text="Sign in" type="h1" />
       {/* <!-- Text --> */}
       <TextField
-        isCenter={true}
-        isBold={false}
-        classes="mb-6"
+        center
+        mb="6"
         text="Welcome to the official Chat web-client."
         type="p"
       />
@@ -70,9 +69,9 @@ export const SignInPage: React.FC = () => {
         </FormGroup>
         {/* <!-- Error text --> */}
         <TextField
-          isCenter={true}
-          isBold={false}
-          classes="mb-6 text-danger"
+          center
+          danger
+          mb="6"
           text={rootState.errorMessage}
           type="p"
         />
@@ -95,7 +94,7 @@ export const SignInPage: React.FC = () => {
           }
         />
       </Form>
-      <TextField isCenter={true} isBold={false} type="p">
+      <TextField center type="p">
         Don't have an account yet {link}.
       </TextField>
     </FormContainer>

@@ -53,12 +53,10 @@ export const ChatDescription: React.FC<IChatDescriptionProps> = ({
           <div className="border-bottom text-center py-9 px-10">
             {/*<!-- Photo -->*/}
             <Avatar large mx="5" mb="5" imagePath={avatarUrl} />
-            <h5>{userLogin}</h5>
+            <TextField type="h5" text={userLogin} />
             <TextField
-              classes="text-muted"
               type="p"
-              isBold={false}
-              isCenter={false}
+              muted
               text={userNote === "NONE" ? "" : userNote}
             />
           </div>

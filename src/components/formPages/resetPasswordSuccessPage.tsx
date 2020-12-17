@@ -7,9 +7,8 @@ export const ResetPasswordSuccessPage: React.FC = () => {
     <FormContainer>
       {/* <!-- Text --> */}
       <TextField
-        isCenter={true}
-        isBold={false}
-        classes="mb-6"
+        center
+        mb="6"
         text="New password is sent to your email."
         type="p"
       />
