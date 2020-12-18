@@ -1,4 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
+import { IUserInfo } from "../../common/interfaces";
 import * as Action from "../actions";
 
 interface IRootState {
@@ -7,6 +8,7 @@ interface IRootState {
   errorMessage: string;
   isReset: boolean;
   activeNavbar: string;
+  userInfo: IUserInfo;
 }
 
 const rootState: IRootState = {
@@ -15,6 +17,11 @@ const rootState: IRootState = {
   errorMessage: "",
   isReset: false,
   activeNavbar: "tab-content-dialogs",
+  userInfo: {
+    userEmail: "",
+    userImage: "",
+    userLogin: "",
+  },
 };
 
 export const rootReducer = createReducer(rootState, {
@@ -46,6 +53,12 @@ export const rootReducer = createReducer(rootState, {
     return {
       ...state,
       activeNavbar: action.payload,
+    };
+  },
+  [Action.setUserInfo.type]: (state, action) => {
+    return {
+      ...state,
+      userInfo: action.payload,
     };
   },
 });

@@ -49,3 +49,9 @@ export interface IChat {
   chatMessages: IChatMessageItem[];
   userNote: string;
 }
+
+export interface IUserInfo {
+  userEmail: string;
+  userImage: string;
+  userLogin: string;
+}

@@ -9,6 +9,7 @@ import {
   setIsAuth,
   setResetState,
   setUserId,
+  setUserInfo,
 } from "../store/actions";
 import { history } from "../store/stores";
 import { store } from "../index";
@@ -583,7 +584,6 @@ export const performCreateGroupChatRequest = (
 };
 
 export const performSetGroupChatImage = (imageFile: Blob, id: string) => {
-  console.log(imageFile);
   console.log(`Perform post image ${imageFile} and get url`);
   const postUrl = `${apiUrl}/postPhoto`;
   const postConfig = new FormData();
@@ -603,6 +603,77 @@ export const performSetGroupChatImage = (imageFile: Blob, id: string) => {
         .post(setUrl, setConfig)
         .then(() => {
           createNotification("success", "Image for group is set.");
+        })
+        .catch((error) => {
+          createNotification(
+            "error",
+            "One or more errors occured while setting image. Please try again."
+          );
+          console.log(error);
+        });
+    })
+    .catch((error) => {
+      createNotification(
+        "error",
+        "One or more errors occured while setting image. Please try again."
+      );
+      console.log(error);
+    });
+};
+
+export const performGetUserInfoRequest = (userId: string) => {
+  console.log(`Perform get user info request with id ${userId}`);
+  const url = `${apiUrl}/getUserInfo`;
+  const config = {
+    user_id: userId,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      if (json.status !== "error") {
+        store.dispatch(
+          setUserInfo({
+            userEmail: json.email,
+            userImage: json.avatarUrl,
+            userLogin: json.login,
+          })
+        );
+      } else console.log(json);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const performSetUserImageRequest = (imageFile: Blob, id: string) => {
+  console.log(`Perform post image ${imageFile} and get url`);
+  const postUrl = `${apiUrl}/postPhoto`;
+  const postConfig = new FormData();
+  postConfig.append("file", imageFile);
+  const setUrl = `${apiUrl}/setAvatar`;
+  axios
+    .post(postUrl, postConfig)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      console.log(json);
+      const setConfig = {
+        id: id,
+        avatarUrl: json.url,
+      };
+      console.log(`Perform set image ${json.url} for user with id ${id}`);
+      axios
+        .post(setUrl, setConfig)
+        .then(() => {
+          createNotification("success", "Your avatar is updated.");
+          const currentUserInfo = store.getState().root.userInfo;
+          store.dispatch(
+            setUserInfo({
+              userEmail: currentUserInfo.userEmail,
+              userImage: json.url,
+              userLogin: currentUserInfo.userLogin,
+            })
+          );
         })
         .catch((error) => {
           createNotification(

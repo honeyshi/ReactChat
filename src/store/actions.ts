@@ -3,6 +3,7 @@ import {
   IChat,
   ISidebarChatItem,
   ISidebarFriendItem,
+  IUserInfo,
 } from "../common/interfaces";
 import { ActionTypes } from "./actionTypes";
 
@@ -42,4 +43,8 @@ export const setGroupChatName = createAction<string>(
 export const setGroupChatMembers = createAction<string[]>(
   ActionTypes.SET_GROUPCHATMEMBERS
 );
-export const setGroupChatImage = createAction<Blob>(ActionTypes.SET_GROUPCHATIMAGE);
+export const setGroupChatImage = createAction<Blob>(
+  ActionTypes.SET_GROUPCHATIMAGE
+);
+
+export const setUserInfo = createAction<IUserInfo>(ActionTypes.SET_USERINFO);

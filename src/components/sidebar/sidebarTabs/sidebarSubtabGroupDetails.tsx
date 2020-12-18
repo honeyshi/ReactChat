@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image } from "react-feather";
 import { useDispatch } from "react-redux";
 import { SidebarTab } from "..";

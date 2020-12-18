@@ -1,29 +1,30 @@
 import React from "react";
-import * as Icon from "react-feather";
+import { Mail, Hexagon, Key, LogOut } from "react-feather";
+import { useSelector } from "react-redux";
 import { SidebarItemsContainer, SidebarTab, SidebarTitle } from "..";
 import {
   ISidebarUserInfoItem,
   ISidebarUserProfileProps,
 } from "../../../common/interfaces";
+import { RootState } from "../../../store/stores";
 import { Button } from "../../base";
-
-const userProfileItem: ISidebarUserProfileProps = {
-  userDescription:
-    "Bootstrap is an open source toolkit for developing web with HTML.",
-  userImage: "/fake-link",
-  userName: "Matthew Wiggins",
-};
-
-const userProfileInfoItems: ISidebarUserInfoItem[] = [
-  { itemHeader: "Country", itemValue: "Warsaw, Poland", icon: Icon.Globe },
-  { itemHeader: "Phone", itemValue: "+39 02 87 21 43 19", icon: Icon.Phone },
-  { itemHeader: "Email", itemValue: "anna@gmail.com", icon: Icon.Mail },
-  { itemHeader: "Time", itemValue: "10:03 am", icon: Icon.Clock },
-];
 
 export const SidebarTabUserProfile: React.FC<{ isActive: boolean }> = ({
   isActive,
 }) => {
+  const userInfo = useSelector((state: RootState) => state.root.userInfo);
+
+  const userProfileItem: ISidebarUserProfileProps = {
+    userDescription:
+      "Click here to change your avatar image. You can upload jpg, jpeg or png files.",
+    userImage: userInfo.userImage,
+    userName: userInfo.userLogin,
+  };
+
+  const userProfileInfoItems: ISidebarUserInfoItem[] = [
+    { itemHeader: "Login", itemValue: userInfo.userLogin, icon: Hexagon },
+    { itemHeader: "Email", itemValue: userInfo.userEmail, icon: Mail },
+  ];
   return (
     <SidebarTab id="tab-content-user" isActive={isActive} isOuter>
       <SidebarTitle text="Profile" />
@@ -38,12 +39,12 @@ export const SidebarTabUserProfile: React.FC<{ isActive: boolean }> = ({
       <div className="form-row">
         <div className="col">
           <Button long block basic flex alignCenter text="Reset password">
-            <Icon.Key className="ml-auto text-muted" size={15} />
+            <Key className="ml-auto text-muted" size={15} />
           </Button>
         </div>
         <div className="col">
           <Button long block basic flex alignCenter text="Logout">
-            <Icon.LogOut className="ml-auto text-muted" size={15} />
+            <LogOut className="ml-auto text-muted" size={15} />
           </Button>
         </div>
       </div>

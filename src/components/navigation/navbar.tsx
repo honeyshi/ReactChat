@@ -6,6 +6,7 @@ import * as Icon from "react-feather";
 import {
   performGetBlockedUsersRequest,
   performGetLastChatsRequest,
+  performGetUserInfoRequest,
 } from "../../common/requests";
 import { RootState } from "../../store/stores";
 
@@ -45,7 +46,7 @@ const navbarItems: INavbarItem[] = [
     title: "User",
     link: "tab-content-user",
     child: Icon.User,
-    clickVoid: () => void 0,
+    clickVoid: performGetUserInfoRequest,
   },
 ];
 

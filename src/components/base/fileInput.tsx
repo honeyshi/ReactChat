@@ -1,13 +1,16 @@
+import classNames from "classnames";
 import React, { useCallback } from "react";
 
 interface FileInputProps {
   classes?: string;
+  displayNone?: boolean;
   id?: string;
   onChange: (value: FileList | null) => void;
 }
 
 export const FileInput: React.FC<FileInputProps> = ({
   classes,
+  displayNone,
   id,
   onChange,
 }) => {
@@ -15,5 +18,10 @@ export const FileInput: React.FC<FileInputProps> = ({
     (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.files),
     [onChange]
   );
-  return <input className={classes} id={id} type="file" onChange={onchange} />;
+  const inputClasses = classNames(classes, {
+    "d-none": displayNone,
+  });
+  return (
+    <input className={inputClasses} id={id} type="file" onChange={onchange} />
+  );
 };
