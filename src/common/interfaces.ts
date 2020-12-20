@@ -6,6 +6,7 @@ export interface ISidebarChatItem {
   chatImage: string;
   chatId: string;
   chatType: number;
+  isAdmin: boolean;
   isUnread: boolean;
   isUserOnline: boolean;
   lastMessageText: string;
@@ -45,6 +46,7 @@ export interface IChat {
   chatId: string;
   chatImage: string;
   chatType: number;
+  isAdmin: boolean;
   isOnline?: string;
   chatMessages: IChatMessageItem[];
   userNote: string;

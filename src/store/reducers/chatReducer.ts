@@ -13,6 +13,7 @@ const chatState: IChatState = {
     chatId: "",
     chatImage: "",
     chatType: ChatType.group,
+    isAdmin: false,
     isOnline: "",
     chatMessages: [],
     userNote: "",

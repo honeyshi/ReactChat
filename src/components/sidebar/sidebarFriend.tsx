@@ -92,6 +92,7 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
                 chatId: chatId === undefined ? "" : chatId,
                 chatImage: friendImage,
                 chatType: ChatType.private,
+                isAdmin: false,
                 isOnline: isOnline ? "Online" : "Offline",
                 chatMessages: [],
                 userNote: userNote,

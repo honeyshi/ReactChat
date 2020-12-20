@@ -1,8 +1,13 @@
 import React from "react";
 import classNames from "classnames";
+import { Trash2 } from "react-feather";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/stores";
 import { IChatMessageItem } from "../../common/interfaces";
-import "./message.scss";
 import { Avatar, TextField } from "../base";
+import { DeleteMessage } from "./deleteMessage";
+
+import "./message.scss";
 
 export const ChatMessage: React.FC<IChatMessageItem> = ({
   isRight,
@@ -12,6 +17,9 @@ export const ChatMessage: React.FC<IChatMessageItem> = ({
   senderName,
   userImage,
 }) => {
+  const isAdmin = useSelector(
+    (state: RootState) => state.chat.chatItem.isAdmin
+  );
   return (
     <div className={classNames("message", { "message-right": isRight })}>
       {/* Avatar */}
@@ -34,6 +42,8 @@ export const ChatMessage: React.FC<IChatMessageItem> = ({
               "justify-content-end": isRight,
             })}
           >
+            {/* Button for own messages deletion */}
+            {isRight && <DeleteMessage messageId={messageId} mr="3" />}
             {/* Message: content */}
             <div
               className={classNames(
@@ -61,6 +71,10 @@ export const ChatMessage: React.FC<IChatMessageItem> = ({
               </div>
             </div>
             {/* Message: content */}
+            {/* Button for admin to delete other's messages */}
+            {!isRight && isAdmin && (
+              <DeleteMessage messageId={messageId} ml="3" />
+            )}
           </div>
         </div>
         {/* Message: row */}

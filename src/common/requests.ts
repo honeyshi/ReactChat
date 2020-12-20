@@ -197,6 +197,7 @@ export const performGetLastChatsRequest = (userId: string) => {
           chatImage: json[item].image,
           chatId: json[item].chat_id,
           chatType: json[item].type_chat,
+          isAdmin: json[item].is_admin === "1" ? true : false,
           isUnread: checkUserSawChat(json[item].date, json[item].last),
           isUserOnline: getUserIsOnline(json[item].online),
           lastMessageText: json[item].text,
@@ -307,6 +308,7 @@ export const performAddBlockedUserRequest = (
             chatId: "",
             chatImage: "",
             chatType: ChatType.group,
+            isAdmin: false,
             isOnline: "",
             chatMessages: [],
             userNote: "",
@@ -384,6 +386,7 @@ export const performGetUserNoteRequest = (
             chatId: currentChat.chatId,
             chatImage: currentChat.chatImage,
             chatType: currentChat.chatType,
+            isAdmin: currentChat.isAdmin,
             isOnline: currentChat.isOnline,
             chatMessages: currentChat.chatMessages,
             userNote: json.note,
@@ -421,6 +424,7 @@ export const performUpdateUserNoteRequest = (
             chatId: currentChat.chatId,
             chatImage: currentChat.chatImage,
             chatType: currentChat.chatType,
+            isAdmin: currentChat.isAdmin,
             isOnline: currentChat.isOnline,
             chatMessages: currentChat.chatMessages,
             userNote: newNote,
@@ -477,6 +481,7 @@ export const performGetMessagesRequest = (
             chatId: currentChat.chatId,
             chatImage: currentChat.chatImage,
             chatType: currentChat.chatType,
+            isAdmin: currentChat.isAdmin,
             isOnline: currentChat.isOnline,
             chatMessages: chatMessages,
             userNote: json.note,
@@ -687,6 +692,50 @@ export const performSetUserImageRequest = (imageFile: Blob, id: string) => {
       createNotification(
         "error",
         "One or more errors occured while setting image. Please try again."
+      );
+      console.log(error);
+    });
+};
+
+export const performDeleteMessageRequest = (messageId: string) => {
+  console.log(`Perform delete message request with id ${messageId}`);
+  const url = `${apiUrl}/deleteMessage`;
+  const config = {
+    message_id: messageId,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      console.log(json);
+      if (json.status !== "error") {
+        const currentChat = store.getState().chat.chatItem;
+        store.dispatch(
+          setCurrentChat({
+            chatHeader: currentChat.chatHeader,
+            chatId: currentChat.chatId,
+            chatImage: currentChat.chatImage,
+            chatType: currentChat.chatType,
+            isAdmin: currentChat.isAdmin,
+            isOnline: currentChat.isOnline,
+            chatMessages: currentChat.chatMessages.filter(
+              (message) => message.messageId !== messageId
+            ),
+            userNote: json.note,
+          })
+        );
+        createNotification("success", "Message was deleted.");
+      } else {
+        createNotification(
+          "error",
+          "One or more errors occured while deleting this messages. Please try again."
+        );
+      }
+    })
+    .catch((error) => {
+      createNotification(
+        "error",
+        "One or more errors occured while deleting this messages. Please try again."
       );
       console.log(error);
     });

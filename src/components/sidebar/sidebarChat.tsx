@@ -10,6 +10,7 @@ interface ISidebarChatProps {
   chatId: string;
   chatImage: string;
   chatType: number;
+  isUserAdmin: boolean;
   isUserOnline: boolean;
   lastMessageText: string;
   lastMessageTime: string;
@@ -20,6 +21,7 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
   chatId,
   chatImage,
   chatType,
+  isUserAdmin,
   isUserOnline,
   lastMessageText,
   lastMessageTime,
@@ -39,6 +41,7 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
             chatId: chatId,
             chatImage: chatImage,
             chatType: chatType,
+            isAdmin: isUserAdmin,
             isOnline: isUserOnline ? "Online" : "Offline",
             chatMessages: [],
             userNote: userNote,
