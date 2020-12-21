@@ -26,6 +26,7 @@ export const AddMemberTab: React.FC<{ isActive: boolean }> = ({ isActive }) => {
             canDelete={false}
             friendImage={chatMember.chatImage}
             friendName={chatMember.chatHeader}
+            isGroupMember={false}
             isOnline={false}
             checkboxName={`user-${memberIndex}`}
           />

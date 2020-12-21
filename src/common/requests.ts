@@ -789,6 +789,47 @@ export const performGetGroupChatMembers = (chatId: string) => {
     });
 };
 
+export const perfromDeleteGroupMemberRequest = (
+  userLogin: string,
+  chatId: string
+) => {
+  console.log(
+    `Perform delete member request ${userLogin} from chat group ${chatId}`
+  );
+  const url = `${apiUrl}/deleteFromGroup`;
+  const config = {
+    name: userLogin,
+    chat_id: chatId,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      console.log(json);
+      if (json.status !== "error") {
+        const groupMembers = store
+          .getState()
+          .chat.chatMembers.filter((groupMember) => {
+            return groupMember.userLogin !== userLogin;
+          });
+        store.dispatch(setChatMembers(groupMembers));
+        createNotification("success", "User was removed from group.");
+      } else {
+        createNotification(
+          "error",
+          "One or more errors occured while removing user from group. Please try again."
+        );
+      }
+    })
+    .catch((error) => {
+      createNotification(
+        "error",
+        "One or more errors occured while removing user from group. Please try again."
+      );
+      console.log(error);
+    });
+};
+
 const testRequestAx = () => {
   const sendLinkData = {
     after_id: -1,

@@ -7,6 +7,7 @@ import { ChatType } from "../../common/variables";
 import {
   performGetMessagesRequest,
   performRemoveBlockedUserRequest,
+  perfromDeleteGroupMemberRequest,
 } from "../../common/requests";
 import { RootState } from "../../store/stores";
 import { getChatIdByUserLogin } from "../../common/functions";
@@ -15,6 +16,7 @@ interface ISidebarFriendProps {
   canDelete: boolean;
   friendImage: string;
   friendName: string;
+  isGroupMember: boolean;
   isOnline: boolean;
   canChoose: boolean;
   checkboxName?: string;
@@ -24,6 +26,7 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
   canDelete,
   friendImage,
   friendName,
+  isGroupMember,
   isOnline,
   canChoose,
   checkboxName,
@@ -37,6 +40,9 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
   const chatId = getChatIdByUserLogin(
     useSelector((state: RootState) => state.sidebar.sidebarDialogs),
     friendName
+  );
+  const currentChatId = useSelector(
+    (state: RootState) => state.chat.chatItem.chatId
   );
   const groupChatMembers = useSelector(
     (state: RootState) => state.sidebar.groupMembers
@@ -54,7 +60,11 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
           <X
             size={20}
             strokeWidth={1}
-            onClick={() => performRemoveBlockedUserRequest(userId, friendName)}
+            onClick={() => {
+              isGroupMember
+                ? perfromDeleteGroupMemberRequest(friendName, currentChatId)
+                : performRemoveBlockedUserRequest(userId, friendName);
+            }}
             cursor="pointer"
           />
         )}

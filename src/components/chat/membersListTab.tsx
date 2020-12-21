@@ -21,6 +21,7 @@ export const MembersListTab: React.FC<IMembersListProps> = ({
           canDelete={isAdmin}
           friendImage={chatMember.userImage}
           friendName={chatMember.userLogin}
+          isGroupMember={true}
           isOnline={false}
           checkboxName={`user-${memberIndex}`}
         />

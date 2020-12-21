@@ -73,6 +73,7 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
               canDelete={sidebarFriendItemInfo.canDelete}
               friendImage={sidebarFriendItemInfo.friendImage}
               friendName={sidebarFriendItemInfo.friendName}
+              isGroupMember={false}
               isOnline={sidebarFriendItemInfo.isOnline}
             />
           </SidebarItem>
@@ -108,6 +109,7 @@ export const SidebarItemsContainer: React.FC<ISidebarItemsProps> = ({
                 canDelete={false}
                 friendImage={sidebarGroupMemberInfo.chatImage}
                 friendName={sidebarGroupMemberInfo.chatHeader}
+                isGroupMember={false}
                 isOnline={false}
                 checkboxName={`user-${userIndex}`}
               />
