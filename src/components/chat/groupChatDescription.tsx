@@ -1,9 +1,13 @@
 import classNames from "classnames";
 import React, { useState } from "react";
 import { ChevronLeft } from "react-feather";
-import { Avatar, TextField } from "../base";
+import { Avatar, FileInput, TextField } from "../base";
 import { NavbarItem } from "../navigation";
 import { MembersListTab, AddMemberTab } from "../chat";
+import { checkInputFile } from "../../common/functions";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/stores";
+import { performSetGroupChatImage } from "../../common/requests";
 
 enum GroupDescriptionSubtabs {
   GroupMembers = "group-members",
@@ -28,6 +32,15 @@ export const GroupChatDescription: React.FC<IGroupChatDesciptionProps> = ({
   const [activeTab, setActiveTab] = useState<string>(
     GroupDescriptionSubtabs.GroupMembers
   );
+  const chatId = useSelector((state: RootState) => state.chat.chatItem.chatId);
+  const handleChange = (selectorFiles: FileList | null) => {
+    if (
+      selectorFiles !== null &&
+      selectorFiles.length !== 0 &&
+      checkInputFile(selectorFiles[0])
+    )
+      performSetGroupChatImage(selectorFiles[0], chatId, true);
+  };
   return (
     <div
       className={classNames("chat-sidebar", "bg-white", {
@@ -55,6 +68,18 @@ export const GroupChatDescription: React.FC<IGroupChatDesciptionProps> = ({
             {/*<!-- Photo -->*/}
             <Avatar large mx="5" mb="5" imagePath={imageUrl} />
             <TextField type="h5" text={groupName} />
+            {isAdmin && (
+              <>
+                <FileInput
+                  id="upload-group-photo"
+                  displayNone
+                  onChange={(e) => handleChange(e)}
+                />
+                <label className="mb-0" htmlFor="upload-group-photo">
+                  Click here to upload new image for group.
+                </label>
+              </>
+            )}
           </div>
 
           {/*<!-- Tabs -->*/}

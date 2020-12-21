@@ -590,7 +590,11 @@ export const performCreateGroupChatRequest = (
     });
 };
 
-export const performSetGroupChatImage = (imageFile: Blob, id: string) => {
+export const performSetGroupChatImage = (
+  imageFile: Blob,
+  id: string,
+  isUpdate = false
+) => {
   console.log(`Perform post image ${imageFile} and get url`);
   const postUrl = `${apiUrl}/postPhoto`;
   const postConfig = new FormData();
@@ -610,6 +614,21 @@ export const performSetGroupChatImage = (imageFile: Blob, id: string) => {
         .post(setUrl, setConfig)
         .then(() => {
           createNotification("success", "Image for group is set.");
+          if (isUpdate) {
+            const currentChat = store.getState().chat.chatItem;
+            store.dispatch(
+              setCurrentChat({
+                chatHeader: currentChat.chatHeader,
+                chatId: currentChat.chatId,
+                chatImage: json.url,
+                chatType: currentChat.chatType,
+                isAdmin: currentChat.isAdmin,
+                isOnline: currentChat.isOnline,
+                chatMessages: currentChat.chatMessages,
+                userNote: currentChat.userNote,
+              })
+            );
+          }
         })
         .catch((error) => {
           createNotification(
