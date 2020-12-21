@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "classnames";
-import { Trash2 } from "react-feather";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/stores";
 import { IChatMessageItem } from "../../common/interfaces";

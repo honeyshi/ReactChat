@@ -2,6 +2,7 @@ import axios from "axios";
 import querystring from "query-string";
 import {
   setBlockedUsers,
+  setChatMembers,
   setCurrentChat,
   setDialogs,
   setErrorMessage,
@@ -17,6 +18,7 @@ import {
   IChatMessageItem,
   ISidebarChatItem,
   ISidebarFriendItem,
+  IUserInfo,
 } from "./interfaces";
 import {
   formatLastChatActivityDate,
@@ -737,6 +739,33 @@ export const performDeleteMessageRequest = (messageId: string) => {
         "error",
         "One or more errors occured while deleting this messages. Please try again."
       );
+      console.log(error);
+    });
+};
+
+export const performGetGroupChatMembers = (chatId: string) => {
+  console.log(`Perform get group chat members request with id ${chatId}`);
+  const url = `${apiUrl}/getChatMembers`;
+  const config = {
+    chat_id: chatId,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      console.log(json);
+      const users = json.users;
+      let groupMembers: IUserInfo[] = [];
+      for (var item in users) {
+        groupMembers.push({
+          userImage: users[item].avatarUrl,
+          userLogin: users[item].login,
+        });
+      }
+      store.dispatch(setChatMembers(groupMembers));
+      console.log(groupMembers);
+    })
+    .catch((error) => {
       console.log(error);
     });
 };

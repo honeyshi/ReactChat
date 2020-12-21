@@ -54,7 +54,7 @@ export const SidebarTab: React.FC<ISidebarTabProps> = ({
           )}
         </div>
       ) : (
-        <form action="#">{children}</form>
+        <>{children}</>
       )}
     </div>
   );

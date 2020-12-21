@@ -3,7 +3,7 @@ import { TextField } from "../base";
 
 interface ISidebarUserProfileInfoItemProps {
   itemHeader: string;
-  itemValue: string;
+  itemValue?: string;
 }
 
 export const SidebarUserProfileInfoItem: React.FC<ISidebarUserProfileInfoItemProps> = ({

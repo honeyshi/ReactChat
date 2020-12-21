@@ -6,10 +6,14 @@ import { ChatMessage } from "./chatMessage";
 import { ChatFooter } from "./chatFooter";
 import { ChatContent } from "./chatContent";
 import { ChatDescription } from "./chatDescription";
+import { GroupChatDescription } from "../chat";
 import { RootState } from "../../store/stores";
 import { ChatType } from "../../common/variables";
 import { TextField } from "../base";
-import { performGetUserNoteRequest } from "../../common/requests";
+import {
+  performGetGroupChatMembers,
+  performGetUserNoteRequest,
+} from "../../common/requests";
 
 import "../layout.scss";
 
@@ -75,6 +79,15 @@ export const ChatLayout: React.FC = () => {
               onCloseClick={() => setDescriptionStatus(false)}
               userLogin={chatState.chatHeader}
               userNote={chatState.userNote}
+            />
+          )}
+          {chatState.chatType === ChatType.group && (
+            <GroupChatDescription
+              imageUrl={chatState.chatImage}
+              isActive={isActiveDescription}
+              onCloseClick={() => setDescriptionStatus(false)}
+              groupName={chatState.chatHeader}
+              isAdmin={chatState.isAdmin}
             />
           )}
         </div>

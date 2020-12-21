@@ -1,10 +1,11 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { IChat } from "../../common/interfaces";
+import { IChat, IUserInfo } from "../../common/interfaces";
 import { ChatType } from "../../common/variables";
-import { setCurrentChat } from "../actions";
+import { setChatMembers, setCurrentChat } from "../actions";
 
 interface IChatState {
   chatItem: IChat;
+  chatMembers: IUserInfo[];
 }
 
 const chatState: IChatState = {
@@ -18,6 +19,7 @@ const chatState: IChatState = {
     chatMessages: [],
     userNote: "",
   },
+  chatMembers: [],
 };
 
 export const chatReducer = createReducer(chatState, {
@@ -25,6 +27,12 @@ export const chatReducer = createReducer(chatState, {
     return {
       ...state,
       chatItem: action.payload,
+    };
+  },
+  [setChatMembers.type]: (state, action) => {
+    return {
+      ...state,
+      chatMembers: action.payload,
     };
   },
 });

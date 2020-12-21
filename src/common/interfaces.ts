@@ -22,7 +22,7 @@ export interface ISidebarFriendItem {
 
 export interface ISidebarUserInfoItem {
   itemHeader: string;
-  itemValue: string;
+  itemValue?: string;
   icon: React.FC<Icon.Props>;
 }
 
@@ -53,7 +53,7 @@ export interface IChat {
 }
 
 export interface IUserInfo {
-  userEmail: string;
+  userEmail?: string;
   userImage: string;
   userLogin: string;
 }

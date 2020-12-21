@@ -1,6 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { performGetMessagesRequest } from "../../common/requests";
+import {
+  performGetGroupChatMembers,
+  performGetMessagesRequest,
+} from "../../common/requests";
+import { ChatType } from "../../common/variables";
 import { setCurrentChat } from "../../store/actions";
 import { RootState } from "../../store/stores";
 import { Avatar, TextField } from "../base";
@@ -48,6 +52,7 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
           })
         );
         performGetMessagesRequest(userId, chatId, 0);
+        chatType === ChatType.group && performGetGroupChatMembers(chatId);
       }}
     >
       <div className="media">

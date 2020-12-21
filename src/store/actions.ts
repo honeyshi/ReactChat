@@ -36,6 +36,9 @@ export const setFoundUsers = createAction<ISidebarFriendItem[]>(
 );
 
 export const setCurrentChat = createAction<IChat>(ActionTypes.SET_CURRENTCHAT);
+export const setChatMembers = createAction<IUserInfo[]>(
+  ActionTypes.SET_CHATMEMBERS
+);
 
 export const setGroupChatName = createAction<string>(
   ActionTypes.SET_GROUPCHATNAME

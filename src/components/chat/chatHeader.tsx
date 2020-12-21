@@ -37,21 +37,19 @@ export const ChatHeader: React.FC<IChatHeaderProps> = ({
               </div>
             </div>
           </div>
-          {chatStatus !== "" && (
-            <div className="col-3 col-xl-6 text-right">
-              <ul className="nav justify-content-end">
-                <li className="nav-item list-inline-item d-none d-xl-block mr-0">
-                  <a
-                    className="nav-link text-muted px-3"
-                    title="Details"
-                    onClick={onDetailsClick}
-                  >
-                    <MoreVertical size={19} />
-                  </a>
-                </li>
-              </ul>
-            </div>
-          )}
+          <div className="col-3 col-xl-6 text-right">
+            <ul className="nav justify-content-end">
+              <li className="nav-item list-inline-item d-none d-xl-block mr-0">
+                <a
+                  className="nav-link text-muted px-3"
+                  title="Details"
+                  onClick={onDetailsClick}
+                >
+                  <MoreVertical size={19} />
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
