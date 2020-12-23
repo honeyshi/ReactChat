@@ -2,8 +2,11 @@ import React from "react";
 import classNames from "classnames";
 
 import "./button.scss";
+import { propsToSpace, SpaceProps } from "../../common/utils/spaceUtil";
 
-interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface IButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    SpaceProps {
   primary?: boolean;
   shapeType?: string;
   long?: boolean;
@@ -34,19 +37,24 @@ export const Button: React.FC<IButtonProps> = ({
   children,
   ...other
 }) => {
-  const classes = classNames("btn", shapeType, {
-    "btn-primary": primary,
-    "btn-lg": long,
-    "btn-block": block,
-    "btn-basic": basic,
-    "d-flex": flex,
-    "align-items-center": alignCenter,
-    "btn-ico": icon,
-    "btn-secondary": secondary,
-    "btn-minimal": minimal,
-  });
+  const classes = classNames(
+    "btn",
+    shapeType,
+    {
+      "btn-primary": primary,
+      "btn-lg": long,
+      "btn-block": block,
+      "btn-basic": basic,
+      "d-flex": flex,
+      "align-items-center": alignCenter,
+      "btn-ico": icon,
+      "btn-secondary": secondary,
+      "btn-minimal": minimal,
+    },
+    propsToSpace(other)
+  );
   return (
-    <button className={classes} type="button" onClick={onClick} {...other}>
+    <button className={classes} type="button" onClick={onClick}>
       {text}
       {children}
     </button>

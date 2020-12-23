@@ -830,6 +830,42 @@ export const perfromDeleteGroupMemberRequest = (
     });
 };
 
+export const performAddUsersInGroupRequest = (
+  groupMembers: string[],
+  chatId: string
+) => {
+  console.log(
+    `Perform add member request ${groupMembers} to chat group ${chatId}`
+  );
+  const url = `${apiUrl}/addMember`;
+  const config = {
+    user_login: groupMembers,
+    chat_id: chatId,
+  };
+  axios
+    .post(url, config)
+    .then((response) => {
+      const json = JSON.parse(JSON.stringify(response.data));
+      console.log(json);
+      if (json.status !== "error") {
+        performGetGroupChatMembers(chatId);
+        createNotification("success", "User was added to group.");
+      } else {
+        createNotification(
+          "error",
+          "One or more errors occured while adding user to group. Please try again."
+        );
+      }
+    })
+    .catch((error) => {
+      createNotification(
+        "error",
+        "One or more errors occured while adding user to group. Please try again."
+      );
+      console.log(error);
+    });
+};
+
 const testRequestAx = () => {
   const sendLinkData = {
     after_id: -1,

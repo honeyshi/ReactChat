@@ -1,11 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { performAddUsersInGroupRequest } from "../../common/requests";
 import { ChatType } from "../../common/variables";
 import { RootState } from "../../store/stores";
 import { Button, TextField } from "../base";
 import { SidebarTab, SidebarItem, SidebarFriend } from "../sidebar";
 
 export const AddMemberTab: React.FC<{ isActive: boolean }> = ({ isActive }) => {
+  const groupMembers = useSelector(
+    (state: RootState) => state.sidebar.groupMembers
+  );
+  const chatId = useSelector((state: RootState) => state.chat.chatItem.chatId);
   const privateChats = useSelector(
     (state: RootState) => state.sidebar.sidebarDialogs
   ).filter((dialog) => dialog.chatType === ChatType.private);
@@ -20,7 +25,11 @@ export const AddMemberTab: React.FC<{ isActive: boolean }> = ({ isActive }) => {
   const extraChatMembersItems = extraChatMembers.map(
     (chatMember, memberIndex) => {
       return (
-        <SidebarItem type="div" classes="card" key={`user-${memberIndex}`}>
+        <SidebarItem
+          type="div"
+          classes="card"
+          key={`group-member-${memberIndex}`}
+        >
           <SidebarFriend
             canChoose={true}
             canDelete={false}
@@ -28,7 +37,7 @@ export const AddMemberTab: React.FC<{ isActive: boolean }> = ({ isActive }) => {
             friendName={chatMember.chatHeader}
             isGroupMember={false}
             isOnline={false}
-            checkboxName={`user-${memberIndex}`}
+            checkboxName={`group-member-${memberIndex}`}
           />
         </SidebarItem>
       );
@@ -40,7 +49,15 @@ export const AddMemberTab: React.FC<{ isActive: boolean }> = ({ isActive }) => {
         {extraChatMembersItems.length !== 0 ? (
           <>
             {extraChatMembersItems}
-            <Button long primary text="Save selection" />
+            <Button
+              long
+              primary
+              m="3"
+              text="Save selection"
+              onClick={() =>
+                performAddUsersInGroupRequest(groupMembers, chatId)
+              }
+            />
           </>
         ) : (
           <TextField
