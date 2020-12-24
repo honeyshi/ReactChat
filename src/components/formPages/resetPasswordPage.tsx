@@ -64,7 +64,7 @@ export const ResetPasswordPage: React.FC = () => {
           text="Reset password"
           onClick={() =>
             performResetPasswordRequest(
-              localStorage.getItem("login"),
+              state.login,
               state.password,
               state.confirmPassword
             )
