@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { Button } from "../base/button";
+import { Button } from "components";
 
 interface ISidebarTabProps {
   id: string;

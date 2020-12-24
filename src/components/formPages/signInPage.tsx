@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   FormContainer,
@@ -6,12 +8,10 @@ import {
   FormGroup,
   Input,
   TextField,
-} from "../base";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setLogin, setPassword, setErrorMessage } from "../../store/actions";
-import { performSignInRequest } from "../../common/requests";
-import { RootState } from "../../store/stores";
+} from "components";
+import { setLogin, setPassword, setErrorMessage } from "store/actions";
+import { performSignInRequest } from "common/requests";
+import { RootState } from "store/stores";
 
 export const SignInPage: React.FC = () => {
   const link = <Link to="/signup">Sign up</Link>;

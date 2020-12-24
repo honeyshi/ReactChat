@@ -1,8 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { SidebarItemsContainer, SidebarTab, SidebarTitle } from "..";
-import { RootState } from "../../../store/stores";
-import { TextField } from "../../base";
+import { SidebarItemsContainer, SidebarTab, SidebarTitle, TextField } from "components";
+import { RootState } from "store/stores";
 
 export const SidebarTabBlockedUsers: React.FC<{ isActive: boolean }> = ({
   isActive,

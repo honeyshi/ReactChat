@@ -1,4 +1,6 @@
-import * as React from "react";
+import React from "react";
+import { Switch, Route, withRouter } from "react-router-dom";
+import { connect, ConnectedProps } from "react-redux";
 import {
   ChatPage,
   ResetPasswordPage,
@@ -6,10 +8,8 @@ import {
   ResetPasswordSuccessPage,
   SignInPage,
   SignUpPage,
-} from "./components/formPages";
-import { Switch, Route, withRouter } from "react-router-dom";
-import { RootState } from "./store/stores";
-import { connect, ConnectedProps } from "react-redux";
+} from "components";
+import { RootState } from "store/stores";
 
 import "./styles.scss";
 import "./components/layout.scss";

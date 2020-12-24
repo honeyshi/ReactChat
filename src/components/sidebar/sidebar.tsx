@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/stores";
+import { RootState } from "store/stores";
 import {
   SidebarTabBlockedUsers,
   SidebarTabChats,
   SidebarTabCreateGroup,
   SidebarTabSearch,
   SidebarTabUserProfile,
-} from "./sidebarTabs";
+} from "components";
 
 import "./sidebar.scss";
 

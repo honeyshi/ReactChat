@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { Search } from "react-feather";
 import { useSelector } from "react-redux";
-import { SidebarItemsContainer, SidebarTab, SidebarTitle } from "..";
-import { Button, Input, TextField } from "../../base";
-import { performSearchUserRequest } from "../../../common/requests";
-import { RootState } from "../../../store/stores";
+import {
+  SidebarItemsContainer,
+  SidebarTab,
+  SidebarTitle,
+  Button,
+  Input,
+  TextField,
+} from "components";
+import { performSearchUserRequest } from "common/requests";
+import { RootState } from "store/stores";
 
 export const SidebarTabSearch: React.FC<{ isActive: boolean }> = ({
   isActive,

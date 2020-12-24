@@ -1,10 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { performAddUsersInGroupRequest } from "../../common/requests";
-import { ChatType } from "../../common/variables";
-import { RootState } from "../../store/stores";
-import { Button, TextField } from "../base";
-import { SidebarTab, SidebarItem, SidebarFriend } from "../sidebar";
+import { performAddUsersInGroupRequest } from "common/requests";
+import { ChatType } from "common/variables";
+import { RootState } from "store/stores";
+import {
+  Button,
+  TextField,
+  SidebarTab,
+  SidebarItem,
+  SidebarFriend,
+} from "components";
 
 export const AddMemberTab: React.FC<{ isActive: boolean }> = ({ isActive }) => {
   const groupMembers = useSelector(

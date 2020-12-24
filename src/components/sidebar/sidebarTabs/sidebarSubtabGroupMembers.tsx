@@ -1,9 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { SidebarItemsContainer, SidebarTab } from "..";
-import { checkUserHasPrivateChats } from "../../../common/functions";
-import { RootState } from "../../../store/stores";
-import { TextField } from "../../base";
+import { SidebarItemsContainer, SidebarTab, TextField } from "components";
+import { checkUserHasPrivateChats } from "common/functions";
+import { RootState } from "store/stores";
 
 export const SidebarSubtabGroupMembers: React.FC<{ isActive: boolean }> = ({
   isActive,

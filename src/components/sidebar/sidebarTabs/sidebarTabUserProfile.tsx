@@ -1,13 +1,17 @@
 import React from "react";
 import { Mail, Hexagon, Key, LogOut } from "react-feather";
 import { useSelector } from "react-redux";
-import { SidebarItemsContainer, SidebarTab, SidebarTitle } from "..";
+import {
+  SidebarItemsContainer,
+  SidebarTab,
+  SidebarTitle,
+  Button,
+} from "components";
 import {
   ISidebarUserInfoItem,
   ISidebarUserProfileProps,
-} from "../../../common/interfaces";
-import { RootState } from "../../../store/stores";
-import { Button } from "../../base";
+} from "common/interfaces";
+import { RootState } from "store/stores";
 
 export const SidebarTabUserProfile: React.FC<{ isActive: boolean }> = ({
   isActive,

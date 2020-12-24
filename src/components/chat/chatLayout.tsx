@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { ChatHeader } from "./chatHeader";
-import { ChatMessage } from "./chatMessage";
-import { ChatFooter } from "./chatFooter";
-import { ChatContent } from "./chatContent";
-import { ChatDescription } from "./chatDescription";
-import { GroupChatDescription } from "../chat";
-import { RootState } from "../../store/stores";
-import { ChatType } from "../../common/variables";
-import { TextField } from "../base";
 import {
-  performGetGroupChatMembers,
-  performGetUserNoteRequest,
-} from "../../common/requests";
+  ChatHeader,
+  ChatMessage,
+  ChatFooter,
+  ChatContent,
+  ChatDescription,
+  GroupChatDescription,
+  TextField,
+} from "components";
+import { RootState } from "store/stores";
+import { ChatType } from "common/variables";
+import { performGetUserNoteRequest } from "common/requests";
 
 import "../layout.scss";
 

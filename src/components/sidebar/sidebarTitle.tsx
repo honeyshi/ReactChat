@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField } from "../base";
+import { TextField } from "components";
 
 interface ISidebarTitleProps {
   text: string;

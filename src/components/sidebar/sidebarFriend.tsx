@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { X } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
-import { Avatar, CheckBox, TextField } from "../base";
-import { setCurrentChat, setGroupChatMembers } from "../../store/actions";
-import { ChatType } from "../../common/variables";
+import { Avatar, CheckBox, TextField } from "components";
+import { setCurrentChat, setGroupChatMembers } from "store/actions";
+import { ChatType } from "common/variables";
 import {
   performGetMessagesRequest,
   performRemoveBlockedUserRequest,
   perfromDeleteGroupMemberRequest,
-} from "../../common/requests";
-import { RootState } from "../../store/stores";
-import { getChatIdByUserLogin } from "../../common/functions";
+} from "common/requests";
+import { RootState } from "store/stores";
+import { getChatIdByUserLogin } from "common/functions";
 
 interface ISidebarFriendProps {
   canDelete: boolean;

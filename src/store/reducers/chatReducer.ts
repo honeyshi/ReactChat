@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { IChat, IUserInfo } from "../../common/interfaces";
-import { ChatType } from "../../common/variables";
-import { setChatMembers, setCurrentChat } from "../actions";
+import { IChat, IUserInfo } from "common/interfaces";
+import { ChatType } from "common/variables";
+import { setChatMembers, setCurrentChat } from "store/actions";
 
 interface IChatState {
   chatItem: IChat;

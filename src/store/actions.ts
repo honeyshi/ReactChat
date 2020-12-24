@@ -4,8 +4,8 @@ import {
   ISidebarChatItem,
   ISidebarFriendItem,
   IUserInfo,
-} from "../common/interfaces";
-import { ActionTypes } from "./actionTypes";
+} from "common/interfaces";
+import { ActionTypes } from "store/actionTypes";
 
 export const setEmail = createAction<string>(ActionTypes.COMMON_SETEMAIL);
 export const setLogin = createAction<string>(ActionTypes.COMMON_SETLOGIN);

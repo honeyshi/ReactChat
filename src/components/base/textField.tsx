@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { propsToSpace, SpaceProps } from "../../common/utils/spaceUtil";
+import { propsToSpace, SpaceProps } from "common/utils/spaceUtil";
 
 interface IDisplayStyle {
   display: string;

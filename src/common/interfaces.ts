@@ -1,4 +1,4 @@
-import * as Icon from "react-feather";
+import { Props } from "react-feather";
 import React from "react";
 
 export interface ISidebarChatItem {
@@ -23,7 +23,7 @@ export interface ISidebarFriendItem {
 export interface ISidebarUserInfoItem {
   itemHeader: string;
   itemValue?: string;
-  icon: React.FC<Icon.Props>;
+  icon: React.FC<Props>;
 }
 
 export interface ISidebarUserProfileProps {

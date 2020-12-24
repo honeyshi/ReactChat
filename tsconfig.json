@@ -1,6 +1,6 @@
 {
   "include": [
-    "./src/*"
+    "src"
   ],
   "files": [
     "src/declaration.d.ts"
@@ -22,6 +22,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": "src"
   }
 }

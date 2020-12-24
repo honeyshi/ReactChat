@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import { ChevronLeft, Save, Slash } from "react-feather";
 import { useSelector } from "react-redux";
-import { Avatar, Button, FormGroup, Input, TextField } from "../base";
+import { Avatar, Button, FormGroup, Input, TextField } from "components";
 import {
   performAddBlockedUserRequest,
   performUpdateUserNoteRequest,
-} from "../../common/requests";
-import { RootState } from "../../store/stores";
+} from "common/requests";
+import { RootState } from "store/stores";
 
 interface IChatDescriptionProps {
   avatarUrl: string;

@@ -1,13 +1,18 @@
-import classNames from "classnames";
 import React, { useState } from "react";
 import { ChevronLeft } from "react-feather";
-import { Avatar, FileInput, TextField } from "../base";
-import { NavbarItem } from "../navigation";
-import { MembersListTab, AddMemberTab } from "../chat";
-import { checkInputFile } from "../../common/functions";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/stores";
-import { performSetGroupChatImage } from "../../common/requests";
+import classNames from "classnames";
+import {
+  Avatar,
+  FileInput,
+  TextField,
+  NavbarItem,
+  MembersListTab,
+  AddMemberTab,
+} from "components";
+import { checkInputFile } from "common/functions";
+import { RootState } from "store/stores";
+import { performSetGroupChatImage } from "common/requests";
 
 enum GroupDescriptionSubtabs {
   GroupMembers = "group-members",

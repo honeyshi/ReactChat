@@ -1,13 +1,13 @@
 import React from "react";
-import { ISidebarUserInfoItem } from "../../common/interfaces";
-import { SidebarUserProfileInfoItem } from "./sidebarUserProfileInfoItem";
+import { ISidebarUserInfoItem } from "common/interfaces";
+import { SidebarUserProfileInfoItem } from "components";
 
 interface ISidebarUserProfileInfoProps {
   infoItems: ISidebarUserInfoItem[];
 }
 
 export const SidebarUserProfileInfo: React.FC<ISidebarUserProfileInfoProps> = ({
-  infoItems
+  infoItems,
 }) => {
   return (
     <div className="card-body">

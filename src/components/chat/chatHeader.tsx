@@ -1,6 +1,6 @@
 import React from "react";
 import { MoreVertical } from "react-feather";
-import { Avatar, TextField } from "../base";
+import { Avatar, TextField } from "components";
 
 interface IChatHeaderProps {
   chatImage: string;

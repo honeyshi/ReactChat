@@ -4,15 +4,17 @@ import {
   ISidebarFriendItem,
   ISidebarUserInfoItem,
   ISidebarUserProfileProps,
-} from "../../common/interfaces";
-import { SidebarChat } from "./sidebarChat";
-import { SidebarChatContainer } from "./sidebarChatContainer";
-import { SidebarItem } from "./sidebarItem";
-import { SidebarFriend } from "./sidebarFriend";
-import { SidebarMessagesCount } from "./sidebarMessagesCount";
-import { SidebarUserProfileInfo } from "./sidebarUserProfileInfo";
-import { SidebarUserProfile } from "./sidebarUserProfile";
-import { ChatType } from "../../common/variables";
+} from "common/interfaces";
+import {
+  SidebarChat,
+  SidebarChatContainer,
+  SidebarItem,
+  SidebarFriend,
+  SidebarMessagesCount,
+  SidebarUserProfileInfo,
+  SidebarUserProfile,
+} from "components";
+import { ChatType } from "common/variables";
 
 interface ISidebarItemsProps {
   classes: string;

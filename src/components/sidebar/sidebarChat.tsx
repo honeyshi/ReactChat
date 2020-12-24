@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   performGetGroupChatMembers,
   performGetMessagesRequest,
-} from "../../common/requests";
-import { ChatType } from "../../common/variables";
-import { setCurrentChat } from "../../store/actions";
-import { RootState } from "../../store/stores";
-import { Avatar, TextField } from "../base";
+} from "common/requests";
+import { ChatType } from "common/variables";
+import { setCurrentChat } from "store/actions";
+import { RootState } from "store/stores";
+import { Avatar, TextField } from "components";
 
 interface ISidebarChatProps {
   chatHeader: string;

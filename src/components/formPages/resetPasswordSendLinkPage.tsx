@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   FormContainer,
@@ -6,11 +7,10 @@ import {
   FormGroup,
   Input,
   TextField,
-} from "../base";
-import { useDispatch, useSelector } from "react-redux";
-import { setLogin, setErrorMessage } from "../../store/actions";
-import { performSendLinkRequest } from "../../common/requests";
-import { RootState } from "../../store/stores";
+} from "components";
+import { setLogin, setErrorMessage } from "store/actions";
+import { performSendLinkRequest } from "common/requests";
+import { RootState } from "store/stores";
 
 export const ResetPasswordSendLinkPage: React.FC = () => {
   const dispatch = useDispatch();

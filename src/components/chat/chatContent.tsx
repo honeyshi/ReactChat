@@ -1,7 +1,5 @@
 import React from "react";
 
-// In future get messages and display
-
 export const ChatContent: React.FC = ({ children }) => {
   return (
     <div className="chat-content px-lg-8">

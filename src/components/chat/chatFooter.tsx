@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Button, Input } from "../base";
+import { useSelector } from "react-redux";
 import { Send } from "react-feather";
+import { Button, Input } from "components";
 import {
   performCreatePrivateChatRequest,
   performSendMessageRequest,
-} from "../../common/requests";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/stores";
-import { ChatType } from "../../common/variables";
+} from "common/requests";
+import { RootState } from "store/stores";
+import { ChatType } from "common/variables";
 
 export const ChatFooter: React.FC = () => {
   const chatState = useSelector((state: RootState) => state.chat.chatItem);

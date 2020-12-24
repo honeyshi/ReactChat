@@ -1,8 +1,9 @@
 import React from "react";
 import classNames from "classnames";
+import { propsToSpace, SpaceProps } from "common/utils/spaceUtil";
 
 import "./button.scss";
-import { propsToSpace, SpaceProps } from "../../common/utils/spaceUtil";
+
 
 interface IButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,

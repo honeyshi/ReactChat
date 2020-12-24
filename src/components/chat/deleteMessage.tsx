@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 import { Trash2 } from "react-feather";
-import { performDeleteMessageRequest } from "../../common/requests";
-import { propsToSpace, SpaceProps } from "../../common/utils/spaceUtil";
+import { performDeleteMessageRequest } from "common/requests";
+import { propsToSpace, SpaceProps } from "common/utils/spaceUtil";
 
 interface IDeleteMessageProps extends SpaceProps {
   messageId: string;

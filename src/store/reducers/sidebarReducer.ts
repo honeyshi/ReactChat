@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { ISidebarChatItem, ISidebarFriendItem } from "../../common/interfaces";
-import * as Action from "../actions";
+import { ISidebarChatItem, ISidebarFriendItem } from "common/interfaces";
+import * as Action from "store/actions";
 
 interface ISidebarState {
   sidebarDialogs: ISidebarChatItem[];

@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { checkInputFile } from "../../common/functions";
-import { ISidebarUserProfileProps } from "../../common/interfaces";
-import { performSetUserImageRequest } from "../../common/requests";
-import { RootState } from "../../store/stores";
-import { Avatar, FileInput, TextField } from "../base";
+import { checkInputFile } from "common/functions";
+import { ISidebarUserProfileProps } from "common/interfaces";
+import { performSetUserImageRequest } from "common/requests";
+import { RootState } from "store/stores";
+import { Avatar, FileInput, TextField } from "components";
 
 export const SidebarUserProfile: React.FC<ISidebarUserProfileProps> = ({
   userDescription,

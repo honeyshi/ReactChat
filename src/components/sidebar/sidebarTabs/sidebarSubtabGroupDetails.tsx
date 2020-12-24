@@ -1,10 +1,9 @@
 import React from "react";
 import { Image } from "react-feather";
 import { useDispatch } from "react-redux";
-import { SidebarTab } from "..";
-import { checkInputFile } from "../../../common/functions";
-import { setGroupChatImage, setGroupChatName } from "../../../store/actions";
-import { FileInput, FormGroup, Input, TextField } from "../../base";
+import { SidebarTab, FileInput, FormGroup, Input, TextField } from "components";
+import { checkInputFile } from "common/functions";
+import { setGroupChatImage, setGroupChatName } from "store/actions";
 
 export const SidebarSubtabGroupDetails: React.FC<{ isActive: boolean }> = ({
   isActive,

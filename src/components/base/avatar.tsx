@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React from "react";
-import { propsToSpace, SpaceProps } from "../../common/utils/spaceUtil";
+import { propsToSpace, SpaceProps } from "common/utils/spaceUtil";
 
 import "./avatar.scss";
 

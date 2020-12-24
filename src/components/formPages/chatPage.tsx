@@ -1,8 +1,6 @@
 import React from "react";
-import { Sidebar } from "../sidebar/sidebar";
-import { ChatLayout } from "../chat/chatLayout";
-import { Navbar } from "../navigation";
 import { NotificationContainer } from "react-notifications";
+import { Sidebar, ChatLayout, Navbar } from "components";
 
 export const ChatPage: React.FC = () => {
   return (

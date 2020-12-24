@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import * as Action from "../actions";
+import * as Action from "store/actions";
 
 interface IAuthInitialState {
   email: string;

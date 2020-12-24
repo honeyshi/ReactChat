@@ -11,23 +11,23 @@ import {
   setResetState,
   setUserId,
   setUserInfo,
-} from "../store/actions";
-import { history } from "../store/stores";
+} from "store/actions";
+import { history } from "store/stores";
 import { store } from "../index";
 import {
   IChatMessageItem,
   ISidebarChatItem,
   ISidebarFriendItem,
   IUserInfo,
-} from "./interfaces";
+} from "common/interfaces";
 import {
   formatLastChatActivityDate,
   checkUserSawChat,
   getUserIsOnline,
   createNotification,
   formatMessageDate,
-} from "./functions";
-import { ChatType } from "./variables";
+} from "common/functions";
+import { ChatType } from "common/variables";
 
 const apiUrl =
   "http://messengerpy-env-1.eba-rs4kjrzc.us-east-2.elasticbeanstalk.com";

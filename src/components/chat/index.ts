@@ -1,9 +1,0 @@
-export { AddMemberTab } from "./addMemberTab";
-export { ChatContent } from "./chatContent";
-export { ChatDescription } from "./chatDescription";
-export { ChatFooter } from "./chatFooter";
-export { ChatHeader } from "./chatHeader";
-export { ChatLayout } from "./chatLayout";
-export { ChatMessage } from "./chatMessage";
-export { GroupChatDescription } from "./groupChatDescription";
-export { MembersListTab } from "./membersListTab";

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/stores";
-import { SidebarTab, SidebarItem, SidebarFriend } from "../sidebar";
+import { RootState } from "store/stores";
+import { SidebarTab, SidebarItem, SidebarFriend } from "components";
 
 interface IMembersListProps {
   isActive: boolean;

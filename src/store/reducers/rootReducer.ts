@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { IUserInfo } from "../../common/interfaces";
-import * as Action from "../actions";
+import { IUserInfo } from "common/interfaces";
+import * as Action from "store/actions";
 
 interface IRootState {
   isAuth: boolean;

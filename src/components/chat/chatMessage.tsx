@@ -1,10 +1,9 @@
 import React from "react";
 import classNames from "classnames";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/stores";
-import { IChatMessageItem } from "../../common/interfaces";
-import { Avatar, TextField } from "../base";
-import { DeleteMessage } from "./deleteMessage";
+import { RootState } from "store/stores";
+import { IChatMessageItem } from "common/interfaces";
+import { Avatar, TextField, DeleteMessage } from "components";
 
 import "./message.scss";
 

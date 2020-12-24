@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { SidebarSubtabGroupDetails } from ".";
-import { SidebarTab, SidebarTitle } from "..";
-import { checkUserHasPrivateChats } from "../../../common/functions";
 import {
-  performCreateGroupChatRequest,
-  performSetGroupChatImage,
-} from "../../../common/requests";
-import { RootState } from "../../../store/stores";
-import { NavbarItem } from "../../navigation";
-import { SidebarSubtabGroupMembers } from "./sidebarSubtabGroupMembers";
+  SidebarSubtabGroupDetails,
+  SidebarTab,
+  SidebarTitle,
+  NavbarItem,
+  SidebarSubtabGroupMembers,
+} from "components";
+import { checkUserHasPrivateChats } from "common/functions";
+import { performCreateGroupChatRequest } from "common/requests";
+import { RootState } from "store/stores";
 
 enum CreateGroupSubtabs {
   GroupDetails = "create-group-details",
