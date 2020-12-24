@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, FormContainer, TextField } from "components";
-import { history } from "store/stores";
+import { history } from "core/history";
 
 export const ResetPasswordSuccessPage: React.FC = () => {
   return (

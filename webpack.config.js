@@ -7,6 +7,7 @@ module.exports = {
       root: path.resolve(__dirname, "src"),
       common: "root/common",
       components: "root/components",
+      core: "root/core",
       store: "root/store",
     },
   },

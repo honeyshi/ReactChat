@@ -1,18 +1,16 @@
-import * as React from "react";
+import React from "react";
 import { render } from "react-dom";
-import { ConnectedRouter } from "connected-react-router";
+import { Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import { configureStore, history } from "./store/stores";
-
-import App from "./App";
-
-export const store = configureStore();
+import { store } from "store/stores";
+import { history } from "core/history";
+import { App } from "./App";
 
 const root = (
   <Provider store={store}>
-    <ConnectedRouter history={history}>
+    <Router history={history}>
       <App />
-    </ConnectedRouter>
+    </Router>
   </Provider>
 );
 

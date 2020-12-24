@@ -12,8 +12,8 @@ import {
   setUserId,
   setUserInfo,
 } from "store/actions";
-import { history } from "store/stores";
-import { store } from "../index";
+import { history } from "core/history";
+import { store } from "store/stores";
 import {
   IChatMessageItem,
   ISidebarChatItem,

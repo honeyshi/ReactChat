@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
-import { connect, ConnectedProps } from "react-redux";
 import {
   ChatPage,
   ResetPasswordPage,
@@ -9,24 +8,13 @@ import {
   SignInPage,
   SignUpPage,
 } from "components";
-import { RootState } from "store/stores";
 
 import "./styles.scss";
 import "./components/layout.scss";
 import "./components/spacing.scss";
 import "react-notifications/lib/notifications.css";
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    errorMessage: state.root.errorMessage,
-  };
-};
-
-const connector = connect(mapStateToProps);
-
-type Props = ConnectedProps<typeof connector>;
-
-const App: React.FC<Props> = () => {
+export const App: React.FC = () => {
   return (
     <div className="layout">
       <Switch>
@@ -48,5 +36,3 @@ const App: React.FC<Props> = () => {
     </div>
   );
 };
-
-export default withRouter(connector(App));
