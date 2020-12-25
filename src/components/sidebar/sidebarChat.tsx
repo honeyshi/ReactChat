@@ -51,7 +51,7 @@ export const SidebarChat: React.FC<ISidebarChatProps> = ({
             userNote: userNote,
           })
         );
-        performGetMessagesRequest(userId, chatId, 0);
+        performGetMessagesRequest(userId, chatId, -1);
         chatType === ChatType.group && performGetGroupChatMembers(chatId);
       }}
     >

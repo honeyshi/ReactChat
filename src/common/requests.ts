@@ -26,6 +26,7 @@ import {
   getUserIsOnline,
   createNotification,
   formatMessageDate,
+  getUserHasNewMessages,
 } from "common/functions";
 import { ChatType } from "common/variables";
 
@@ -450,7 +451,7 @@ export const performGetMessagesRequest = (
   page: number
 ) => {
   console.log(
-    `Perform request get messages for user. User's id: ${userId}. Chat id: ${chatId}`
+    `Perform request get messages for user. User's id: ${userId}. Chat id: ${chatId}. Page number: ${page}`
   );
   const url = `${apiUrl}/getMessages`;
   const config = {
@@ -866,25 +867,31 @@ export const performAddUsersInGroupRequest = (
     });
 };
 
-const testRequestAx = () => {
-  const sendLinkData = {
-    after_id: -1,
+export const updateChatState = () => {
+  const userId = store.getState().root.userId;
+  const chatId = store.getState().chat.chatItem.chatId;
+  console.log(`Update chat state with id ${chatId} for user ${userId}`);
+  performGetLastChatsRequest(userId);
+  performGetMessagesRequest(userId, chatId, -1);
+  const url = `${apiUrl}/isNewMessages`;
+  const config = {
+    secret_id: userId,
   };
-
-  const get_request_args = querystring.stringify(sendLinkData);
-  const url =
-    "http://messengerpy-env-1.eba-rs4kjrzc.us-east-2.elasticbeanstalk.com/messages?" +
-    get_request_args;
-  console.log("Test Axios!");
   axios
-    .get(url)
+    .post(url, config)
     .then((response) => {
-      console.log(response.data);
+      const json = JSON.parse(JSON.stringify(response.data));
+      console.log(json);
+      if (json.status !== "error") {
+        for (var item in json) {
+          if (getUserHasNewMessages(json[item].date)) {
+            createNotification("info", "You have new message.");
+            return;
+          }
+        }
+      }
     })
-    .catch((error) => console.log(error));
-};
-
-export const testRequest = () => {
-  console.log("Resolve!");
-  testRequestAx();
+    .catch((error) => {
+      console.log(error);
+    });
 };

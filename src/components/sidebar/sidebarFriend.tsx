@@ -109,7 +109,7 @@ export const SidebarFriend: React.FC<ISidebarFriendProps> = ({
               })
             );
             chatId !== undefined &&
-              performGetMessagesRequest(userId, chatId, 0);
+              performGetMessagesRequest(userId, chatId, -1);
           }}
         />
       )}

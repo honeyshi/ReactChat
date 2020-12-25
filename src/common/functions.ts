@@ -119,6 +119,15 @@ export const getUserIsOnline = (lastActivityDate: string) => {
   else return false;
 };
 
+export const getUserHasNewMessages = (messageDate: string) => {
+  const timeDifferenceSeconds = Math.floor(
+    Math.abs(new Date().getTime() - new Date(messageDate).getTime()) / 1000
+  );
+  const differenceLimit = 120;
+  if (timeDifferenceSeconds <= differenceLimit) return true;
+  else return false;
+};
+
 export const checkUserHasPrivateChats = (userChats: ISidebarChatItem[]) => {
   return userChats.some((userChat) => userChat.chatType === ChatType.private);
 };
@@ -130,6 +139,9 @@ export const createNotification = (type: string, message: string) => {
       break;
     case "error":
       NotificationManager.error(message, "Something went wrong");
+      break;
+    case "info":
+      NotificationManager.info(message, "Notification");
       break;
   }
 };
