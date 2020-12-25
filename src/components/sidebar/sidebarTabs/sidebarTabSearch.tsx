@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Search } from "react-feather";
 import { useSelector } from "react-redux";
+import DotLoader from "react-spinners/DotLoader";
 import {
   SidebarItemsContainer,
   SidebarTab,
@@ -17,6 +18,9 @@ export const SidebarTabSearch: React.FC<{ isActive: boolean }> = ({
 }) => {
   const sidebarFoundUsers = useSelector(
     (state: RootState) => state.sidebar.sidebarFoundUsers
+  );
+  const isLoading = useSelector(
+    (state: RootState) => state.loader.isLoadingSearch
   );
   const [searchLogin, setSearchLogin] = useState<string>("");
   return (
@@ -53,7 +57,13 @@ export const SidebarTabSearch: React.FC<{ isActive: boolean }> = ({
           sidebarFriendItems={sidebarFoundUsers}
         />
       ) : (
-        <TextField center text="Users not found" type="p" />
+        [
+          isLoading ? (
+            <DotLoader size={50} color={"#0176ff"} loading={true} />
+          ) : (
+            <TextField center text="Users not found" type="p" />
+          ),
+        ]
       )}
     </SidebarTab>
   );

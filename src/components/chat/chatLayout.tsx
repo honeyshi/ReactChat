@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-
+import DotLoader from "react-spinners/DotLoader";
 import {
   ChatHeader,
   ChatMessage,
@@ -20,6 +20,9 @@ export const ChatLayout: React.FC = () => {
   const [isActiveDescription, setDescriptionStatus] = useState<boolean>(false);
   const chatState = useSelector((state: RootState) => state.chat.chatItem);
   const userId = useSelector((state: RootState) => state.root.userId);
+  const isLoading = useSelector(
+    (state: RootState) => state.loader.isLoadingMessages
+  );
 
   const chatMessageComponents = chatState.chatMessages.map(
     (chatMessageInfo) => {
@@ -61,13 +64,21 @@ export const ChatLayout: React.FC = () => {
             {chatState.chatMessages.length !== 0 ? (
               <ChatContent>{chatMessageComponents}</ChatContent>
             ) : (
-              <ChatContent>
-                <TextField
-                  center
-                  type="p"
-                  text="You do not have messages yet."
-                />
-              </ChatContent>
+              [
+                isLoading ? (
+                  <ChatContent>
+                    <DotLoader size={50} color={"#0176ff"} loading={true} />
+                  </ChatContent>
+                ) : (
+                  <ChatContent>
+                    <TextField
+                      center
+                      type="p"
+                      text="You do not have messages yet."
+                    />
+                  </ChatContent>
+                ),
+              ]
             )}
             <ChatFooter />
           </div>

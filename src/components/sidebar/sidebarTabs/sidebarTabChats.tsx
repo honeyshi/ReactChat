@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import DotLoader from "react-spinners/DotLoader";
 import {
   SidebarItemsContainer,
   SidebarTab,
@@ -14,6 +15,9 @@ export const SidebarTabChats: React.FC<{ isActive: boolean }> = ({
   const sidebarDialogs = useSelector(
     (state: RootState) => state.sidebar.sidebarDialogs
   );
+  const isLoading = useSelector(
+    (state: RootState) => state.loader.isLoadingChats
+  );
   return (
     <SidebarTab id="tab-content-dialogs" isActive={isActive} isOuter>
       <SidebarTitle text="Chats" />
@@ -23,11 +27,17 @@ export const SidebarTabChats: React.FC<{ isActive: boolean }> = ({
           sidebarChatItems={sidebarDialogs}
         />
       ) : (
-        <TextField
-          center
-          text="You do not have any chats. Search user to start messaging"
-          type="p"
-        />
+        [
+          isLoading ? (
+            <DotLoader size={50} color={"#0176ff"} loading={true} />
+          ) : (
+            <TextField
+              center
+              text="You do not have any chats. Search user to start messaging"
+              type="p"
+            />
+          ),
+        ]
       )}
     </SidebarTab>
   );

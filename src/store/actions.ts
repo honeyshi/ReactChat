@@ -51,3 +51,8 @@ export const setGroupChatImage = createAction<Blob>(
 );
 
 export const setUserInfo = createAction<IUserInfo>(ActionTypes.SET_USERINFO);
+
+export const setLoadChats = createAction<boolean>(ActionTypes.LOAD_CHATS);
+export const setLoadMessages = createAction<boolean>(ActionTypes.LOAD_MESSAGES);
+export const setLoadSearch = createAction<boolean>(ActionTypes.LOAD_SEARCH);
+export const setLoadBlocked = createAction<boolean>(ActionTypes.LOAD_BLOCKED);

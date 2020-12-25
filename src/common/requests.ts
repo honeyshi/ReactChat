@@ -8,6 +8,10 @@ import {
   setErrorMessage,
   setFoundUsers,
   setIsAuth,
+  setLoadBlocked,
+  setLoadChats,
+  setLoadMessages,
+  setLoadSearch,
   setResetState,
   setUserId,
   setUserInfo,
@@ -182,8 +186,12 @@ export const performResetPasswordRequest = (
   }
 };
 
-export const performGetLastChatsRequest = (userId: string) => {
+export const performGetLastChatsRequest = (
+  userId: string,
+  withLoader = true
+) => {
   console.log(`Perform get last chats request for user with id ${userId}`);
+  withLoader && store.dispatch(setLoadChats(true));
 
   const url = `${apiUrl}/chats`;
   const config = {
@@ -208,6 +216,7 @@ export const performGetLastChatsRequest = (userId: string) => {
         });
       }
       store.dispatch(setDialogs(sidebarChatItems));
+      withLoader && store.dispatch(setLoadChats(false));
       console.log(json);
       console.log(sidebarChatItems);
     })
@@ -218,7 +227,7 @@ export const performGetLastChatsRequest = (userId: string) => {
 
 export const performGetBlockedUsersRequest = (userId: string) => {
   console.log(`Perform get blocked users request for user with id ${userId}`);
-
+  store.dispatch(setLoadBlocked(true));
   const url = `${apiUrl}/getBlockedUsers`;
   const config = {
     id: userId,
@@ -238,6 +247,7 @@ export const performGetBlockedUsersRequest = (userId: string) => {
           });
         }
         store.dispatch(setBlockedUsers(sidebarBlockedUsers));
+        store.dispatch(setLoadBlocked(false));
         console.log(json);
         console.log(sidebarBlockedUsers);
       } else console.log(json);
@@ -249,7 +259,7 @@ export const performGetBlockedUsersRequest = (userId: string) => {
 
 export const performSearchUserRequest = (login: string | undefined) => {
   console.log(`Perform search user request by login ${login}`);
-
+  store.dispatch(setLoadSearch(true));
   const url = `${apiUrl}/findUser`;
   const config = {
     login: login,
@@ -269,6 +279,7 @@ export const performSearchUserRequest = (login: string | undefined) => {
           });
         }
         store.dispatch(setFoundUsers(sidebarFoundUsers));
+        store.dispatch(setLoadSearch(false));
         console.log(json);
         console.log(sidebarFoundUsers);
       } else {
@@ -448,11 +459,13 @@ export const performUpdateUserNoteRequest = (
 export const performGetMessagesRequest = (
   userId: string,
   chatId: string,
-  page: number
+  page: number,
+  withLoader = true
 ) => {
   console.log(
     `Perform request get messages for user. User's id: ${userId}. Chat id: ${chatId}. Page number: ${page}`
   );
+  withLoader && store.dispatch(setLoadMessages(true));
   const url = `${apiUrl}/getMessages`;
   const config = {
     id: userId,
@@ -490,6 +503,7 @@ export const performGetMessagesRequest = (
             userNote: json.note,
           })
         );
+        withLoader && store.dispatch(setLoadMessages(false));
       } else console.log(json);
     })
     .catch((error) => console.log(error));
@@ -871,8 +885,8 @@ export const updateChatState = () => {
   const userId = store.getState().root.userId;
   const chatId = store.getState().chat.chatItem.chatId;
   console.log(`Update chat state with id ${chatId} for user ${userId}`);
-  performGetLastChatsRequest(userId);
-  performGetMessagesRequest(userId, chatId, -1);
+  performGetLastChatsRequest(userId, false);
+  performGetMessagesRequest(userId, chatId, -1, false);
   const url = `${apiUrl}/isNewMessages`;
   const config = {
     secret_id: userId,
