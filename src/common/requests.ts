@@ -1,5 +1,4 @@
 import axios from "axios";
-import querystring from "query-string";
 import {
   setBlockedUsers,
   setChatMembers,
@@ -93,6 +92,7 @@ export const performSignInRequest = (
         store.dispatch(setErrorMessage(""));
         store.dispatch(setIsAuth(true));
         store.dispatch(setUserId(json.userId));
+        performGetLastChatsRequest(json.userId);
         if (isReset) history.push("/reset-password");
         else history.push("/");
       } else {

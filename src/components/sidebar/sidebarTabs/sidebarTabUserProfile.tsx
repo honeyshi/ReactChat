@@ -14,6 +14,7 @@ import {
 import { RootState } from "store/stores";
 import { history } from "core/history";
 import { setIsAuth, setUserId } from "store/actions";
+import { updateStoreToInitialState } from "common/functions/storeFunctions";
 
 export const SidebarTabUserProfile: React.FC<{ isActive: boolean }> = ({
   isActive,
@@ -66,8 +67,7 @@ export const SidebarTabUserProfile: React.FC<{ isActive: boolean }> = ({
             alignCenter
             text="Logout"
             onClick={() => {
-              dispatch(setIsAuth(false));
-              dispatch(setUserId(""));
+              updateStoreToInitialState();
               history.push("/signin");
             }}
           >

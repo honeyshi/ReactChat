@@ -2,15 +2,18 @@ import React from "react";
 import { render } from "react-dom";
 import { Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "store/stores";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "store/stores";
 import { history } from "core/history";
 import { App } from "./App";
 
 const root = (
   <Provider store={store}>
-    <Router history={history}>
-      <App />
-    </Router>
+    <PersistGate loading={null} persistor={persistor}>
+      <Router history={history}>
+        <App />
+      </Router>
+    </PersistGate>
   </Provider>
 );
 
