@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
 import {
   ChatPage,
@@ -8,7 +8,6 @@ import {
   SignInPage,
   SignUpPage,
 } from "components";
-import { updateChatState } from "common/requests";
 
 import "./styles.scss";
 import "./components/layout.scss";
@@ -16,11 +15,6 @@ import "./components/spacing.scss";
 import "react-notifications/lib/notifications.css";
 
 export const App: React.FC = () => {
-  let interval = null;
-  useEffect(() => {
-    interval = setInterval(updateChatState, 40000);
-    updateChatState();
-  }, []);
   return (
     <div className="layout">
       <Switch>
