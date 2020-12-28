@@ -17,6 +17,3 @@ export const setGroupChatMembers = createAction<string[]>(
 export const setGroupChatName = createAction<string>(
   SidebarActionTypes.SET_GROUPCHATNAME
 );
-export const setGroupChatImage = createAction<Blob>(
-  SidebarActionTypes.SET_GROUPCHATIMAGE
-);

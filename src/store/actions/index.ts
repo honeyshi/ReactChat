@@ -27,7 +27,6 @@ export {
   setBlockedUsers,
   setDialogs,
   setFoundUsers,
-  setGroupChatImage,
   setGroupChatMembers,
   setGroupChatName,
 } from "./sidebarActions";

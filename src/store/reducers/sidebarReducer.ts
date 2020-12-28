@@ -6,7 +6,6 @@ interface ISidebarState {
   sidebarDialogs: ISidebarChatItem[];
   sidebarBlockedUsers: ISidebarFriendItem[];
   sidebarFoundUsers: ISidebarFriendItem[];
-  selectedFile: Blob;
   groupMembers: string[];
   groupName: string;
 }
@@ -15,7 +14,6 @@ const sidebarState: ISidebarState = {
   sidebarDialogs: [],
   sidebarBlockedUsers: [],
   sidebarFoundUsers: [],
-  selectedFile: new Blob(),
   groupMembers: [],
   groupName: "",
 };
@@ -49,12 +47,6 @@ export const sidebarReducer = createReducer(sidebarState, {
     return {
       ...state,
       groupName: action.payload,
-    };
-  },
-  [Action.setGroupChatImage.type]: (state, action) => {
-    return {
-      ...state,
-      selectedFile: action.payload,
     };
   },
 });

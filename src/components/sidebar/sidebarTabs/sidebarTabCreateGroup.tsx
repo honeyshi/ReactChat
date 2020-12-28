@@ -36,8 +36,7 @@ export const SidebarTabCreateGroup: React.FC<{ isActive: boolean }> = ({
         performCreateGroupChatRequest(
           userId,
           sidebarState.groupName,
-          sidebarState.groupMembers,
-          sidebarState.selectedFile
+          sidebarState.groupMembers
         )
       }
     >

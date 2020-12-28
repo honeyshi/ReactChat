@@ -6,7 +6,6 @@ import {
   setCurrentChat,
   setDialogs,
   setFoundUsers,
-  setGroupChatImage,
   setGroupChatMembers,
   setGroupChatName,
   setIsAuth,
@@ -44,5 +43,4 @@ export const updateStoreToInitialState = () => {
   store.dispatch(setFoundUsers([]));
   store.dispatch(setGroupChatName(""));
   store.dispatch(setGroupChatMembers([]));
-  store.dispatch(setGroupChatImage(new Blob()));
 };

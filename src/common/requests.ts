@@ -576,11 +576,10 @@ export const performCreatePrivateChatRequest = (
 export const performCreateGroupChatRequest = (
   userId: string,
   groupName: string,
-  groupMembers: string[],
-  groupImage: Blob
+  groupMembers: string[]
 ) => {
   console.log(
-    `Perform create group chat request. User's id: ${userId}. Group name: ${groupName}. Members: ${groupMembers}. Image: ${groupImage}`
+    `Perform create group chat request. User's id: ${userId}. Group name: ${groupName}. Members: ${groupMembers}`
   );
   const url = `${apiUrl}/addChat`;
   const config = {
@@ -593,7 +592,6 @@ export const performCreateGroupChatRequest = (
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
       console.log(json);
-      performSetGroupChatImage(groupImage, json.chatId);
       createNotification("success", "Group is created successfully.");
     })
     .catch((error) => {
