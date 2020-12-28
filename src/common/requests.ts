@@ -11,6 +11,7 @@ import {
   setLoadChats,
   setLoadMessages,
   setLoadSearch,
+  setLogin,
   setResetState,
   setUserId,
   setUserInfo,
@@ -32,6 +33,7 @@ import {
   getUserHasNewMessages,
 } from "common/functions";
 import { ChatType } from "common/variables";
+import { updateStoreToInitialState } from "common/functions/storeFunctions";
 
 const apiUrl =
   "http://messengerpy-env-1.eba-rs4kjrzc.us-east-2.elasticbeanstalk.com";
@@ -89,9 +91,11 @@ export const performSignInRequest = (
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
       if (json.status !== "error") {
+        updateStoreToInitialState();
         store.dispatch(setErrorMessage(""));
         store.dispatch(setIsAuth(true));
         store.dispatch(setUserId(json.userId));
+        store.dispatch(setLogin(login));
         performGetLastChatsRequest(json.userId);
         if (isReset) history.push("/reset-password");
         else history.push("/");
@@ -882,6 +886,7 @@ export const performAddUsersInGroupRequest = (
 export const updateChatState = () => {
   const userId = store.getState().root.userId;
   const chatId = store.getState().chat.chatItem.chatId;
+  const userLogin = store.getState().auth.login;
   console.log(`Update chat state with id ${chatId} for user ${userId}`);
   performGetLastChatsRequest(userId, false);
   performGetMessagesRequest(userId, chatId, -1, false);
@@ -896,7 +901,10 @@ export const updateChatState = () => {
       console.log(json);
       if (json.status !== "error") {
         for (var item in json) {
-          if (getUserHasNewMessages(json[item].date)) {
+          if (
+            getUserHasNewMessages(json[item].date) &&
+            json[item].user !== userLogin
+          ) {
             createNotification("info", "You have new message.");
             return;
           }
