@@ -43,9 +43,6 @@ export const performSignUpRequest = (
   email: string,
   password: string
 ) => {
-  console.log(
-    `Perform sign up request with login: ${login} email: ${email} pass: ${password}`
-  );
   const url = `${apiUrl}/register`;
   const config = {
     login: login,
@@ -65,13 +62,11 @@ export const performSignUpRequest = (
             json.description.charAt(0).toUpperCase() + json.description.slice(1)
           )
         );
-      console.log(response.data);
     })
     .catch((error) => {
       store.dispatch(
         setErrorMessage("Something went wrong. Please try again.")
       );
-      console.log(error);
     });
 };
 
@@ -80,7 +75,6 @@ export const performSignInRequest = (
   password: string,
   isReset: boolean
 ) => {
-  console.log(`Perform sign in request with login: ${login} pass: ${password}`);
   const url = `${apiUrl}/login`;
   const config = {
     login: login,
@@ -113,13 +107,10 @@ export const performSignInRequest = (
       store.dispatch(
         setErrorMessage("Something went wrong. Please try again.")
       );
-      console.log(error);
     });
 };
 
 export const performSendLinkRequest = (login: string) => {
-  console.log(`Perform send link request with login: ${login}`);
-
   const url = `${apiUrl}/forget`;
   const config = {
     login: login,
@@ -143,7 +134,6 @@ export const performSendLinkRequest = (login: string) => {
       store.dispatch(
         setErrorMessage("Something went wrong. Please try again.")
       );
-      console.log(error);
     });
 };
 
@@ -152,10 +142,6 @@ export const performResetPasswordRequest = (
   password: string,
   confirmPassword: string
 ) => {
-  console.log(
-    `Perform reset passsword request for user: ${login} with password: ${password} and confirmed password: ${confirmPassword}`
-  );
-
   const url = `${apiUrl}/restore`;
   const config = {
     login: login,
@@ -182,10 +168,8 @@ export const performResetPasswordRequest = (
         store.dispatch(
           setErrorMessage("Something went wrong. Please try again.")
         );
-        console.log(error);
       });
   } else {
-    console.log("ERROR!");
     store.dispatch(setErrorMessage("Passwords are not equal"));
   }
 };
@@ -194,7 +178,6 @@ export const performGetLastChatsRequest = (
   userId: string,
   withLoader = true
 ) => {
-  console.log(`Perform get last chats request for user with id ${userId}`);
   withLoader && store.dispatch(setLoadChats(true));
 
   const url = `${apiUrl}/chats`;
@@ -221,16 +204,11 @@ export const performGetLastChatsRequest = (
       }
       store.dispatch(setDialogs(sidebarChatItems));
       withLoader && store.dispatch(setLoadChats(false));
-      console.log(json);
-      console.log(sidebarChatItems);
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => console.log(error));
 };
 
 export const performGetBlockedUsersRequest = (userId: string) => {
-  console.log(`Perform get blocked users request for user with id ${userId}`);
   store.dispatch(setLoadBlocked(true));
   const url = `${apiUrl}/getBlockedUsers`;
   const config = {
@@ -252,17 +230,12 @@ export const performGetBlockedUsersRequest = (userId: string) => {
         }
         store.dispatch(setBlockedUsers(sidebarBlockedUsers));
         store.dispatch(setLoadBlocked(false));
-        console.log(json);
-        console.log(sidebarBlockedUsers);
-      } else console.log(json);
+      }
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => console.log(error));
 };
 
 export const performSearchUserRequest = (login: string | undefined) => {
-  console.log(`Perform search user request by login ${login}`);
   store.dispatch(setLoadSearch(true));
   const url = `${apiUrl}/findUser`;
   const config = {
@@ -284,25 +257,17 @@ export const performSearchUserRequest = (login: string | undefined) => {
         }
         store.dispatch(setFoundUsers(sidebarFoundUsers));
         store.dispatch(setLoadSearch(false));
-        console.log(json);
-        console.log(sidebarFoundUsers);
       } else {
-        console.log(json);
         store.dispatch(setFoundUsers([]));
       }
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => console.log(error));
 };
 
 export const performAddBlockedUserRequest = (
   userId: string,
   blockedUserLogin: string
 ) => {
-  console.log(
-    `Perform block user request. Id of user who blocks: ${userId}. Blocked user: ${blockedUserLogin}`
-  );
   const url = `${apiUrl}/addBlockedUsers`;
   const config = {
     id: userId,
@@ -340,7 +305,6 @@ export const performAddBlockedUserRequest = (
     })
     .catch((error) => {
       createNotification("error", "Something went wrong. Please try again.");
-      console.log(error);
     });
 };
 
@@ -348,9 +312,6 @@ export const performRemoveBlockedUserRequest = (
   userId: string,
   blockedUserLogin: string
 ) => {
-  console.log(
-    `Perform remove blocked user request. Id of user who blocks: ${userId}. Blocked user: ${blockedUserLogin}`
-  );
   const url = `${apiUrl}/removeBlockedUsers`;
   const config = {
     id: userId,
@@ -376,7 +337,6 @@ export const performRemoveBlockedUserRequest = (
     })
     .catch((error) => {
       createNotification("error", "Something went wrong. Please try again.");
-      console.log(error);
     });
 };
 
@@ -384,9 +344,6 @@ export const performGetUserNoteRequest = (
   userId: string,
   userGetLogin: string
 ) => {
-  console.log(
-    `Perform get note for user. Id of user who gets: ${userId}. Login user with note: ${userGetLogin}`
-  );
   const url = `${apiUrl}/getNote`;
   const config = {
     id: userId,
@@ -410,7 +367,7 @@ export const performGetUserNoteRequest = (
             userNote: json.note,
           })
         );
-      } else console.log(json);
+      }
     })
     .catch((error) => console.log(error));
 };
@@ -420,9 +377,6 @@ export const performUpdateUserNoteRequest = (
   userNoteLogin: string,
   newNote: string
 ) => {
-  console.log(
-    `Perform update user's note request. Id of user who updates: ${userId}. User with not: ${userNoteLogin}. New note: ${newNote}`
-  );
   const url = `${apiUrl}/addNote`;
   const config = {
     id: userId,
@@ -456,7 +410,6 @@ export const performUpdateUserNoteRequest = (
     })
     .catch((error) => {
       createNotification("error", "Something went wrong. Please try again.");
-      console.log(error);
     });
 };
 
@@ -466,9 +419,6 @@ export const performGetMessagesRequest = (
   page: number,
   withLoader = true
 ) => {
-  console.log(
-    `Perform request get messages for user. User's id: ${userId}. Chat id: ${chatId}. Page number: ${page}`
-  );
   withLoader && store.dispatch(setLoadMessages(true));
   const url = `${apiUrl}/getMessages`;
   const config = {
@@ -482,7 +432,6 @@ export const performGetMessagesRequest = (
       const json = JSON.parse(JSON.stringify(response.data));
       if (json.status !== "error") {
         const messages = json.messages;
-        console.log(messages);
         let chatMessages: IChatMessageItem[] = [];
         for (var item in messages) {
           chatMessages.push({
@@ -508,7 +457,7 @@ export const performGetMessagesRequest = (
           })
         );
         withLoader && store.dispatch(setLoadMessages(false));
-      } else console.log(json);
+      }
     })
     .catch((error) => console.log(error));
 };
@@ -518,9 +467,6 @@ export const performSendMessageRequest = (
   chatId: string,
   message: string
 ) => {
-  console.log(
-    `Perform send request with text ${message}. User's id: ${userId}. Chat id: ${chatId}`
-  );
   const url = `${apiUrl}/newMessage`;
   const config = {
     id: userId,
@@ -544,7 +490,6 @@ export const performSendMessageRequest = (
         "error",
         "One or more errors occured while sending this messages. Please try again."
       );
-      console.log(error);
     });
 };
 
@@ -553,9 +498,6 @@ export const performCreatePrivateChatRequest = (
   userLogin: string,
   message: string
 ) => {
-  console.log(
-    `Perform create private chat request and send message. User's id: ${userId}. User login: ${userLogin}`
-  );
   const url = `${apiUrl}/addPrivateChat`;
   const config = {
     id: userId,
@@ -565,7 +507,6 @@ export const performCreatePrivateChatRequest = (
     .post(url, config)
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
-      console.log(json);
       performSendMessageRequest(userId, json.chatId, message);
     })
     .catch((error) => {
@@ -573,7 +514,6 @@ export const performCreatePrivateChatRequest = (
         "error",
         "One or more errors occured while sending this messages. Please try again."
       );
-      console.log(error);
     });
 };
 
@@ -582,9 +522,6 @@ export const performCreateGroupChatRequest = (
   groupName: string,
   groupMembers: string[]
 ) => {
-  console.log(
-    `Perform create group chat request. User's id: ${userId}. Group name: ${groupName}. Members: ${groupMembers}`
-  );
   const url = `${apiUrl}/addChat`;
   const config = {
     id: userId,
@@ -595,7 +532,6 @@ export const performCreateGroupChatRequest = (
     .post(url, config)
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
-      console.log(json);
       createNotification("success", "Group is created successfully.");
     })
     .catch((error) => {
@@ -603,7 +539,6 @@ export const performCreateGroupChatRequest = (
         "error",
         "One or more errors occured during group creation. Please try again."
       );
-      console.log(error);
     });
 };
 
@@ -612,7 +547,6 @@ export const performSetGroupChatImage = (
   id: string,
   isUpdate = false
 ) => {
-  console.log(`Perform post image ${imageFile} and get url`);
   const postUrl = `${apiUrl}/postPhoto`;
   const postConfig = new FormData();
   postConfig.append("file", imageFile);
@@ -621,12 +555,10 @@ export const performSetGroupChatImage = (
     .post(postUrl, postConfig)
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
-      console.log(json);
       const setConfig = {
         chat_id: id,
         avatarUrl: json.url,
       };
-      console.log(`Perform set image ${json.url} for group chat with id ${id}`);
       axios
         .post(setUrl, setConfig)
         .then(() => {
@@ -652,7 +584,6 @@ export const performSetGroupChatImage = (
             "error",
             "One or more errors occured while setting image. Please try again."
           );
-          console.log(error);
         });
     })
     .catch((error) => {
@@ -660,12 +591,10 @@ export const performSetGroupChatImage = (
         "error",
         "One or more errors occured while setting image. Please try again."
       );
-      console.log(error);
     });
 };
 
 export const performGetUserInfoRequest = (userId: string) => {
-  console.log(`Perform get user info request with id ${userId}`);
   const url = `${apiUrl}/getUserInfo`;
   const config = {
     user_id: userId,
@@ -682,15 +611,12 @@ export const performGetUserInfoRequest = (userId: string) => {
             userLogin: json.login,
           })
         );
-      } else console.log(json);
+      }
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => console.log(error));
 };
 
 export const performSetUserImageRequest = (imageFile: Blob, id: string) => {
-  console.log(`Perform post image ${imageFile} and get url`);
   const postUrl = `${apiUrl}/postPhoto`;
   const postConfig = new FormData();
   postConfig.append("file", imageFile);
@@ -699,12 +625,10 @@ export const performSetUserImageRequest = (imageFile: Blob, id: string) => {
     .post(postUrl, postConfig)
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
-      console.log(json);
       const setConfig = {
         id: id,
         avatarUrl: json.url,
       };
-      console.log(`Perform set image ${json.url} for user with id ${id}`);
       axios
         .post(setUrl, setConfig)
         .then(() => {
@@ -723,7 +647,6 @@ export const performSetUserImageRequest = (imageFile: Blob, id: string) => {
             "error",
             "One or more errors occured while setting image. Please try again."
           );
-          console.log(error);
         });
     })
     .catch((error) => {
@@ -731,12 +654,10 @@ export const performSetUserImageRequest = (imageFile: Blob, id: string) => {
         "error",
         "One or more errors occured while setting image. Please try again."
       );
-      console.log(error);
     });
 };
 
 export const performDeleteMessageRequest = (messageId: string) => {
-  console.log(`Perform delete message request with id ${messageId}`);
   const url = `${apiUrl}/deleteMessage`;
   const config = {
     message_id: messageId,
@@ -745,7 +666,6 @@ export const performDeleteMessageRequest = (messageId: string) => {
     .post(url, config)
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
-      console.log(json);
       if (json.status !== "error") {
         const currentChat = store.getState().chat.chatItem;
         store.dispatch(
@@ -775,12 +695,10 @@ export const performDeleteMessageRequest = (messageId: string) => {
         "error",
         "One or more errors occured while deleting this messages. Please try again."
       );
-      console.log(error);
     });
 };
 
 export const performGetGroupChatMembers = (chatId: string) => {
-  console.log(`Perform get group chat members request with id ${chatId}`);
   const url = `${apiUrl}/getChatMembers`;
   const config = {
     chat_id: chatId,
@@ -789,7 +707,6 @@ export const performGetGroupChatMembers = (chatId: string) => {
     .post(url, config)
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
-      console.log(json);
       const users = json.users;
       let groupMembers: IUserInfo[] = [];
       for (var item in users) {
@@ -799,20 +716,14 @@ export const performGetGroupChatMembers = (chatId: string) => {
         });
       }
       store.dispatch(setChatMembers(groupMembers));
-      console.log(groupMembers);
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => console.log(error));
 };
 
 export const perfromDeleteGroupMemberRequest = (
   userLogin: string,
   chatId: string
 ) => {
-  console.log(
-    `Perform delete member request ${userLogin} from chat group ${chatId}`
-  );
   const url = `${apiUrl}/deleteFromGroup`;
   const config = {
     name: userLogin,
@@ -822,7 +733,6 @@ export const perfromDeleteGroupMemberRequest = (
     .post(url, config)
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
-      console.log(json);
       if (json.status !== "error") {
         const groupMembers = store
           .getState()
@@ -843,7 +753,6 @@ export const perfromDeleteGroupMemberRequest = (
         "error",
         "One or more errors occured while removing user from group. Please try again."
       );
-      console.log(error);
     });
 };
 
@@ -851,9 +760,6 @@ export const performAddUsersInGroupRequest = (
   groupMembers: string[],
   chatId: string
 ) => {
-  console.log(
-    `Perform add member request ${groupMembers} to chat group ${chatId}`
-  );
   const url = `${apiUrl}/addMember`;
   const config = {
     user_login: groupMembers,
@@ -863,7 +769,6 @@ export const performAddUsersInGroupRequest = (
     .post(url, config)
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
-      console.log(json);
       if (json.status !== "error") {
         performGetGroupChatMembers(chatId);
         createNotification("success", "User was added to group.");
@@ -879,7 +784,6 @@ export const performAddUsersInGroupRequest = (
         "error",
         "One or more errors occured while adding user to group. Please try again."
       );
-      console.log(error);
     });
 };
 
@@ -887,7 +791,6 @@ export const updateChatState = () => {
   const userId = store.getState().root.userId;
   const chatId = store.getState().chat.chatItem.chatId;
   const userLogin = store.getState().auth.login;
-  console.log(`Update chat state with id ${chatId} for user ${userId}`);
   performGetLastChatsRequest(userId, false);
   performGetMessagesRequest(userId, chatId, -1, false);
   const url = `${apiUrl}/isNewMessages`;
@@ -898,7 +801,6 @@ export const updateChatState = () => {
     .post(url, config)
     .then((response) => {
       const json = JSON.parse(JSON.stringify(response.data));
-      console.log(json);
       if (json.status !== "error") {
         for (var item in json) {
           if (
@@ -911,7 +813,5 @@ export const updateChatState = () => {
         }
       }
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => console.log(error));
 };

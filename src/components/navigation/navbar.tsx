@@ -56,7 +56,6 @@ export const Navbar: React.FC = () => {
   const userId = useSelector((state: RootState) => state.root.userId);
 
   const onNavbarItemClick = (item: string) => {
-    console.log(`Click on ${item}`);
     setActiveItem(item);
     dispatch(setActiveNavbar(item));
   };
